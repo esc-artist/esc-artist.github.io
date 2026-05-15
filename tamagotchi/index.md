@@ -7,8 +7,8 @@ permalink: /tamagotchi/
 <div class="page-label">// <span>tamagotchi</span></div>
 
 <p style="color: var(--text-dim); margin-bottom: 2rem; max-width: 520px;">
-  Public behavioral accountability system. Token economy, bounty hunters, punishment wheel. 
-  Hard determinist. Skinnerian. Source on <a href="https://github.com/esc-artist/Constantine-Tamagotchi" target="_blank" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim);">GitHub</a>.
+  Public behavioral accountability system. Token economy, logs, surviellance, punishment wheel. 
+  Source on <a href="https://github.com/esc-artist/Constantine-Tamagotchi" target="_blank" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim);">GitHub</a>.
 </p>
 
 <div class="embed-frame">
