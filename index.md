@@ -5,7 +5,7 @@ layout: default
 <div class="page-label">// <span>index</span></div>
 
 <div class="intro">
-  <h1>penetration tester.<br>student of systems.</h1>
+  <h1>student of systems.</h1>
   <p>OSCP. Working toward CPTS. Box notes, behavioral experiments, and a livestream when the hardware arrives.</p>
 </div>
 
