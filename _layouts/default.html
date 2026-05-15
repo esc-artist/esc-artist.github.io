@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="inner">
+        <a href="{{ '/' | relative_url }}" class="site-title"><span>//</span> esc-artist</a>
+        <nav>
+          <a href="{{ '/box-notes/' | relative_url }}" {% if page.url contains '/box-notes' %}class="active"{% endif %}>Box Notes</a>
+          <a href="{{ '/tamagotchi/' | relative_url }}" {% if page.url contains '/tamagotchi' %}class="active"{% endif %}>Tamagotchi</a>
+          <a href="{{ '/livestream/' | relative_url }}" {% if page.url contains '/livestream' %}class="active"{% endif %}>Livestream</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      {{ content }}
+    </main>
+
+    <footer class="site-footer">
+      <span>esc-artist — {{ site.url }}</span>
+      <a href="https://github.com/esc-artist" target="_blank">github</a>
+    </footer>
+  </div>
+</body>
+</html>

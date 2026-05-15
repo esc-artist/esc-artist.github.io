@@ -1,0 +1,23 @@
+title: esc-artist
+description: penetration tester. box notes. behavioral experiments.
+url: "https://esc-artist.github.io"
+baseurl: ""
+
+author: Constantine
+
+permalink: /box-notes/:title/
+
+plugins:
+  - jekyll-feed
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
