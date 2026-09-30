@@ -1,26 +1,14 @@
 [
  {
   "date": "2026-09-30",
-  "blocks": [],
-  "streams": [
-   {
-    "id": "J55JQLaGTQw",
-    "start": "14:07",
-    "end": "15:51"
-   },
-   {
-    "id": "qryt7MQdlvM",
-    "start": "03:08",
-    "end": "03:58"
-   },
-   {
-    "id": "kVP36ln6al0",
-    "start": "02:34",
-    "end": "03:57"
-   }
+  "blocks": [
+   "16:30-19:30",
+   "21:00-23:00",
+   "00:00-01:00"
   ],
+  "streams": [],
   "hits": 0,
-  "verdict": "no_plan",
-  "note": "No plan filed."
+  "verdict": "pending",
+  "note": "Blocks still in progress; final check runs ~1:30am ET."
  }
 ]

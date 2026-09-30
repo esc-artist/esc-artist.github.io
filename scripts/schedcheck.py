@@ -136,16 +136,31 @@ def check_day(d, streams):
         rec["note"] = "Plan content changed after filing."
         return rec
 
-    # Absolute block windows; end <= start means the block crosses midnight.
+    # Absolute block windows. Blocks are placed on the plan date, rolling
+    # forward past midnight as needed: a block whose start would otherwise
+    # precede the filing time (e.g. "12:00am-1:00am" filed in the afternoon)
+    # belongs to the following night. end <= start also crosses midnight.
+    filed = plan_first_commit(d)
     windows = []
+    offset = 0
+    prev_start = None
     for b in blocks:
         sh, sm = parse_hm(b[0])
         eh, em = parse_hm(b[1])
-        bs = datetime(d.year, d.month, d.day, sh, sm, tzinfo=ET)
-        be = datetime(d.year, d.month, d.day, eh, em, tzinfo=ET)
-        if be <= bs:
-            be += timedelta(days=1)
+        while True:
+            bs = datetime(d.year, d.month, d.day, sh, sm, tzinfo=ET) + timedelta(days=offset)
+            be = datetime(d.year, d.month, d.day, eh, em, tzinfo=ET) + timedelta(days=offset)
+            if be <= bs:
+                be += timedelta(days=1)
+            if filed and bs < filed:
+                offset += 1
+                continue
+            if prev_start and bs < prev_start:
+                offset += 1
+                continue
+            break
         windows.append((bs, be))
+        prev_start = bs
 
     if not windows:
         rec["verdict"] = "no_plan"
@@ -156,11 +171,10 @@ def check_day(d, streams):
     # starts. Streams from earlier in the day don't matter; only the
     # plan-then-execute order for the planned blocks.
     first_block = min(bs for (bs, _) in windows)
-    first_commit = plan_first_commit(d)
-    if first_commit and first_commit >= first_block:
+    if filed and filed >= first_block:
         rec["verdict"] = "late_plan"
         rec["note"] = ("Plan filed at %s, after the first block started at %s: "
-                       "unverifiable." % (first_commit.strftime("%m-%d %H:%M"),
+                       "unverifiable." % (filed.strftime("%m-%d %H:%M"),
                                            first_block.strftime("%m-%d %H:%M")))
         return rec
 
@@ -170,6 +184,12 @@ def check_day(d, streams):
     rec["streams"] = [{"id": v,
                        "start": s.strftime("%m-%d %H:%M"),
                        "end": e.strftime("%m-%d %H:%M")} for (v, s, e) in in_span]
+
+    # Blocks still in the future: no verdict yet, final check runs ~1:30am.
+    if span_end > datetime.now(ET):
+        rec["verdict"] = "pending"
+        rec["note"] = "Blocks still in progress; final check runs ~1:30am ET."
+        return rec
 
     # Adherence: block is HIT if a stream was live 10 minutes into the
     # block, having started no later than 10 minutes after block start.
@@ -207,7 +227,7 @@ def save_log(log):
 
 
 def build_page(log):
-    planned = [r for r in log if r["verdict"] not in ("no_plan",)]
+    planned = [r for r in log if r["verdict"] not in ("no_plan", "pending")]
     full = [r for r in planned if r["verdict"] == "adhered"]
     blocks_hit = sum(r["hits"] for r in planned)
     blocks_total = sum(len(r["blocks"]) for r in planned)
@@ -219,12 +239,13 @@ def build_page(log):
     lines.append("---")
     lines.append("")
     lines.append("Each morning I file a study schedule — time blocks only. "
-                 "Every evening the day's public streams are checked against it: "
+                 "After the day is done the public streams are checked against it: "
                  "a block counts as hit if a stream was live ten minutes in, "
-                 "having started no later than ten minutes after the block began.")
+                 "having started no later than ten minutes after the block began. "
+                 "Blocks past midnight count toward the day they were planned on.")
     lines.append("")
     lines.append("Plans are timestamped by their git commit and must predate the "
-                 "day's first stream; post-hoc edits are flagged, the same way "
+                 "plan's first block; post-hoc edits are flagged, the same way "
                  "the CPTS countdown date is guarded.")
     lines.append("")
     lines.append("**%d of %d planned days fully adhered (%.0f%%). %d of %d blocks hit.**"
