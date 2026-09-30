@@ -268,3 +268,25 @@
 }
 .cd-hist-date { color: #8a9a8f; white-space: nowrap; }
 .cd-hist-event { color: #c9f5d6; }
+
+/* CPTS countdown banner: slim strip under the nav, every page */
+.cpts-banner {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.45rem 1rem;
+  background: #050805;
+  border-bottom: 1px solid #1d3a24;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+  color: #57d977;
+  text-decoration: none;
+}
+.cpts-banner:hover { background: #0a120b; }
+.cpts-banner-label { letter-spacing: 0.14em; color: #8a9a8f; font-size: 0.75rem; }
+.cpts-banner-timer {
+  color: #3dff73;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(61, 255, 115, 0.4);
+}
