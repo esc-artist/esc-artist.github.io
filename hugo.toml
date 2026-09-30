@@ -1,0 +1,31 @@
+baseURL = 'https://esc-artist.github.io/'
+locale = 'en-us'
+title = 'esc_artist'
+theme = 'PaperMod'
+
+[author]
+  name = 'esc_artist'
+
+[menu]
+  [[menu.main]]
+    identifier = 'home'
+    name = 'Home'
+    url = '/'
+    weight = 10
+  [[menu.main]]
+    identifier = 'posts'
+    name = 'Posts'
+    url = '/posts/'
+    weight = 20
+  [[menu.main]]
+    identifier = 'about'
+    name = 'About'
+    url = '/about/'
+    weight = 30
+
+[params]
+  description = 'Pentesting notes and embedded experiments.'
+  author = 'esc_artist'
+  ShowReadingTime = true
+  ShowWordCount = true
+  defaultTheme = 'dark'
