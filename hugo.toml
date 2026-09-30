@@ -29,3 +29,8 @@ theme = 'PaperMod'
   ShowReadingTime = true
   ShowWordCount = true
   defaultTheme = 'dark'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
