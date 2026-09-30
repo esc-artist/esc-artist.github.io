@@ -22,6 +22,11 @@ theme = 'PaperMod'
     name = 'About'
     url = '/about/'
     weight = 30
+  [[menu.main]]
+    identifier = 'study'
+    name = 'Study Log'
+    url = '/study/'
+    weight = 40
 
 [params]
   description = 'Pentesting notes and embedded experiments.'

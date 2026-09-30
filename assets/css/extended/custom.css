@@ -88,6 +88,50 @@
   margin-top: 0.5rem;
 }
 
+/* study log page: stat cards + charts */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+}
+
+.stat {
+  border: 1px solid #1d3a24;
+  border-radius: 10px;
+  padding: 0.9rem 0.6rem;
+  text-align: center;
+  background: rgba(10, 20, 12, 0.5);
+}
+
+.stat-num {
+  display: block;
+  font-size: 1.5rem;
+  color: #33ff66;
+  font-weight: bold;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #8a9a8f;
+  margin-top: 0.25rem;
+}
+
+.study-chart {
+  margin: 1.8rem 0;
+}
+
+.study-chart svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 620px) {
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* about page gallery: 2-up grid, overlaid captions, staggered rise-in */
 .gallery {
   display: grid;
