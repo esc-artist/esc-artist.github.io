@@ -8,9 +8,10 @@ Public study hours, for accountability. Totals come from the durations of my pub
 
 <div class="stat-row">
 <div class="stat"><span class="stat-num">118.0h</span><span class="stat-label">since Aug 30</span></div>
-<div class="stat"><span class="stat-num">3.7h</span><span class="stat-label">avg / day</span></div>
+<div class="stat"><span class="stat-num">3.7h</span><span class="stat-label">avg / day (target 6h)</span></div>
 <div class="stat"><span class="stat-num">11.9h</span><span class="stat-label">best day (Wed 9/23)</span></div>
 <div class="stat"><span class="stat-num">3</span><span class="stat-label">day streak</span></div>
+<div class="stat"><span class="stat-num">10/32</span><span class="stat-label">days ≥ 6h</span></div>
 </div>
 
 <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hours per day — since Aug 30">
@@ -70,32 +71,38 @@ Public study hours, for accountability. Totals come from the durations of my pub
 <rect x="632.5" y="54.7" width="12.5" height="135.3" rx="3" fill="#33ff66" opacity="0.92"><title>9/29: 9.9h</title></rect>
 <text x="638.8" y="210" font-size="10" text-anchor="middle">9/29</text>
 <rect x="652.0" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/30: 0.0h</title></rect>
+<line x1="44" y1="108.0" x2="668" y2="108.0" stroke="#e5484d" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="668" y="102.0" font-size="10" text-anchor="end" fill="#e5484d">6h target</text>
 </svg>
 
-<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hours per week">
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hours per week (42h = 6h/day)">
 <style>text{fill:#8a9a8f;font-family:monospace}</style>
-<text x="44" y="16" font-size="13" fill="#c9f5d6">Hours per week</text>
+<text x="44" y="16" font-size="13" fill="#c9f5d6">Hours per week (42h = 6h/day)</text>
 <line x1="44" y1="190.0" x2="668" y2="190.0" stroke="#1d3a24" stroke-width="1"/>
 <text x="38" y="194.0" font-size="10" text-anchor="end">0h</text>
 <line x1="44" y1="108.0" x2="668" y2="108.0" stroke="#1d3a24" stroke-width="1"/>
-<text x="38" y="112.0" font-size="10" text-anchor="end">14.5h</text>
+<text x="38" y="112.0" font-size="10" text-anchor="end">21h</text>
 <line x1="44" y1="26.0" x2="668" y2="26.0" stroke="#1d3a24" stroke-width="1"/>
-<text x="38" y="30.0" font-size="10" text-anchor="end">29h</text>
-<rect x="66.5" y="81.4" width="79.9" height="108.6" rx="3" fill="#2f9e4f" opacity="0.92"><title>8/30: 19.2h</title></rect>
+<text x="38" y="30.0" font-size="10" text-anchor="end">42h</text>
+<rect x="66.5" y="115.0" width="79.9" height="75.0" rx="3" fill="#2f9e4f" opacity="0.92"><title>8/30: 19.2h</title></rect>
 <text x="106.4" y="210" font-size="10" text-anchor="middle">8/30</text>
-<text x="106.4" y="76.4" font-size="10" text-anchor="middle" fill="#c9f5d6">19.2</text>
-<rect x="191.3" y="29.4" width="79.9" height="160.6" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/6: 28.4h</title></rect>
+<text x="106.4" y="110.0" font-size="10" text-anchor="middle" fill="#c9f5d6">19.2</text>
+<rect x="191.3" y="79.1" width="79.9" height="110.9" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/6: 28.4h</title></rect>
 <text x="231.2" y="210" font-size="10" text-anchor="middle">9/6</text>
-<text x="231.2" y="24.4" font-size="10" text-anchor="middle" fill="#c9f5d6">28.4</text>
-<rect x="316.1" y="32.8" width="79.9" height="157.2" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/13: 27.8h</title></rect>
+<text x="231.2" y="74.1" font-size="10" text-anchor="middle" fill="#c9f5d6">28.4</text>
+<rect x="316.1" y="81.4" width="79.9" height="108.6" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/13: 27.8h</title></rect>
 <text x="356.0" y="210" font-size="10" text-anchor="middle">9/13</text>
-<text x="356.0" y="27.8" font-size="10" text-anchor="middle" fill="#c9f5d6">27.8</text>
-<rect x="440.9" y="68.4" width="79.9" height="121.6" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/20: 21.5h</title></rect>
+<text x="356.0" y="76.4" font-size="10" text-anchor="middle" fill="#c9f5d6">27.8</text>
+<rect x="440.9" y="106.0" width="79.9" height="84.0" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/20: 21.5h</title></rect>
 <text x="480.8" y="210" font-size="10" text-anchor="middle">9/20</text>
-<text x="480.8" y="63.4" font-size="10" text-anchor="middle" fill="#c9f5d6">21.5</text>
-<rect x="565.7" y="70.7" width="79.9" height="119.3" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/27: 21.1h</title></rect>
+<text x="480.8" y="101.0" font-size="10" text-anchor="middle" fill="#c9f5d6">21.5</text>
+<rect x="565.7" y="107.6" width="79.9" height="82.4" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/27: 21.1h</title></rect>
 <text x="605.6" y="210" font-size="10" text-anchor="middle">9/27</text>
-<text x="605.6" y="65.7" font-size="10" text-anchor="middle" fill="#c9f5d6">21.1</text>
+<text x="605.6" y="102.6" font-size="10" text-anchor="middle" fill="#c9f5d6">21.1</text>
+<line x1="44" y1="26.0" x2="668" y2="26.0" stroke="#e5484d" stroke-width="1.5" stroke-dasharray="6,4"/>
+<text x="668" y="20.0" font-size="10" text-anchor="end" fill="#e5484d">42h target</text>
 </svg>
 
 Sessions are screen-recorded study streams on [YouTube @constantinestudies](https://www.youtube.com/@constantinestudies) — boring to watch, useful to log. Hours are summed from public stream durations.
+
+Whether I studied *when I said I would* is tracked separately on the [Schedule](/schedule/) page.

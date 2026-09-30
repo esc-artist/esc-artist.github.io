@@ -69,10 +69,53 @@ def plan_first_commit(d):
 
 
 def plan_sha256(d):
+    return file_sha256(plan_path(d))
+
+
+def file_sha256(path):
     h = hashlib.sha256()
-    with open(plan_path(d), "rb") as f:
+    with open(path, "rb") as f:
         h.update(f.read())
     return h.hexdigest()
+
+
+def verify_all():
+    """Re-verify every filed plan against its snapshot. Any post-filing
+    change (including to plans already checked on earlier days) is
+    reverted and logged in the public changelog. Returns event list."""
+    state = load_state()
+    events = []
+
+    def revert(diso, detail):
+        st = state[diso]
+        with open(os.path.join(PLAN_DIR, diso + ".json"), "w") as f:
+            json.dump(st["content"], f, indent=2)
+        log_event(diso, "Schedule tampering detected and reverted.",
+                  detail + ".")
+        events.append({"date": diso, "detail": detail})
+
+    for fname in sorted(os.listdir(PLAN_DIR)):
+        if not fname.endswith(".json") or fname.startswith("_"):
+            continue
+        diso = fname[:-5]
+        st = state.get(diso)
+        if not st or not st.get("content") or not st.get("sha256"):
+            continue
+        if st["sha256"] == file_sha256(os.path.join(PLAN_DIR, fname)):
+            continue
+        with open(os.path.join(PLAN_DIR, fname)) as f:
+            old = json.load(f)
+        detail = ("blocks changed from %s to %s"
+                  % (fmt_block_list(old.get("blocks", [])),
+                     fmt_block_list(st["content"].get("blocks", []))))
+        revert(diso, detail)
+    for diso, st in state.items():
+        if not st.get("content"):
+            continue
+        if os.path.exists(os.path.join(PLAN_DIR, diso + ".json")):
+            continue
+        revert(diso, "plan file deleted after filing")
+    return events
 
 
 def load_state():
@@ -287,16 +330,28 @@ def fmt_block_list(blocks):
 
 
 def upcoming_section():
-    """'I will be live at the following times' — the current plan's blocks
-    that have not ended yet, published so anyone can check."""
+    """'I will be live at the following times' — the nearest plan's blocks
+    that have not ended yet, published so anyone can check. Prefers today's
+    plan; falls back to the next filed future plan (plans may be filed the
+    prior day or earlier — they lock at filing either way)."""
     now = datetime.now(ET)
     d = now.date()
+    windows = []
     plan = load_plan(d)
-    if not plan:
-        return ""
-    windows = compute_windows(d, plan.get("blocks", []), plan_first_commit(d))
-    future = [(bs, be) for (bs, be) in windows if be > now]
-    if not future:
+    if plan:
+        windows = [(bs, be) for (bs, be) in
+                   compute_windows(d, plan.get("blocks", []),
+                                   plan_first_commit(d))
+                   if be > now]
+    if not windows:
+        for offset in range(1, 8):
+            fd = d + timedelta(days=offset)
+            fplan = load_plan(fd)
+            if fplan and fplan.get("blocks"):
+                windows = compute_windows(fd, fplan["blocks"],
+                                          plan_first_commit(fd))
+                break
+    if not windows:
         return ""
     lines = ["## I will be live on "
              "[@constantinestudies](https://www.youtube.com/@constantinestudies) "
@@ -304,7 +359,7 @@ def upcoming_section():
              "",
              "All times ET.",
              ""]
-    for (bs, be) in future:
+    for (bs, be) in windows:
         lines.append("- %s, %s – %s"
                      % (bs.strftime("%a %-m/%-d"),
                         bs.strftime("%-I:%M %p"), be.strftime("%-I:%M %p")))
@@ -328,8 +383,11 @@ def build_page(log):
     if up:
         lines.append(up)
         lines.append("")
-    lines.append("Each morning I file a study schedule — time blocks only, always "
-                 "totaling at least 6 hours. After the day is done the public streams "
+    lines.append("I file a study schedule — time blocks only, always "
+                 "totaling at least 6 hours — sometimes the morning of, "
+                 "sometimes the night before or earlier. The plan locks at "
+                 "filing: it can't be changed after, no matter when it was "
+                 "filed. After the day is done the public streams "
                  "are checked against it: a block counts as hit if a stream was live "
                  "ten minutes in, having started no later than ten minutes after the "
                  "block began. Blocks past midnight count toward the day they were "
@@ -340,8 +398,15 @@ def build_page(log):
                  "marked. If a plan is changed after filing, the change is logged "
                  "below, the original is restored, and the day is judged against "
                  "the original schedule — the same way the CPTS countdown date is "
-                 "guarded. Days with fewer than 6 streamed hours are marked, "
+                 "guarded. The exact machinery is documented on the "
+                 "[Schedule Rules & Guard](/schedule-guard/). Days with fewer than "
+                 "6 streamed hours are marked, "
                  "regardless of when the hours happened.")
+    lines.append("")
+    lines.append("Cumulative and weekly hours, running average, streak, and "
+                 "hour totals against the 6h/day target are tracked on the "
+                 "[Study Log](/study/) page. This page answers one question: "
+                 "did I study when I said I would?")
     lines.append("")
     lines.append("**%d of %d planned days fully adhered (%.0f%%). %d of %d blocks hit. "
                  "%d of %d days reached 6h.**"
@@ -380,9 +445,15 @@ def build_page(log):
 
 def main():
     args = sys.argv[1:]
-    if not args or args[0] != "--check":
-        print("usage: schedcheck.py --check [YYYY-MM-DD]", file=sys.stderr)
+    if not args or args[0] not in ("--check", "--verify-all"):
+        print("usage: schedcheck.py --check [YYYY-MM-DD] | --verify-all",
+              file=sys.stderr)
         sys.exit(2)
+    if args[0] == "--verify-all":
+        events = verify_all()
+        build_page(load_log())
+        print(json.dumps({"reverted": len(events), "events": events}, indent=1))
+        return
     d = date.fromisoformat(args[1]) if len(args) > 1 else today_et()
 
     streams = fetch_streams()
