@@ -7,53 +7,69 @@ draft: false
 Public study hours, for accountability. Totals come from the durations of my public study streams.
 
 <div class="stat-row">
-<div class="stat"><span class="stat-num">84.5h</span><span class="stat-label">last 3 weeks</span></div>
-<div class="stat"><span class="stat-num">4.0h</span><span class="stat-label">avg / day</span></div>
+<div class="stat"><span class="stat-num">118.0h</span><span class="stat-label">since Aug 30</span></div>
+<div class="stat"><span class="stat-num">3.7h</span><span class="stat-label">avg / day</span></div>
 <div class="stat"><span class="stat-num">11.9h</span><span class="stat-label">best day (Wed 9/23)</span></div>
 <div class="stat"><span class="stat-num">3</span><span class="stat-label">day streak</span></div>
 </div>
 
-<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hours per day — last 3 weeks">
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hours per day — since Aug 30">
 <style>text{fill:#8a9a8f;font-family:monospace}</style>
-<text x="44" y="16" font-size="13" fill="#c9f5d6">Hours per day — last 3 weeks</text>
+<text x="44" y="16" font-size="13" fill="#c9f5d6">Hours per day — since Aug 30</text>
 <line x1="44" y1="190.0" x2="668" y2="190.0" stroke="#1d3a24" stroke-width="1"/>
 <text x="38" y="194.0" font-size="10" text-anchor="end">0h</text>
 <line x1="44" y1="108.0" x2="668" y2="108.0" stroke="#1d3a24" stroke-width="1"/>
 <text x="38" y="112.0" font-size="10" text-anchor="end">6h</text>
 <line x1="44" y1="26.0" x2="668" y2="26.0" stroke="#1d3a24" stroke-width="1"/>
 <text x="38" y="30.0" font-size="10" text-anchor="end">12h</text>
-<rect x="49.3" y="117.8" width="19.0" height="72.2" rx="3" fill="#33ff66" opacity="0.92"><title>9/10: 5.3h</title></rect>
-<text x="58.9" y="210" font-size="10" text-anchor="middle">9/10</text>
-<rect x="79.1" y="69.1" width="19.0" height="120.9" rx="3" fill="#33ff66" opacity="0.92"><title>9/11: 8.8h</title></rect>
-<rect x="108.8" y="190.0" width="19.0" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/12: 0.0h</title></rect>
-<text x="118.3" y="210" font-size="10" text-anchor="middle">9/12</text>
-<rect x="138.5" y="190.0" width="19.0" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/13: 0.0h</title></rect>
-<rect x="168.2" y="190.0" width="19.0" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/14: 0.0h</title></rect>
-<text x="177.7" y="210" font-size="10" text-anchor="middle">9/14</text>
-<rect x="197.9" y="40.9" width="19.0" height="149.1" rx="3" fill="#33ff66" opacity="0.92"><title>9/15: 10.9h</title></rect>
-<rect x="227.6" y="167.7" width="19.0" height="22.3" rx="3" fill="#33ff66" opacity="0.92"><title>9/16: 1.6h</title></rect>
-<text x="237.1" y="210" font-size="10" text-anchor="middle">9/16</text>
-<rect x="257.3" y="95.7" width="19.0" height="94.3" rx="3" fill="#33ff66" opacity="0.92"><title>9/17: 6.9h</title></rect>
-<rect x="287.1" y="75.9" width="19.0" height="114.1" rx="3" fill="#33ff66" opacity="0.92"><title>9/18: 8.3h</title></rect>
-<text x="296.6" y="210" font-size="10" text-anchor="middle">9/18</text>
-<rect x="316.8" y="190.0" width="19.0" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/19: 0.0h</title></rect>
-<rect x="346.5" y="171.7" width="19.0" height="18.3" rx="3" fill="#33ff66" opacity="0.92"><title>9/20: 1.3h</title></rect>
-<text x="356.0" y="210" font-size="10" text-anchor="middle">9/20</text>
-<rect x="376.2" y="190.0" width="19.0" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/21: 0.0h</title></rect>
-<rect x="405.9" y="139.4" width="19.0" height="50.6" rx="3" fill="#33ff66" opacity="0.92"><title>9/22: 3.7h</title></rect>
-<text x="415.4" y="210" font-size="10" text-anchor="middle">9/22</text>
-<rect x="435.6" y="27.4" width="19.0" height="162.6" rx="3" fill="#33ff66" opacity="0.92"><title>9/23: 11.9h</title></rect>
-<rect x="465.3" y="137.5" width="19.0" height="52.5" rx="3" fill="#33ff66" opacity="0.92"><title>9/24: 3.8h</title></rect>
-<text x="474.9" y="210" font-size="10" text-anchor="middle">9/24</text>
-<rect x="495.1" y="179.9" width="19.0" height="10.1" rx="3" fill="#33ff66" opacity="0.92"><title>9/25: 0.7h</title></rect>
-<rect x="524.8" y="190.0" width="19.0" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/26: 0.0h</title></rect>
-<text x="534.3" y="210" font-size="10" text-anchor="middle">9/26</text>
-<rect x="554.5" y="133.1" width="19.0" height="56.9" rx="3" fill="#33ff66" opacity="0.92"><title>9/27: 4.2h</title></rect>
-<rect x="584.2" y="94.1" width="19.0" height="95.9" rx="3" fill="#33ff66" opacity="0.92"><title>9/28: 7.0h</title></rect>
-<text x="593.7" y="210" font-size="10" text-anchor="middle">9/28</text>
-<rect x="613.9" y="54.7" width="19.0" height="135.3" rx="3" fill="#33ff66" opacity="0.92"><title>9/29: 9.9h</title></rect>
-<rect x="643.6" y="190.0" width="19.0" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/30: 0.0h</title></rect>
-<text x="653.1" y="210" font-size="10" text-anchor="middle">9/30</text>
+<rect x="47.5" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>8/30: 0.0h</title></rect>
+<text x="53.8" y="210" font-size="10" text-anchor="middle">8/30</text>
+<rect x="67.0" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>8/31: 0.0h</title></rect>
+<rect x="86.5" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/1: 0.0h</title></rect>
+<text x="92.8" y="210" font-size="10" text-anchor="middle">9/1</text>
+<rect x="106.0" y="177.2" width="12.5" height="12.8" rx="3" fill="#33ff66" opacity="0.92"><title>9/2: 0.9h</title></rect>
+<rect x="125.5" y="81.6" width="12.5" height="108.4" rx="3" fill="#33ff66" opacity="0.92"><title>9/3: 7.9h</title></rect>
+<text x="131.8" y="210" font-size="10" text-anchor="middle">9/3</text>
+<rect x="145.0" y="91.1" width="12.5" height="98.9" rx="3" fill="#33ff66" opacity="0.92"><title>9/4: 7.2h</title></rect>
+<rect x="164.5" y="147.5" width="12.5" height="42.5" rx="3" fill="#33ff66" opacity="0.92"><title>9/5: 3.1h</title></rect>
+<text x="170.8" y="210" font-size="10" text-anchor="middle">9/5</text>
+<rect x="184.0" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/6: 0.0h</title></rect>
+<rect x="203.5" y="164.0" width="12.5" height="26.0" rx="3" fill="#33ff66" opacity="0.92"><title>9/7: 1.9h</title></rect>
+<text x="209.8" y="210" font-size="10" text-anchor="middle">9/7</text>
+<rect x="223.0" y="131.5" width="12.5" height="58.5" rx="3" fill="#33ff66" opacity="0.92"><title>9/8: 4.3h</title></rect>
+<rect x="242.5" y="79.8" width="12.5" height="110.2" rx="3" fill="#33ff66" opacity="0.92"><title>9/9: 8.1h</title></rect>
+<text x="248.8" y="210" font-size="10" text-anchor="middle">9/9</text>
+<rect x="262.0" y="117.8" width="12.5" height="72.2" rx="3" fill="#33ff66" opacity="0.92"><title>9/10: 5.3h</title></rect>
+<rect x="281.5" y="69.1" width="12.5" height="120.9" rx="3" fill="#33ff66" opacity="0.92"><title>9/11: 8.8h</title></rect>
+<text x="287.8" y="210" font-size="10" text-anchor="middle">9/11</text>
+<rect x="301.0" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/12: 0.0h</title></rect>
+<rect x="320.5" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/13: 0.0h</title></rect>
+<text x="326.8" y="210" font-size="10" text-anchor="middle">9/13</text>
+<rect x="340.0" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/14: 0.0h</title></rect>
+<rect x="359.5" y="40.9" width="12.5" height="149.1" rx="3" fill="#33ff66" opacity="0.92"><title>9/15: 10.9h</title></rect>
+<text x="365.8" y="210" font-size="10" text-anchor="middle">9/15</text>
+<rect x="379.0" y="167.7" width="12.5" height="22.3" rx="3" fill="#33ff66" opacity="0.92"><title>9/16: 1.6h</title></rect>
+<rect x="398.5" y="95.7" width="12.5" height="94.3" rx="3" fill="#33ff66" opacity="0.92"><title>9/17: 6.9h</title></rect>
+<text x="404.8" y="210" font-size="10" text-anchor="middle">9/17</text>
+<rect x="418.0" y="75.9" width="12.5" height="114.1" rx="3" fill="#33ff66" opacity="0.92"><title>9/18: 8.3h</title></rect>
+<rect x="437.5" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/19: 0.0h</title></rect>
+<text x="443.8" y="210" font-size="10" text-anchor="middle">9/19</text>
+<rect x="457.0" y="171.7" width="12.5" height="18.3" rx="3" fill="#33ff66" opacity="0.92"><title>9/20: 1.3h</title></rect>
+<rect x="476.5" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/21: 0.0h</title></rect>
+<text x="482.8" y="210" font-size="10" text-anchor="middle">9/21</text>
+<rect x="496.0" y="139.4" width="12.5" height="50.6" rx="3" fill="#33ff66" opacity="0.92"><title>9/22: 3.7h</title></rect>
+<rect x="515.5" y="27.4" width="12.5" height="162.6" rx="3" fill="#33ff66" opacity="0.92"><title>9/23: 11.9h</title></rect>
+<text x="521.8" y="210" font-size="10" text-anchor="middle">9/23</text>
+<rect x="535.0" y="137.5" width="12.5" height="52.5" rx="3" fill="#33ff66" opacity="0.92"><title>9/24: 3.8h</title></rect>
+<rect x="554.5" y="179.9" width="12.5" height="10.1" rx="3" fill="#33ff66" opacity="0.92"><title>9/25: 0.7h</title></rect>
+<text x="560.8" y="210" font-size="10" text-anchor="middle">9/25</text>
+<rect x="574.0" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/26: 0.0h</title></rect>
+<rect x="593.5" y="133.1" width="12.5" height="56.9" rx="3" fill="#33ff66" opacity="0.92"><title>9/27: 4.2h</title></rect>
+<text x="599.8" y="210" font-size="10" text-anchor="middle">9/27</text>
+<rect x="613.0" y="94.1" width="12.5" height="95.9" rx="3" fill="#33ff66" opacity="0.92"><title>9/28: 7.0h</title></rect>
+<rect x="632.5" y="54.7" width="12.5" height="135.3" rx="3" fill="#33ff66" opacity="0.92"><title>9/29: 9.9h</title></rect>
+<text x="638.8" y="210" font-size="10" text-anchor="middle">9/29</text>
+<rect x="652.0" y="190.0" width="12.5" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>9/30: 0.0h</title></rect>
 </svg>
 
 <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hours per week">
@@ -62,21 +78,24 @@ Public study hours, for accountability. Totals come from the durations of my pub
 <line x1="44" y1="190.0" x2="668" y2="190.0" stroke="#1d3a24" stroke-width="1"/>
 <text x="38" y="194.0" font-size="10" text-anchor="end">0h</text>
 <line x1="44" y1="108.0" x2="668" y2="108.0" stroke="#1d3a24" stroke-width="1"/>
-<text x="38" y="112.0" font-size="10" text-anchor="end">14h</text>
+<text x="38" y="112.0" font-size="10" text-anchor="end">14.5h</text>
 <line x1="44" y1="26.0" x2="668" y2="26.0" stroke="#1d3a24" stroke-width="1"/>
-<text x="38" y="30.0" font-size="10" text-anchor="end">28h</text>
-<rect x="72.1" y="107.4" width="99.8" height="82.6" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/6: 14.1h</title></rect>
-<text x="122.0" y="210" font-size="10" text-anchor="middle">9/6</text>
-<text x="122.0" y="102.4" font-size="10" text-anchor="middle" fill="#c9f5d6">14.1</text>
-<rect x="228.1" y="27.2" width="99.8" height="162.8" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/13: 27.8h</title></rect>
-<text x="278.0" y="210" font-size="10" text-anchor="middle">9/13</text>
-<text x="278.0" y="22.2" font-size="10" text-anchor="middle" fill="#c9f5d6">27.8</text>
-<rect x="384.1" y="64.1" width="99.8" height="125.9" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/20: 21.5h</title></rect>
-<text x="434.0" y="210" font-size="10" text-anchor="middle">9/20</text>
-<text x="434.0" y="59.1" font-size="10" text-anchor="middle" fill="#c9f5d6">21.5</text>
-<rect x="540.1" y="66.4" width="99.8" height="123.6" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/27: 21.1h</title></rect>
-<text x="590.0" y="210" font-size="10" text-anchor="middle">9/27</text>
-<text x="590.0" y="61.4" font-size="10" text-anchor="middle" fill="#c9f5d6">21.1</text>
+<text x="38" y="30.0" font-size="10" text-anchor="end">29h</text>
+<rect x="66.5" y="81.4" width="79.9" height="108.6" rx="3" fill="#2f9e4f" opacity="0.92"><title>8/30: 19.2h</title></rect>
+<text x="106.4" y="210" font-size="10" text-anchor="middle">8/30</text>
+<text x="106.4" y="76.4" font-size="10" text-anchor="middle" fill="#c9f5d6">19.2</text>
+<rect x="191.3" y="29.4" width="79.9" height="160.6" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/6: 28.4h</title></rect>
+<text x="231.2" y="210" font-size="10" text-anchor="middle">9/6</text>
+<text x="231.2" y="24.4" font-size="10" text-anchor="middle" fill="#c9f5d6">28.4</text>
+<rect x="316.1" y="32.8" width="79.9" height="157.2" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/13: 27.8h</title></rect>
+<text x="356.0" y="210" font-size="10" text-anchor="middle">9/13</text>
+<text x="356.0" y="27.8" font-size="10" text-anchor="middle" fill="#c9f5d6">27.8</text>
+<rect x="440.9" y="68.4" width="79.9" height="121.6" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/20: 21.5h</title></rect>
+<text x="480.8" y="210" font-size="10" text-anchor="middle">9/20</text>
+<text x="480.8" y="63.4" font-size="10" text-anchor="middle" fill="#c9f5d6">21.5</text>
+<rect x="565.7" y="70.7" width="79.9" height="119.3" rx="3" fill="#2f9e4f" opacity="0.92"><title>9/27: 21.1h</title></rect>
+<text x="605.6" y="210" font-size="10" text-anchor="middle">9/27</text>
+<text x="605.6" y="65.7" font-size="10" text-anchor="middle" fill="#c9f5d6">21.1</text>
 </svg>
 
 Sessions are screen-recorded study streams on [YouTube @constantinestudies](https://www.youtube.com/@constantinestudies) — boring to watch, useful to log. Hours are summed from public stream durations.
