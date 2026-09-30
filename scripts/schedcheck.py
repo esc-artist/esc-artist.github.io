@@ -5,13 +5,15 @@ Compares the morning-filed plan (static/data/schedules/YYYY-MM-DD.json)
 against the day's public study streams (start times via yt-dlp), using a
 10-minute grace window, and regenerates the public schedule page.
 
-Tamper model (mirrors the CPTS countdown guard):
-- The plan must be committed BEFORE the day's first stream starts,
-  otherwise the day is marked late/unverifiable.
-- A morning content snapshot lives outside the repo
-  (~/workspace/sched-guard/hidden_files/state.json). If the repo's plan
-  content ever disagrees with the snapshot (e.g. a force-pushed rewrite),
-  the day is flagged as tampered.
+Tamper model (mirrors the CPTS countdown guard): the morning snapshot is
+canonical and stores the full plan content. Any post-filing change
+(modified or deleted plan) is logged in a public changelog, the original
+is restored, and the day is judged against the original schedule.
+Plans are timestamped by their git commit; a plan committed after its
+first block started is `late_plan` (unverifiable).
+Plans must total at least 6 hours (`short_plan` otherwise); days with
+fewer than 6 streamed hours are marked regardless of timing.
+Blocks past midnight count toward the plan date.
 
 Usage:
     python3 scripts/schedcheck.py --check [YYYY-MM-DD]   # default: today ET
@@ -30,6 +32,7 @@ ET = ZoneInfo("America/New_York")
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLAN_DIR = os.path.join(REPO, "static", "data", "schedules")
 LOG_PATH = os.path.join(PLAN_DIR, "_log.json")
+CHANGELOG_PATH = os.path.join(PLAN_DIR, "_changelog.json")
 STATE_PATH = os.path.expanduser("~/workspace/sched-guard/hidden_files/state.json")
 PAGE_PATH = os.path.join(REPO, "content", "schedule.md")
 GRACE = timedelta(minutes=10)
@@ -116,31 +119,11 @@ def parse_hm(s):
     return int(h), int(m)
 
 
-def check_day(d, streams):
-    plan = load_plan(d)
-    rec = {"date": d.isoformat(), "blocks": [], "streams": [],
-           "hits": 0, "verdict": "", "note": ""}
-
-    if plan is None:
-        rec["verdict"] = "no_plan"
-        rec["note"] = "No plan filed."
-        return rec
-
-    blocks = plan.get("blocks", [])
-    rec["blocks"] = ["%s-%s" % (b[0], b[1]) for b in blocks]
-
-    # Tamper check 1: repo content must match the morning snapshot.
-    state = load_state().get(d.isoformat())
-    if state and state.get("sha256") != plan_sha256(d):
-        rec["verdict"] = "tampered"
-        rec["note"] = "Plan content changed after filing."
-        return rec
-
-    # Absolute block windows. Blocks are placed on the plan date, rolling
-    # forward past midnight as needed: a block whose start would otherwise
-    # precede the filing time (e.g. "12:00am-1:00am" filed in the afternoon)
-    # belongs to the following night. end <= start also crosses midnight.
-    filed = plan_first_commit(d)
+def compute_windows(d, blocks, filed):
+    """Absolute block windows. Blocks are placed on the plan date, rolling
+    forward past midnight as needed: a block whose start would otherwise
+    precede the filing time (e.g. "12:00am-1:00am" filed in the afternoon)
+    belongs to the following night. end <= start also crosses midnight."""
     windows = []
     offset = 0
     prev_start = None
@@ -161,6 +144,48 @@ def check_day(d, streams):
             break
         windows.append((bs, be))
         prev_start = bs
+    return windows
+
+
+def check_day(d, streams):
+    plan = load_plan(d)
+    state = load_state().get(d.isoformat())
+    rec = {"date": d.isoformat(), "blocks": [], "streams": [],
+           "hits": 0, "verdict": "", "note": ""}
+    tamper_detail = None
+
+    # Tamper handling: the morning snapshot is canonical. Any post-filing
+    # change (modified or deleted plan) is logged publicly, the original
+    # is restored, and the day is judged against the original schedule.
+    if plan is None and state and state.get("content"):
+        plan = state["content"]
+        tamper_detail = "plan file deleted after filing"
+    elif (plan is not None and state and state.get("sha256")
+            and state["sha256"] != plan_sha256(d) and state.get("content")):
+        tamper_detail = ("blocks changed from %s to %s"
+                         % (fmt_block_list(state["content"].get("blocks", [])),
+                            fmt_block_list(plan.get("blocks", []))))
+        plan = state["content"]
+
+    if plan is None:
+        rec["verdict"] = "no_plan"
+        rec["note"] = "No plan filed."
+        return rec
+
+    if tamper_detail:
+        with open(plan_path(d), "w") as f:
+            json.dump(plan, f, indent=2)
+        log_event(d.isoformat(),
+                  "Schedule tampering detected and reverted.",
+                  tamper_detail + ".")
+        rec["note"] = ("Plan changed after filing; original restored. "
+                       + tamper_detail + ". Judged against original schedule. ")
+
+    blocks = plan.get("blocks", [])
+    rec["blocks"] = ["%s-%s" % (b[0], b[1]) for b in blocks]
+
+    filed = plan_first_commit(d)
+    windows = compute_windows(d, blocks, filed)
 
     if not windows:
         rec["verdict"] = "no_plan"
@@ -178,6 +203,15 @@ def check_day(d, streams):
                                            first_block.strftime("%m-%d %H:%M")))
         return rec
 
+    # Validity check: the plan must total at least 6 hours. Short plans
+    # are a violation, flagged the same as tampering.
+    plan_hours = sum((be - bs).total_seconds() / 3600 for (bs, be) in windows)
+    rec["plan_hours"] = round(plan_hours, 1)
+    if plan_hours < 6 - 1e-9:
+        rec["verdict"] = "short_plan"
+        rec["note"] = "Plan totaled %.1fh; 6h required." % plan_hours
+        return rec
+
     span_start = min(bs for (bs, _) in windows)
     span_end = max(be for (_, be) in windows)
     in_span = [(v, s, e) for (v, s, e) in streams if s < span_end and e > span_start]
@@ -190,6 +224,13 @@ def check_day(d, streams):
         rec["verdict"] = "pending"
         rec["note"] = "Blocks still in progress; final check runs ~1:30am ET."
         return rec
+
+    # Hours: total streamed time overlapping the day's span, regardless of
+    # when within it the hours happened. Under 6h is marked.
+    day_hours = sum((e - s).total_seconds() / 3600
+                    for (_, s, e) in streams if s < span_end and e > span_start)
+    rec["hours"] = round(day_hours, 1)
+    rec["hours_met"] = day_hours >= 6 - 1e-9
 
     # Adherence: block is HIT if a stream was live 10 minutes into the
     # block, having started no later than 10 minutes after block start.
@@ -226,9 +267,54 @@ def save_log(log):
         json.dump(log, f, indent=1)
 
 
+def load_changelog():
+    if not os.path.exists(CHANGELOG_PATH):
+        return []
+    with open(CHANGELOG_PATH) as f:
+        return json.load(f)
+
+
+def log_event(date_iso, event, detail):
+    cl = load_changelog()
+    cl.append({"date": date_iso, "event": event, "detail": detail})
+    os.makedirs(PLAN_DIR, exist_ok=True)
+    with open(CHANGELOG_PATH, "w") as f:
+        json.dump(cl, f, indent=1)
+
+
+def fmt_block_list(blocks):
+    return ", ".join("%s-%s" % (b[0], b[1]) for b in blocks) or "(none)"
+
+
+def upcoming_section():
+    """'I will be live at the following times' — the current plan's blocks
+    that have not ended yet, published so anyone can check."""
+    now = datetime.now(ET)
+    d = now.date()
+    plan = load_plan(d)
+    if not plan:
+        return ""
+    windows = compute_windows(d, plan.get("blocks", []), plan_first_commit(d))
+    future = [(bs, be) for (bs, be) in windows if be > now]
+    if not future:
+        return ""
+    lines = ["## I will be live on "
+             "[@constantinestudies](https://www.youtube.com/@constantinestudies) "
+             "at the following times",
+             "",
+             "All times ET.",
+             ""]
+    for (bs, be) in future:
+        lines.append("- %s, %s – %s"
+                     % (bs.strftime("%a %-m/%-d"),
+                        bs.strftime("%-I:%M %p"), be.strftime("%-I:%M %p")))
+    return "\n".join(lines)
+
+
 def build_page(log):
     planned = [r for r in log if r["verdict"] not in ("no_plan", "pending")]
     full = [r for r in planned if r["verdict"] == "adhered"]
+    met = [r for r in planned if r.get("hours_met")]
     blocks_hit = sum(r["hits"] for r in planned)
     blocks_total = sum(len(r["blocks"]) for r in planned)
     adh = (100.0 * len(full) / len(planned)) if planned else 0.0
@@ -238,21 +324,32 @@ def build_page(log):
     lines.append('title: "Schedule Adherence"')
     lines.append("---")
     lines.append("")
-    lines.append("Each morning I file a study schedule — time blocks only. "
-                 "After the day is done the public streams are checked against it: "
-                 "a block counts as hit if a stream was live ten minutes in, "
-                 "having started no later than ten minutes after the block began. "
-                 "Blocks past midnight count toward the day they were planned on.")
+    up = upcoming_section()
+    if up:
+        lines.append(up)
+        lines.append("")
+    lines.append("Each morning I file a study schedule — time blocks only, always "
+                 "totaling at least 6 hours. After the day is done the public streams "
+                 "are checked against it: a block counts as hit if a stream was live "
+                 "ten minutes in, having started no later than ten minutes after the "
+                 "block began. Blocks past midnight count toward the day they were "
+                 "planned on.")
     lines.append("")
     lines.append("Plans are timestamped by their git commit and must predate the "
-                 "plan's first block; post-hoc edits are flagged, the same way "
-                 "the CPTS countdown date is guarded.")
+                 "plan's first block. A missing plan, or a plan under 6 hours, is "
+                 "marked. If a plan is changed after filing, the change is logged "
+                 "below, the original is restored, and the day is judged against "
+                 "the original schedule — the same way the CPTS countdown date is "
+                 "guarded. Days with fewer than 6 streamed hours are marked, "
+                 "regardless of when the hours happened.")
     lines.append("")
-    lines.append("**%d of %d planned days fully adhered (%.0f%%). %d of %d blocks hit.**"
-                 % (len(full), len(planned), adh, blocks_hit, blocks_total))
+    lines.append("**%d of %d planned days fully adhered (%.0f%%). %d of %d blocks hit. "
+                 "%d of %d days reached 6h.**"
+                 % (len(full), len(planned), adh, blocks_hit, blocks_total,
+                    len(met), len(planned)))
     lines.append("")
-    lines.append("| Date | Plan | Streams (ET) | Blocks hit | Verdict | Note |")
-    lines.append("|---|---|---|---|---|---|")
+    lines.append("| Date | Plan | Streams (ET) | Blocks hit | Hours | Verdict | Note |")
+    lines.append("|---|---|---|---|---|---|---|")
     for r in sorted(log, key=lambda r: r["date"], reverse=True):
         plan = ", ".join(r["blocks"]) if r["blocks"] else "—"
         streams = ", ".join("%s–%s" % (s["start"], s["end"]) for s in r["streams"]) or "—"
@@ -260,9 +357,22 @@ def build_page(log):
             bh = "%d/%d" % (r["hits"], len(r["blocks"]))
         else:
             bh = "—"
+        if "hours" in r:
+            h = "%.1fh" % r["hours"]
+            if not r.get("hours_met"):
+                h = "**%s**" % h
+        else:
+            h = "—"
         note = r.get("note", "")
-        lines.append("| %s | %s | %s | %s | %s | %s |"
-                     % (r["date"], plan, streams, bh, r["verdict"], note))
+        lines.append("| %s | %s | %s | %s | %s | %s | %s |"
+                     % (r["date"], plan, streams, bh, h, r["verdict"], note))
+    cl = load_changelog()
+    if cl:
+        lines.append("")
+        lines.append("## Changelog")
+        lines.append("")
+        for e in cl:
+            lines.append("- %s — %s %s" % (e["date"], e["event"], e.get("detail", "")))
     lines.append("")
     with open(PAGE_PATH, "w") as f:
         f.write("\n".join(lines) + "\n")

@@ -9,6 +9,7 @@
   "streams": [],
   "hits": 0,
   "verdict": "pending",
-  "note": "Blocks still in progress; final check runs ~1:30am ET."
+  "note": "Blocks still in progress; final check runs ~1:30am ET.",
+  "plan_hours": 6.0
  }
 ]
