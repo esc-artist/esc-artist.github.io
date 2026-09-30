@@ -10,14 +10,22 @@ This blog is my notes: retired HTB machines, and whatever I'm building. Currentl
 
 The plan, on my leg:
 
-![Certification path tattoo — OSCP filled in with the OffSec dragon; CPTS, CAPE, OSEP, OSWE, OSED waiting](/images/cert-path.jpg)
+<figure class="about-photo">
+<img src="/images/cert-path.jpg" alt="Certification path tattoo — OSCP filled in with the OffSec dragon; CPTS, CAPE, OSEP, OSWE, OSED waiting">
+</figure>
 
 One down, five to go.
 
-![OSCP certificate, earned September 2025](/images/oscp-cert.jpg)
+<figure class="about-photo">
+<img src="/images/oscp-cert.jpg" alt="OSCP certificate, earned September 2025">
+</figure>
 
 The tools of the trade, on my shoulder:
 
-![Keyboard wrapped in its own cord — tattoo](/images/keyboard-tattoo.jpg)
+<figure class="about-photo">
+<img src="/images/keyboard-tattoo.jpg" alt="Keyboard wrapped in its own cord — tattoo">
+</figure>
 
-![BLACK HAT knuckle tattoos on a keyboard](/images/hands-keyboard.jpg)
+<figure class="about-photo">
+<img src="/images/hands-keyboard.jpg" alt="BLACK HAT knuckle tattoos on a keyboard">
+</figure>

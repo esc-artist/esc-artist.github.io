@@ -56,6 +56,19 @@
   box-shadow: 0 0 22px rgba(51, 255, 102, 0.07);
 }
 
+/* about page photos: keep them modest, not full-width */
+.about-photo {
+  margin: 1.6rem 0;
+  text-align: center;
+}
+
+.about-photo img {
+  max-width: min(320px, 100%);
+  height: auto;
+  border: 1px solid #1d3a24;
+  border-radius: 8px;
+}
+
 /* edgy divider */
 .post-content hr {
   border: none;
