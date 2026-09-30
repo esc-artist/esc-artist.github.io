@@ -23,6 +23,6 @@ This blog is my notes: retired HTB machines, and whatever I'm building. Currentl
 </figure>
 <figure>
 <img src="/images/hands-keyboard.jpg" alt="BLACK HAT knuckle tattoos on a keyboard">
-<figcaption>BLACK HAT knuckles, at work.</figcaption>
+<figcaption>At work.</figcaption>
 </figure>
 </div>
