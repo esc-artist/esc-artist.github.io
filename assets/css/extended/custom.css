@@ -127,14 +127,16 @@
   transform: scale(1.045);
 }
 
-.gallery figcaption {
+.md-content .gallery figure > figcaption {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
+  margin: 0;
   padding: 2rem 0.9rem 0.7rem;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.92), transparent);
   font-size: 0.82rem;
+  font-weight: normal;
   color: #f2fff5;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
 }
