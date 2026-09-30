@@ -133,9 +133,10 @@
   right: 0;
   bottom: 0;
   padding: 2rem 0.9rem 0.7rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.88), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.92), transparent);
   font-size: 0.82rem;
-  color: #c9f5d6;
+  color: #f2fff5;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 @keyframes gallery-rise {
