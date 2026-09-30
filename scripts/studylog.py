@@ -105,7 +105,7 @@ date: 2026-09-30
 draft: false
 ---
 
-Public study hours, for accountability. Totals come from the durations of my public study streams — hours only, no money involved.
+Public study hours, for accountability. Totals come from the durations of my public study streams.
 
 <div class="stat-row">
 <div class="stat"><span class="stat-num">{total:.1f}h</span><span class="stat-label">last 3 weeks</span></div>
@@ -118,7 +118,7 @@ Public study hours, for accountability. Totals come from the durations of my pub
 
 {weekly_svg}
 
-Sessions are screen-recorded study streams on [YouTube @constantinestudies](https://www.youtube.com/@constantinestudies) — boring to watch, useful to log. Hours are summed from public stream durations by upload date.
+Sessions are screen-recorded study streams on [YouTube @constantinestudies](https://www.youtube.com/@constantinestudies) — boring to watch, useful to log. Hours are summed from public stream durations.
 """
 open("/home/hatch/workspace/esc-artist-blog/content/study.md", "w").write(md)
 
