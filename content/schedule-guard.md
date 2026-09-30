@@ -41,8 +41,6 @@ The per-day check runs the same revert-and-log step for the day it grades before
 
 **The changelog.** Every revert becomes a public, permanent entry: the date, what happened, and the before/after blocks. Entries are never edited or deleted.
 
-**Refusal policy.** Migi refuses any request to change a filed plan after filing — the same standing refusal as the CPTS countdown date. No debate.
-
 ## Honest limits
 
 I own the repo, so I can technically edit anything in it. This system does not make tampering impossible — it makes it pointless: edits are publicly logged and automatically reverted, usually within a day. The snapshot lives outside the repo, where repo edits can't reach it. Same pattern guards the CPTS countdown date: weekly verify, public history, auto-restore.
