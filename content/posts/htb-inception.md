@@ -50,7 +50,7 @@ port 80 identical direct vs proxied
 ssh to loopback via squid -&gt; 192.168.0.10  # same host as website</pre></div>
 </div>
 
-The conclusion: 192.168.0.10 is a container on 10.129.56.242. All of its listening ports — 80, 22, *and* 3128 — are made public through the target. Squid is running on the container, not the target, and squid's internal interface is the container's loopback.
+The conclusion: 192.168.0.10 is a container on 10.129.56.242, and all three services — 80, 22, *and* 3128 — run inside it. Ports 80 and 3128 are published through the target; 22 is reachable only through the squid proxy. Squid is running on the container, not the target, and squid's internal interface is the container's loopback.
 
 The box was designed to make you believe only port 80 was containerized, squid was on the target, and ssh was on the target's loopback. In reality, 80, 22, and 3128 all run in the container, all published through the target, and squid proxies to the container's loopback.
 
