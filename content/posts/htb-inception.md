@@ -114,3 +114,15 @@ __attribute__((constructor)) void privesc() {
 The box's whole trick was getting the attacker to misrepresent what was containerized and what wasn't. Every weird detail — the revshell failing, the ssh that wasn't where it looked, the proxy that wasn't on the host — was one wrong assumption stacked on another. Assembling the facts on paper is what broke it, not another scan.
 
 On the privesc side: the obvious paths all died (SUID bash via mounts, authorized_keys, PATH hijacking cron). The thing that worked was the weird one — a TFTP quirk creating root-owned files, plus a preload file that only needs to exist. Worth the research detour.
+
+---
+
+## Reference
+
+A few things worth keeping from this box's notes:
+
+**Squid proxy.** Typically a forward proxy (client to server, outgoing) for caching and access control. Port 3128. To scan internal interfaces through it: add the IP and port as an HTTP proxy in `proxychains.conf` and run `proxychains nmap -sT <ip>` — or use spose.py, which is more convenient: `python spose.py --proxy http://<ip>:3128 --target 127.0.0.1`. curl works through the proxy without proxychains: `curl -x http://<ip>:3128 http://<internal-ip>:<port>`. When curling the squid port directly or getting squid errors, look for "Client IP: <ip>" — that shows what squid thinks the request source is. Here it was the host's container interface, not my IP, which turned out to be critical.
+
+**WebDAV.** Enumerate with `nmap --script http-webdav-scan`. If you find an endpoint and have creds, the Linux CLI tool `cadaver` gets you in: `cadaver http://<ip>/<endpoint>`.
+
+**/etc/ld.so.preload.** The post covers the exploit; the build line from my notes: `x86_64-linux-gnu-g++ -fPIC -shared -o privesc.so privesc.c -nostartfiles`, then write `/tmp/privesc.so` into `/etc/ld.so.preload`.
