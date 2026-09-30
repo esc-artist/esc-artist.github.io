@@ -1,0 +1,26 @@
+[
+ {
+  "date": "2026-09-30",
+  "blocks": [],
+  "streams": [
+   {
+    "id": "J55JQLaGTQw",
+    "start": "14:07",
+    "end": "15:51"
+   },
+   {
+    "id": "qryt7MQdlvM",
+    "start": "03:08",
+    "end": "03:58"
+   },
+   {
+    "id": "kVP36ln6al0",
+    "start": "02:34",
+    "end": "03:57"
+   }
+  ],
+  "hits": 0,
+  "verdict": "no_plan",
+  "note": "No plan filed."
+ }
+]
