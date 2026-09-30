@@ -208,3 +208,63 @@
   letter-spacing: 0.35em;
   font-size: 0.8rem;
 }
+
+/* CPTS countdown page */
+.countdown-wrap {
+  text-align: center;
+  margin: 2.5rem 0 3rem;
+  padding: 2.5rem 1rem;
+  background: #050805;
+  border: 1px solid #1d3a24;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(51, 255, 102, 0.08), inset 0 0 60px rgba(0, 0, 0, 0.6);
+}
+.cd-target {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.15rem;
+  color: #c9f5d6;
+  margin-bottom: 1.5rem;
+}
+.countdown-digits {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.9rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.cd-num {
+  font-size: clamp(2.6rem, 9vw, 4.6rem);
+  font-weight: bold;
+  color: #3dff73;
+  text-shadow: 0 0 22px rgba(61, 255, 115, 0.5);
+  line-height: 1;
+  min-width: 2ch;
+}
+.cd-sep {
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  color: #1d3a24;
+}
+.cd-label {
+  font-size: 0.8rem;
+  color: #8a9a8f;
+  margin-top: 0.4rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.cd-note {
+  margin-top: 1.6rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.95rem;
+  color: #57d977;
+}
+.cd-history { margin-top: 1rem; }
+.cd-hist-row {
+  display: flex;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #1d3a24;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.88rem;
+}
+.cd-hist-date { color: #8a9a8f; white-space: nowrap; }
+.cd-hist-event { color: #c9f5d6; }

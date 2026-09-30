@@ -27,6 +27,11 @@ theme = 'PaperMod'
     name = 'Study Log'
     url = '/study/'
     weight = 40
+  [[menu.main]]
+    identifier = 'cpts'
+    name = 'CPTS'
+    url = '/cpts/'
+    weight = 50
 
 [params]
   description = 'Pentesting notes and embedded experiments.'
