@@ -27,7 +27,7 @@ I found the required `/vendor/dompdf/dompdf` endpoint on the site, slightly modi
 
 Then a whole lot of nothing. Normal enumeration turned up nothing useful, so I ran pspy and found two scripts running repeatedly on the machine. One was `/root/clean.sh`, which cleaned a directory used for the exploit and restored its file log. The other was `/usr/local/sbin/cleancache.sh`, and it was readable.
 
-cleancache.sh used exiftool to extract the "Producer" from the metadata of any file in /tmp, compared it to the string 'dompdf' — using `-eq`, an arithmetic comparison, which was a genuine bug: it can't compare strings at all — and removed it.
+cleancache.sh used exiftool to extract the "Producer" from the metadata of any file in /tmp, compared it to the string 'dompdf' — using `-eq` inside `[[ ]]`, which evaluates both sides as arithmetic expressions. That's a genuine bug: non-numeric strings reduce to 0, so it can't compare strings at all — and removed it.
 
 The facts:
 
@@ -37,7 +37,7 @@ The facts:
 /root/clean.sh ............ on schedule, cleans exploit dir, restores file log
 /usr/local/sbin/cleancache . readable
   exiftool -"Producer" of every file in /tmp
-  [ "$producer" -eq "dompdf" ] &amp;&amp; rm   # -eq can't compare strings: a bug, not a comparison</pre></div>
+  [[ "$producer" -eq "dompdf" ]] &amp;&amp; rm   # [[ -eq evaluates arithmetic: a bug, not a comparison</pre></div>
 </div>
 
 Arithmetic comparison on attacker-controlled input. If the Producer value is something bash arithmetic expansion will evaluate — like `a[$(id)]` — it executes. It doesn't like spaces, so the payload has to avoid them:
@@ -59,4 +59,4 @@ API endpoint fuzzing, learned on this box:
 
 Bash arithmetic comparison:
 
-- It can happen explicitly in `(( ))`, or implicitly with arithmetic comparison operators (`-eq`, `-gt`, ...). If either side of the comparison is attacker-controlled, it's code execution.
+- It can happen explicitly in `(( ))`, or implicitly with arithmetic comparison operators (`-eq`, `-gt`, ...) inside `[[ ]]`. (Single-bracket `[ ]` just errors on non-integers — no evaluation happens.) If either side of the comparison is attacker-controlled, it's code execution.
