@@ -33,21 +33,23 @@ The facts:
 
 <div class="terminal">
 <div class="terminal-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="fname">field-notes.txt</span></div>
-<div class="terminal-body"><pre>$ assemble_the_facts
-me (vpn):   10.10.14.239
-target:     10.129.56.242
-open:       80, 3128
+<div class="terminal-body"><pre>facts:
+  me (vpn):  10.10.14.239
+  target:    10.129.56.242
+  open:      80, 3128
 
-$ curl squid directly ...... "Client IP: 192.168.0.1"
-$ curl loopback THRU squid . "Client IP: 127.0.0.1"
-$ proxy -&gt; 10.129.56.242 / 192.168.0.x ... access denied
+squid:
+  curl squid directly:     "Client IP: 192.168.0.1"
+  curl loopback via squid: "Client IP: 127.0.0.1"
+  proxy -&gt; 10.129.56.242 / 192.168.0.x ... access denied
 
-$ webshell recon
-interfaces: loopback, 192.168.0.10/24
-listening (all ifaces): 22, 80, 3128
-loopback via squid: 80, 22 open   # 22 NOT open publicly
-port 80 identical direct vs proxied
-ssh to loopback via squid -&gt; 192.168.0.10  # same host as website</pre></div>
+webshell recon:
+  interfaces: loopback, 192.168.0.10/24
+  listening (all ifaces): 22, 80, 3128
+  loopback via squid: 80, 22 open (22 NOT open publicly)
+  port 80 identical direct vs proxied
+  ssh to loopback via squid -&gt; 192.168.0.10 (same host as website)</pre></div>
+<div class="vim-status"><span>"field-notes.txt" [readonly] 16L</span><span>1,1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All</span></div>
 </div>
 
 The conclusion: 192.168.0.10 is a container on 10.129.56.242, and all three services — 80, 22, *and* 3128 — run inside it. Ports 80 and 3128 are published through the target; 22 is reachable only through the squid proxy. Squid is running on the container, not the target, and squid's internal interface is the container's loopback.
