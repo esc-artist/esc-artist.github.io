@@ -18,6 +18,12 @@ draft: false
 <div class="cd-note" id="cd-note">The date does not move.</div>
 </div>
 
+<div class="cd-about">
+<div class="cd-about-title">&gt; what is CPTS_</div>
+<p><strong>CPTS</strong> — Certified Penetration Testing Specialist — is Hack&nbsp;The&nbsp;Box's hands-on penetration testing certification. The exam is a <strong>10-day (240-hour)</strong> practical: a black-box simulated corporate network of roughly eight Linux and Windows machines, heavy on Active Directory. Fourteen flags are hidden in the environment; you need <strong>twelve</strong> to pass, plus a <strong>professional-grade penetration test report</strong> — the report is where plenty of candidates fail. The exam only unlocks after completing HTB Academy's 28-module Penetration Tester path.</p>
+<p>That's the thing ticking down above.</p>
+</div>
+
 ## Date history
 
 Every change to this date is published here. There is nowhere to hide a moved deadline.
