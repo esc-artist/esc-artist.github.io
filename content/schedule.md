@@ -12,5 +12,5 @@ Cumulative and weekly hours, running average, streak, and hour totals against th
 
 | Date | Plan | Streams (ET) | Blocks hit | Hours | Verdict | Note |
 |---|---|---|---|---|---|---|
-| 2026-09-30 | 16:30-19:30, 21:00-23:00, 00:00-01:00 | 09-30 20:56–09-30 21:59, 09-30 16:58–09-30 17:36 | 0/3 | **1.7h** | missed |  |
+| 2026-09-30 | 4:30 PM-7:30 PM, 9:00 PM-11:00 PM, 12:00 AM-1:00 AM | 09-30 8:56 PM–09-30 9:59 PM, 09-30 4:58 PM–09-30 5:36 PM | 0/3 | **1.7h** | missed |  |
 

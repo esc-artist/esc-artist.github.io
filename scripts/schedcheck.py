@@ -162,6 +162,13 @@ def parse_hm(s):
     return int(h), int(m)
 
 
+def hm12(s):
+    """'16:30' -> '4:30 PM'. Display only; plans stay in HH:MM."""
+    h, m = parse_hm(s)
+    ap = "AM" if h < 12 else "PM"
+    return "%d:%02d %s" % (h % 12 or 12, m, ap)
+
+
 def compute_windows(d, blocks, filed):
     """Absolute block windows. Blocks are placed on the plan date, rolling
     forward past midnight as needed: a block whose start would otherwise
@@ -225,7 +232,7 @@ def check_day(d, streams):
                        + tamper_detail + ". Judged against original schedule. ")
 
     blocks = plan.get("blocks", [])
-    rec["blocks"] = ["%s-%s" % (b[0], b[1]) for b in blocks]
+    rec["blocks"] = ["%s-%s" % (hm12(b[0]), hm12(b[1])) for b in blocks]
 
     filed = plan_first_commit(d)
     windows = compute_windows(d, blocks, filed)
@@ -242,8 +249,8 @@ def check_day(d, streams):
     if filed and filed >= first_block:
         rec["verdict"] = "late_plan"
         rec["note"] = ("Plan filed at %s, after the first block started at %s: "
-                       "unverifiable." % (filed.strftime("%m-%d %H:%M"),
-                                           first_block.strftime("%m-%d %H:%M")))
+                       "unverifiable." % (filed.strftime("%m-%d ") + hm12(filed.strftime("%H:%M")),
+                                           first_block.strftime("%m-%d ") + hm12(first_block.strftime("%H:%M"))))
         return rec
 
     # Validity check: the plan must total at least 6 hours. Short plans
@@ -259,8 +266,8 @@ def check_day(d, streams):
     span_end = max(be for (_, be) in windows)
     in_span = [(v, s, e) for (v, s, e) in streams if s < span_end and e > span_start]
     rec["streams"] = [{"id": v,
-                       "start": s.strftime("%m-%d %H:%M"),
-                       "end": e.strftime("%m-%d %H:%M")} for (v, s, e) in in_span]
+                       "start": s.strftime("%m-%d ") + hm12(s.strftime("%H:%M")),
+                       "end": e.strftime("%m-%d ") + hm12(e.strftime("%H:%M"))} for (v, s, e) in in_span]
 
     # Blocks still in the future: no verdict yet, final check runs ~1:30am.
     if span_end > datetime.now(ET):
@@ -285,7 +292,7 @@ def check_day(d, streams):
         tail = be - GRACE
         hit = any(s <= bs + GRACE and e >= probe and e >= tail
                   for (_, s, e) in streams)
-        results.append({"block": "%s-%s" % (b[0], b[1]), "hit": hit})
+        results.append({"block": "%s-%s" % (hm12(b[0]), hm12(b[1])), "hit": hit})
         hits += 1 if hit else 0
     rec["block_results"] = results
     rec["hits"] = hits
@@ -329,7 +336,7 @@ def log_event(date_iso, event, detail):
 
 
 def fmt_block_list(blocks):
-    return ", ".join("%s-%s" % (b[0], b[1]) for b in blocks) or "(none)"
+    return ", ".join("%s-%s" % (hm12(b[0]), hm12(b[1])) for b in blocks) or "(none)"
 
 
 def upcoming_section():

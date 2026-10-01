@@ -2,20 +2,20 @@
  {
   "date": "2026-09-30",
   "blocks": [
-   "16:30-19:30",
-   "21:00-23:00",
-   "00:00-01:00"
+   "4:30 PM-7:30 PM",
+   "9:00 PM-11:00 PM",
+   "12:00 AM-1:00 AM"
   ],
   "streams": [
    {
     "id": "wOmyNzshIck",
-    "start": "09-30 20:56",
-    "end": "09-30 21:59"
+    "start": "09-30 8:56 PM",
+    "end": "09-30 9:59 PM"
    },
    {
     "id": "7KAAE7sD3Vk",
-    "start": "09-30 16:58",
-    "end": "09-30 17:36"
+    "start": "09-30 4:58 PM",
+    "end": "09-30 5:36 PM"
    }
   ],
   "hits": 0,
@@ -26,15 +26,15 @@
   "hours_met": false,
   "block_results": [
    {
-    "block": "16:30-19:30",
+    "block": "4:30 PM-7:30 PM",
     "hit": false
    },
    {
-    "block": "21:00-23:00",
+    "block": "9:00 PM-11:00 PM",
     "hit": false
    },
    {
-    "block": "00:00-01:00",
+    "block": "12:00 AM-1:00 AM",
     "hit": false
    }
   ]
