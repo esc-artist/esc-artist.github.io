@@ -390,6 +390,15 @@ def build_page(log):
     lines.append('title: "Schedule Adherence"')
     lines.append("---")
     lines.append("")
+    try:
+        with open(os.path.join(REPO, "static", "data", "schedules",
+                               "_summary.md")) as f:
+            summary = f.read().strip()
+        if summary:
+            lines.append(summary)
+            lines.append("")
+    except OSError:
+        pass
     up = upcoming_section()
     if up:
         lines.append(up)
@@ -457,10 +466,14 @@ def build_page(log):
 
 def main():
     args = sys.argv[1:]
-    if not args or args[0] not in ("--check", "--verify-all"):
-        print("usage: schedcheck.py --check [YYYY-MM-DD] | --verify-all",
+    if not args or args[0] not in ("--check", "--verify-all", "--rebuild-page"):
+        print("usage: schedcheck.py --check [YYYY-MM-DD] | --verify-all | --rebuild-page",
               file=sys.stderr)
         sys.exit(2)
+    if args[0] == "--rebuild-page":
+        build_page(load_log())
+        print("rebuilt")
+        return
     if args[0] == "--verify-all":
         events = verify_all()
         build_page(load_log())

@@ -139,6 +139,16 @@ def svg_bars(labels, values, title, w=680, h=220, color="#33ff66", target=None):
     return "\n".join(p)
 
 
+def load_summary():
+    """Editorial summary written by Migi from the numbers (strictly public
+    data only — never anything from chat). Refreshed by the Sunday job."""
+    try:
+        with open(f"{HOME}/static/data/study/_summary.md") as f:
+            return f.read().strip()
+    except OSError:
+        return ""
+
+
 def do_build():
     vids = load_store()
     today = date.today()
@@ -191,6 +201,8 @@ title: "Study Log"
 date: {today.isoformat()}
 draft: false
 ---
+
+{load_summary()}
 
 Public study hours, for accountability. Totals come from the durations of my public study streams.
 
