@@ -264,7 +264,8 @@ def check_day(d, streams):
 
     span_start = min(bs for (bs, _) in windows)
     span_end = max(be for (_, be) in windows)
-    in_span = [(v, s, e) for (v, s, e) in streams if s < span_end and e > span_start]
+    in_span = sorted(((v, s, e) for (v, s, e) in streams if s < span_end and e > span_start),
+                     key=lambda t: t[1])
     rec["streams"] = [{"id": v,
                        "start": s.strftime("%m-%d ") + hm12(s.strftime("%H:%M")),
                        "end": e.strftime("%m-%d ") + hm12(e.strftime("%H:%M"))} for (v, s, e) in in_span]
