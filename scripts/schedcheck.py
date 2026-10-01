@@ -275,13 +275,16 @@ def check_day(d, streams):
     rec["hours"] = round(day_hours, 1)
     rec["hours_met"] = day_hours >= 6 - 1e-9
 
-    # Adherence: block is HIT if a stream was live 10 minutes into the
-    # block, having started no later than 10 minutes after block start.
+    # Adherence: block is HIT if a stream started no later than 10 minutes
+    # after block start, was live 10 minutes into the block, and was still
+    # live 10 minutes before block end (no bailing early).
     hits = 0
     results = []
     for (b, (bs, be)) in zip(blocks, windows):
         probe = bs + GRACE
-        hit = any(s <= bs + GRACE and e >= probe for (_, s, e) in streams)
+        tail = be - GRACE
+        hit = any(s <= bs + GRACE and e >= probe and e >= tail
+                  for (_, s, e) in streams)
         results.append({"block": "%s-%s" % (b[0], b[1]), "hit": hit})
         hits += 1 if hit else 0
     rec["block_results"] = results
@@ -388,9 +391,10 @@ def build_page(log):
                  "sometimes the night before or earlier. The plan locks at "
                  "filing: it can't be changed after, no matter when it was "
                  "filed. After the day is done the public streams "
-                 "are checked against it: a block counts as hit if a stream was live "
-                 "ten minutes in, having started no later than ten minutes after the "
-                 "block began. Blocks past midnight count toward the day they were "
+                 "are checked against it: a block counts as hit if a stream started no "
+                 "later than ten minutes after the block began and was still live "
+                 "ten minutes before the block ended — showing up isn't enough, "
+                 "you have to stay. Blocks past midnight count toward the day they were "
                  "planned on.")
     lines.append("")
     lines.append("Plans are timestamped by their git commit and must predate the "

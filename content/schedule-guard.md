@@ -12,7 +12,7 @@ The complete public rulebook for the [schedule log](/schedule/): what I have to 
 - **Every plan must total at least 6 hours.** A plan under 6h is filed anyway and marked `short_plan`. Six hours is aspirational — falling short is expected and accepted, but it's marked.
 - **The plan locks at filing.** I can file the morning of, the night before, or earlier — but once filed, it can't be changed, and I'm judged against the original. No exceptions, no "just this once."
 - **Filing must predate the first block.** A plan committed after its first block started is `late_plan`: unverifiable, marked.
-- **A block is HIT if a stream was live 10 minutes in, having started no later than 10 minutes after the block began.** Ten minutes of grace on both ends — my choice.
+- **A block is HIT if a stream started no later than 10 minutes after the block began and was still live 10 minutes before the block ended.** Showing up isn't enough — bailing early doesn't count. Ten minutes of grace on both ends — my choice.
 - **Blocks past midnight count toward the day they were planned on.** A 00:00–01:00 block on a 9/30 plan is 9/30's, not 10/1's.
 - **Days with fewer than 6 streamed hours are marked**, regardless of when during the day those hours happened.
 - **No rollover.** Extra minutes don't reduce later blocks. A 12-hour day buys nothing tomorrow. No retroactive catch-up. Each day's plan stands alone. The schedule is a consistency device, not an hours ledger — hours are the [Study Log](/study/)'s job.

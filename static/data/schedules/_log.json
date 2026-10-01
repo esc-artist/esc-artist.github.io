@@ -18,8 +18,8 @@
     "end": "09-30 17:36"
    }
   ],
-  "hits": 1,
-  "verdict": "partial",
+  "hits": 0,
+  "verdict": "missed",
   "note": "",
   "plan_hours": 6.0,
   "hours": 1.7,
@@ -31,7 +31,7 @@
    },
    {
     "block": "21:00-23:00",
-    "hit": true
+    "hit": false
    },
    {
     "block": "00:00-01:00",
