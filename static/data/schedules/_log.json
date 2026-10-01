@@ -6,10 +6,37 @@
    "21:00-23:00",
    "00:00-01:00"
   ],
-  "streams": [],
-  "hits": 0,
-  "verdict": "pending",
-  "note": "Blocks still in progress; final check runs ~1:30am ET.",
-  "plan_hours": 6.0
+  "streams": [
+   {
+    "id": "wOmyNzshIck",
+    "start": "09-30 20:56",
+    "end": "09-30 21:59"
+   },
+   {
+    "id": "7KAAE7sD3Vk",
+    "start": "09-30 16:58",
+    "end": "09-30 17:36"
+   }
+  ],
+  "hits": 1,
+  "verdict": "partial",
+  "note": "",
+  "plan_hours": 6.0,
+  "hours": 1.7,
+  "hours_met": false,
+  "block_results": [
+   {
+    "block": "16:30-19:30",
+    "hit": false
+   },
+   {
+    "block": "21:00-23:00",
+    "hit": true
+   },
+   {
+    "block": "00:00-01:00",
+    "hit": false
+   }
+  ]
  }
 ]
