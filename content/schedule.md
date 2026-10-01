@@ -2,6 +2,14 @@
 title: "Schedule Adherence"
 ---
 
+## I will be live on [@constantinestudies](https://www.youtube.com/@constantinestudies) at the following times
+
+All times ET.
+
+- Thu 10/1, 10:00 AM – 12:00 PM
+- Thu 10/1, 1:00 PM – 3:00 PM
+- Thu 10/1, 4:00 PM – 6:00 PM
+
 I file a study schedule — time blocks only, always totaling at least 6 hours — sometimes the morning of, sometimes the night before or earlier. The plan locks at filing: it can't be changed after, no matter when it was filed. After the day is done the public streams are checked against it: a block counts as hit if a stream started no later than ten minutes after the block began and was still live ten minutes before the block ended — showing up isn't enough, you have to stay. Blocks past midnight count toward the day they were planned on.
 
 Plans are timestamped by their git commit and must predate the plan's first block. A missing plan, or a plan under 6 hours, is marked. If a plan is changed after filing, the change is logged below, the original is restored, and the day is judged against the original schedule — the same way the CPTS countdown date is guarded. The exact machinery is documented on the [Schedule Rules & Guard](/schedule-guard/). Days with fewer than 6 streamed hours are marked, regardless of when the hours happened.
