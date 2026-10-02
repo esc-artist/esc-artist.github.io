@@ -355,10 +355,15 @@ BADGE_PATHS = {
 
 # Rank icons for the cert-path hexagons (viewBox 0 0 64 64), mirroring the calf tattoo
 RANK_ICONS = {
-    # dragon (OSCP): horned head, serpentine neck, wing slashes
-    "OSCP": ('<path d="M18 50 C14 40 18 32 26 28 L22 18 L30 22 L34 12 L38 22 L48 24'
-             ' L42 30 L46 34 L38 36 L40 44 L32 52 Z"/>'
-             '<path d="M40 20 L52 10 L48 24 Z"/><path d="M44 26 L58 20 L50 32 Z"/>'),
+    # dragon (OSCP): angular head in profile, swept horn, wing slash, fierce eye
+    "OSCP": ('<path d="M34 14 L27 2 L43 10 Z"/>'
+             '<path d="M44 16 L50 6 L50 20 Z"/>'
+             '<path d="M12 36 L18 28 L24 26 L34 22 L46 26 L54 36 L50 48 L38 54'
+             ' L26 52 L16 46 Z"/>'
+             '<path d="M46 26 L60 12 L55 30 Z"/>'
+             '<ellipse cx="31" cy="34" rx="3.5" ry="4.5" fill="' + BG + '"/>'
+             '<circle cx="18" cy="37" r="1.8" fill="' + BG + '"/>'
+             '<path d="M14 40 L26 44 L24 48 L14 44 Z" fill="' + BG + '"/>'),
     # crossed swords (CPTS)
     "CPTS": ('<g transform="rotate(45 32 32)"><rect x="29" y="6" width="6" height="34" rx="2"/>'
              '<rect x="20" y="38" width="24" height="5" rx="2"/>'
@@ -446,11 +451,10 @@ def points_mark(size=18):
 
 
 def heatmap_svg(hours_by_day, weeks=16):
-    """GitHub-style heatmap, most recent `weeks` weeks."""
+    """GitHub-style heatmap, most recent `weeks` weeks. Interactive: hover ripples, click shows date."""
     today = date.today()
     # start on the Monday `weeks` weeks ago
     start = today - timedelta(days=today.weekday() + 7 * (weeks - 1))
-    max_h = max(hours_by_day.values(), default=0)
     cells = []
     for w in range(weeks):
         for d in range(7):
@@ -470,10 +474,12 @@ def heatmap_svg(hours_by_day, weeks=16):
                 c = "#33ff66"
             x, y = w * 14, d * 14
             cells.append(
-                f'<rect x="{x}" y="{y}" width="11" height="11" rx="2" fill="{c}">'
-                f'<title>{day.isoformat()}: {h:.1f}h</title></rect>')
+                f'<rect x="{x}" y="{y}" width="11" height="11" rx="2" fill="{c}"'
+                f' class="hcell" data-w="{w}" data-d="{d}"'
+                f' data-date="{day.isoformat()}" data-hours="{h:.1f}"/>')
     W, H = weeks * 14, 7 * 14
-    return f'<svg viewBox="0 0 {W} {H}" class="heatmap">{"".join(cells)}</svg>'
+    return (f'<div class="heat-readout" id="heatread">hover or tap a day</div>'
+            f'<svg viewBox="0 0 {W} {H}" class="heatmap" id="heatmap">{"".join(cells)}</svg>')
 
 
 # ---------------------------------------------------------------- page ---
@@ -497,6 +503,9 @@ CSS = """
 .stat-card .v{font-size:1.5rem;color:#33ff66;font-family:ui-monospace,monospace}
 .stat-card .k{font-size:.75rem;color:#8aa392;letter-spacing:.08em;text-transform:uppercase;margin-top:.2rem}
 .heatmap{width:100%;height:auto;margin:1rem 0}
+.hcell{transform-box:fill-box;transform-origin:center;transition:transform .18s ease;cursor:pointer}
+.heat-readout{font-family:ui-monospace,Menlo,monospace;color:#33ff66;font-size:.9rem;
+  min-height:1.4em;margin-bottom:.2rem;text-shadow:0 0 8px rgba(51,255,102,.35)}
 .badge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:1rem;margin:1.5rem 0}
 .badge-cell{text-align:center;opacity:0;animation:fadeup .5s ease forwards}
 .badge-cell .n{font-size:.8rem;color:#33ff66;margin-top:.3rem}
@@ -534,6 +543,29 @@ document.querySelectorAll('[data-count]').forEach(el=>{
 document.querySelectorAll('.badge-cell').forEach((el,i)=>{
   el.style.animationDelay=(i*0.06)+'s';
 });
+// heatmap ripple + click readout
+(function(){
+  const hm=document.getElementById('heatmap'), read=document.getElementById('heatread');
+  if(!hm||!read)return;
+  const cells=[...hm.querySelectorAll('.hcell')];
+  const byPos={};
+  cells.forEach(c=>{byPos[c.dataset.w+','+c.dataset.d]=c;});
+  function ripple(w,d){
+    const W=+w,D=+d;
+    cells.forEach(c=>{
+      const dx=Math.abs(+c.dataset.w-W), dy=Math.abs(+c.dataset.d-D);
+      const dist=Math.max(dx,dy);
+      c.style.transform=dist===0?'scale(1.55)':dist===1?'scale(1.28)':dist===2?'scale(1.12)':'';
+    });
+  }
+  function clear(){cells.forEach(c=>{c.style.transform='';});}
+  function label(c){read.textContent=c.dataset.date+': '+c.dataset.hours+'h';}
+  cells.forEach(c=>{
+    c.addEventListener('mouseenter',()=>{ripple(c.dataset.w,c.dataset.d);label(c);});
+    c.addEventListener('click',()=>{ripple(c.dataset.w,c.dataset.d);label(c);});
+  });
+  hm.addEventListener('mouseleave',()=>{clear();read.textContent='hover or tap a day';});
+})();
 """
 
 
