@@ -38,13 +38,15 @@ def load_json(path, default):
         return default
 
 
-def daily_hours(videos):
-    """{date_iso: hours} from the video store."""
+def daily_hours(videos, start_date=None):
+    """{date_iso: hours} from the video store, optionally filtered to start_date."""
     out = {}
     for v in videos.values():
         d = v.get("date")
         s = v.get("secs", 0) or 0
         if not d:
+            continue
+        if start_date and d < start_date:
             continue
         out[d] = out.get(d, 0) + s / 3600.0
     return out
@@ -127,68 +129,117 @@ def compute_points(hours_by_day, sched_log):
     return total, b
 
 
+def longest_run(dates, min_hours):
+    """Longest run of consecutive dates with hours >= min_hours. Returns (length, end_date)."""
+    best, run, prev = 0, 0, None
+    best_end = None
+    for d in sorted(dates):
+        di = date.fromisoformat(d)
+        if dates[d] >= min_hours - 1e-9 and (prev is None or di == prev + timedelta(days=1)):
+            run += 1
+        elif dates[d] >= min_hours - 1e-9:
+            run = 1
+        else:
+            run = 0
+        if run > best:
+            best, best_end = run, d
+        prev = di
+    return best, best_end
+
+
+def first_reach(dates, key, threshold):
+    """First date where cumulative key() reaches threshold."""
+    cum = 0.0
+    for d in sorted(dates):
+        cum += key(d)
+        if cum >= threshold - 1e-9:
+            return d
+    return None
+
+
 def compute_badges(hours_by_day, sched_log, cfg):
     """Return {badge_id: date_earned_iso_or_None}."""
     earned = {}
     days = sorted(hours_by_day)
-
-    def first(cond):
-        for d in days:
-            if cond(d):
-                return d
-        return None
-
-    earned["first_blood"] = first(lambda d: hours_by_day[d] >= 6 - 1e-9)
-    earned["marathon"] = first(lambda d: hours_by_day[d] >= 10 - 1e-9)
-    # comeback: 6h+ day right after a zero day
-    cb = None
-    for i, d in enumerate(days):
-        if hours_by_day[d] >= 6 - 1e-9 and i > 0:
-            prev = date.fromisoformat(d) - timedelta(days=1)
-            if hours_by_day.get(prev.isoformat(), 0) < 1e-9:
-                cb = d
-                break
-    earned["comeback"] = cb
-    # week_clear: 7 straight 6h days
-    wc = None
-    good = {d for d in days if hours_by_day[d] >= 6 - 1e-9}
-    for d in days:
-        di = date.fromisoformat(d)
-        if all((di + timedelta(days=k)).isoformat() in good for k in range(7)):
-            wc = d
-            break
-    earned["week_clear"] = wc
-    # centurions
-    total_h = sum(hours_by_day.values())
-    for bid in ("centurion_100", "centurion_250", "centurion_500", "centurion_1000"):
-        th = next(b["threshold"] for b in cfg["badges"] if b["id"] == bid)
-        earned[bid] = None
-        cum = 0.0
-        for d in days:
-            cum += hours_by_day[d]
-            if cum >= th - 1e-9:
-                earned[bid] = d
-                break
-    # schedule-based
     log_by_date = {d["date"]: d for d in sched_log if isinstance(d, dict)}
-    earned["perfect_day"] = None
-    for d in sorted(log_by_date):
-        if log_by_date[d].get("verdict") == "adhered":
-            earned["perfect_day"] = d
+    log_days = sorted(log_by_date)
+
+    # firsts
+    earned["first_stream"] = days[0] if days else None
+    earned["first_blood"] = next((d for d in days if hours_by_day[d] >= 6 - 1e-9), None)
+    fb = None
+    for d in log_days:
+        if any(r.get("hit") for r in log_by_date[d].get("block_results", [])):
+            fb = d
             break
-    earned["perfect_week"] = None
-    for d in sorted(log_by_date):
+    earned["first_block"] = fb
+
+    # total-hour milestones
+    for bid in ("hours_10", "hours_25", "hours_50", "centurion_100",
+                "centurion_250", "centurion_500", "centurion_1000"):
+        th = next(b["threshold"] for b in cfg["badges"] if b["id"] == bid)
+        earned[bid] = first_reach(hours_by_day, lambda d: hours_by_day[d], th)
+
+    # single-day feats
+    for bid, h in (("overtime", 8), ("marathon", 10), ("ultra", 12)):
+        earned[bid] = next((d for d in days if hours_by_day[d] >= h - 1e-9), None)
+
+    # six-hour day counts
+    for bid in ("grinder_5", "grinder_10", "grinder_25", "grinder_50"):
+        th = next(b["threshold"] for b in cfg["badges"] if b["id"] == bid)
+        earned[bid] = first_reach(
+            hours_by_day, lambda d: 1 if hours_by_day[d] >= 6 - 1e-9 else 0, th)
+
+    # streaks
+    six_best, _ = longest_run(hours_by_day, 6)
+    any_best, _ = longest_run(hours_by_day, 1e-9)
+    # first date each streak length was achieved
+    def streak_first(min_hours, need):
+        run, prev = 0, None
+        for d in days:
+            di = date.fromisoformat(d)
+            if hours_by_day[d] >= min_hours - 1e-9 and (prev is None or di == prev + timedelta(days=1)):
+                run += 1
+            elif hours_by_day[d] >= min_hours - 1e-9:
+                run = 1
+            else:
+                run = 0
+            if run >= need:
+                return d
+            prev = di
+        return None
+    earned["hat_trick"] = streak_first(6, 3)
+    earned["week_clear"] = streak_first(6, 7)
+    earned["streak_7"] = streak_first(1e-9, 7)
+    earned["streak_14"] = streak_first(1e-9, 14)
+    earned["streak_30"] = streak_first(1e-9, 30)
+
+    # schedule badges
+    adhered = [d for d in log_days if log_by_date[d].get("verdict") == "adhered"]
+    earned["perfect_day"] = adhered[0] if adhered else None
+    earned["perfect_5"] = adhered[4] if len(adhered) >= 5 else None
+    pw = None
+    for d in log_days:
         di = date.fromisoformat(d)
         if all(log_by_date.get((di + timedelta(days=k)).isoformat(), {}).get("verdict") == "adhered"
                for k in range(7)):
-            earned["perfect_week"] = d
+            pw = d
             break
-    # stream-time badges from judged-day streams
+    earned["perfect_week"] = pw
+    for bid in ("blocks_10", "blocks_25", "blocks_50"):
+        th = next(b["threshold"] for b in cfg["badges"] if b["id"] == bid)
+        cum, when = 0, None
+        for d in log_days:
+            cum += sum(1 for r in log_by_date[d].get("block_results", []) if r.get("hit"))
+            if cum >= th and when is None:
+                when = d
+        earned[bid] = when
+
+    # stream-time badges
     earned["night_owl"] = earned["early_bird"] = None
-    for d in sorted(log_by_date):
+    for d in log_days:
         for s in log_by_date[d].get("streams", []):
             st = s.get("start", "")
-            # format "10-01 3:40 AM"
             try:
                 hm, ap = st.split()[1], st.split()[2]
                 h = int(hm.split(":")[0]) % 12 + (12 if ap == "PM" else 0)
@@ -198,16 +249,45 @@ def compute_badges(hours_by_day, sched_log, cfg):
                 earned["night_owl"] = d
             if 5 <= h < 7 and earned["early_bird"] is None:
                 earned["early_bird"] = d
-    # halfway: 50% of current exam's estimate
+
+    # exam progress
     span = next(sp for sp in cfg["rank_spans"] if sp["from"] == cfg["current_rank"])
-    earned["halfway"] = None
-    cum = 0.0
+    for bid, frac in (("halfway", 0.5), ("three_quarter", 0.75), ("exam_ready", 1.0)):
+        earned[bid] = first_reach(hours_by_day, lambda d: hours_by_day[d],
+                                  span["exam_hours_est"] * frac)
+
+    # comeback: 6h+ day right after a zero day
+    cb = None
+    for i, d in enumerate(days):
+        if hours_by_day[d] >= 6 - 1e-9 and i > 0:
+            prev = date.fromisoformat(d) - timedelta(days=1)
+            if hours_by_day.get(prev.isoformat(), 0) < 1e-9:
+                cb = d
+                break
+    earned["comeback"] = cb
+
+    # weekend warrior: Sat and Sun both studied
+    ww = None
     for d in days:
-        cum += hours_by_day[d]
-        if cum >= span["exam_hours_est"] / 2 - 1e-9:
-            earned["halfway"] = d
+        di = date.fromisoformat(d)
+        if di.weekday() == 5 and hours_by_day[d] > 1e-9:
+            sun = (di + timedelta(days=1)).isoformat()
+            if hours_by_day.get(sun, 0) > 1e-9:
+                ww = d
+                break
+    earned["weekend_warrior"] = ww
+
+    # no zero week: 7 consecutive days all >0
+    nzw = None
+    for d in days:
+        di = date.fromisoformat(d)
+        if all(hours_by_day.get((di + timedelta(days=k)).isoformat(), 0) > 1e-9 for k in range(7)):
+            nzw = d
             break
+    earned["no_zero_week"] = nzw
+
     return earned
+
 
 
 # ---------------------------------------------------------------- SVG ---
@@ -265,6 +345,12 @@ BADGE_PATHS = {
     "rebirth": '<path d="M52 32 a20 20 0 1 1 -6 -14" fill="none" stroke-width="6"/><path d="M46 6 L48 20 L34 16 Z"/>',
     "gauge": '<path d="M10 44 a22 22 0 0 1 44 0 Z"/><path d="M32 44 L48 26" stroke-width="5" stroke-linecap="round"/>',
     "hex": '<path d="M32 6 L54 19 L54 45 L32 58 L10 45 L10 19 Z"/>',
+    "play": '<path d="M22 12 L50 32 L22 52 Z"/>',
+    "check": '<path d="M12 34 L26 48 L52 18" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>',
+    "spark": '<path d="M32 6 L37 27 L58 32 L37 37 L32 58 L27 37 L6 32 L27 27 Z"/>',
+    "flag": '<path d="M16 6 L16 58 M16 10 L50 10 L43 20 L50 30 L16 30 Z"/>',
+    "target": '<circle cx="32" cy="32" r="20" fill="none" stroke-width="5"/><circle cx="32" cy="32" r="11" fill="none" stroke-width="4"/><circle cx="32" cy="32" r="4"/>',
+    "calendar": '<rect x="12" y="14" width="40" height="38" rx="3" fill="none" stroke-width="5"/><path d="M12 24 L52 24" stroke-width="5"/><path d="M22 8 L22 18 M42 8 L42 18" stroke-width="5" stroke-linecap="round"/>',
 }
 
 # Rank icons for the cert-path hexagons (viewBox 0 0 64 64), mirroring the calf tattoo
@@ -548,7 +634,7 @@ def main():
     videos = load_json(VIDEOS, {})
     sched_log = load_json(SCHED_LOG, [])
 
-    hours_by_day = daily_hours(videos)
+    hours_by_day = daily_hours(videos, cfg.get("start_date"))
     total_points, breakdown = compute_points(hours_by_day, sched_log)
     cur_streak, longest_streak = streaks(hours_by_day)
     badges = compute_badges(hours_by_day, sched_log, cfg)
