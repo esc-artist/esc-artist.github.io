@@ -42,7 +42,7 @@ robotsNoIndex: true
 <div class="rank-path"><div class="rank-cell" title="OSCP">
   <svg viewBox="0 0 92 114" width="84" height="106">
     <polygon points="82.3731,25 82.3731,67 46,88 9.62693,67 9.62693,25 46,4" fill="#33ff66" fill-opacity="0.16" stroke="#33ff66" stroke-width="2.5" filter="url(#hexglow)"/>
-    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="#33ff66" opacity="0.92" filter="url(#hexglow)"><path d="M34 14 L27 2 L43 10 Z"/><path d="M44 16 L50 6 L50 20 Z"/><path d="M12 36 L18 28 L24 26 L34 22 L46 26 L54 36 L50 48 L38 54 L26 52 L16 46 Z"/><path d="M46 26 L60 12 L55 30 Z"/><ellipse cx="31" cy="34" rx="3.5" ry="4.5" fill="#050805"/><circle cx="18" cy="37" r="1.8" fill="#050805"/><path d="M14 40 L26 44 L24 48 L14 44 Z" fill="#050805"/></g></g>
+    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="#33ff66" opacity="0.92" filter="url(#hexglow)"><path d="M38 22 L52 6 L47 24 Z"/><path d="M31 21 L40 3 L38 23 Z"/><path d="M24 21 L29 8 L31 23 Z"/><path d="M6 32 L14 24 L26 20 L38 22 L46 30 L44 42 L34 50 L22 48 L12 42 Z"/><path d="M24 28 L33 26 L31 33 L24 32 Z" fill="#050805"/><circle cx="12" cy="30" r="1.6" fill="#050805"/><path d="M8 37 L26 39" stroke="#050805" stroke-width="2"/><path d="M18 38 L20 43 L23 38 Z" fill="#050805"/><path d="M28 39 L30 44 L33 39 Z" fill="#050805"/></g></g>
     <text x="46.0" y="104.0" text-anchor="middle" fill="#33ff66"
           font-size="11" font-family="ui-monospace,monospace" opacity="1">OSCP</text>
   </svg></div><div class="rank-cell" title="CPTS">
@@ -235,7 +235,7 @@ document.querySelectorAll('.badge-cell').forEach((el,i)=>{
     cells.forEach(c=>{
       const dx=Math.abs(+c.dataset.w-W), dy=Math.abs(+c.dataset.d-D);
       const dist=Math.max(dx,dy);
-      c.style.transform=dist===0?'scale(1.55)':dist===1?'scale(1.28)':dist===2?'scale(1.12)':'';
+      c.style.transform=dist===0?'scale(1.6)':dist===1?'scale(1.15)':dist===2?'scale(1.05)':'';
     });
   }
   function clear(){cells.forEach(c=>{c.style.transform='';});}
