@@ -42,7 +42,7 @@ robotsNoIndex: true
 <div class="rank-path"><div class="rank-cell" title="OSCP">
   <svg viewBox="0 0 92 114" width="84" height="106">
     <polygon points="82.3731,25 82.3731,67 46,88 9.62693,67 9.62693,25 46,4" fill="#33ff66" fill-opacity="0.16" stroke="#33ff66" stroke-width="2.5" filter="url(#hexglow)"/>
-    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="#33ff66" opacity="0.92" filter="url(#hexglow)"><path d="M38 22 L52 6 L47 24 Z"/><path d="M31 21 L40 3 L38 23 Z"/><path d="M24 21 L29 8 L31 23 Z"/><path d="M6 32 L14 24 L26 20 L38 22 L46 30 L44 42 L34 50 L22 48 L12 42 Z"/><path d="M24 28 L33 26 L31 33 L24 32 Z" fill="#050805"/><circle cx="12" cy="30" r="1.6" fill="#050805"/><path d="M8 37 L26 39" stroke="#050805" stroke-width="2"/><path d="M18 38 L20 43 L23 38 Z" fill="#050805"/><path d="M28 39 L30 44 L33 39 Z" fill="#050805"/></g></g>
+    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="#33ff66" opacity="0.92" filter="url(#hexglow)"><path d="M47 12 C34 7, 20 7, 5 12 L5 13.5 C20 9, 34 9, 47 13.5 Z"/><path d="M47 15 C34 11, 22 13, 9 19 L9 20.5 C22 15, 34 13, 47 16.5 Z"/><path d="M47 18 C36 16, 26 20, 15 26 L15 27.5 C26 22, 36 18, 47 19.5 Z"/><path d="M47 11 L56 4 L52 13 Z"/><path d="M37 59 C33 51, 29 45, 33 37 C37 29, 45 29, 48 21 L52 12 L58 16 L52 23 C48 31, 41 33, 39 41 C37 49, 39 56, 37 59 Z"/><path d="M48 11 L61 16 L49 21 L46 16 Z"/></g></g>
     <text x="46.0" y="104.0" text-anchor="middle" fill="#33ff66"
           font-size="11" font-family="ui-monospace,monospace" opacity="1">OSCP</text>
   </svg></div><div class="rank-cell" title="CPTS">
