@@ -221,6 +221,8 @@ Public study hours, for accountability. Totals come from the durations of my pub
 Sessions are screen-recorded study streams on [YouTube @constantinestudies](https://www.youtube.com/@constantinestudies) — boring to watch, useful to log. Hours are summed from public stream durations.
 
 Whether I studied *when I said I would* is tracked separately on the [Schedule](/schedule/) page.
+
+<span style="opacity:.35;font-size:.8em">[stats](/stats/)</span>
 """
     open(f"{HOME}/content/study.md", "w").write(md)
     print(f"build: {len(vids)} videos, {ndays} days, total={total}h avg={avg}h best={best}h({best_day}) streak={streak}d")
