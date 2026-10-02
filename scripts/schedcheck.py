@@ -25,6 +25,7 @@ import os
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime, timedelta, date
 from zoneinfo import ZoneInfo
 
@@ -131,39 +132,82 @@ def ytdlp_cmd():
     return [sys.executable, "-m", "yt_dlp"]
 
 
+def parse_stream_line(line):
+    """Parse one yt-dlp --print line into (vid, start_et, end_et) or None."""
+    parts = line.strip().split()
+    if len(parts) < 4:
+        return None
+    vid, rts, ts, dur = parts[0], parts[1], parts[2], parts[3]
+    start = None
+    for cand in (rts, ts):
+        try:
+            start = datetime.fromtimestamp(int(cand), tz=ET)
+            break
+        except (ValueError, OSError):
+            continue
+    if start is None:
+        return None
+    try:
+        end = start + timedelta(seconds=float(dur))
+    except (ValueError, OSError):
+        return None
+    return (vid, start, end)
+
+
+def extract_urls(urls, timeout):
+    """Run yt-dlp --print over urls; return {vid: (start, end)}."""
+    if not urls:
+        return {}
+    r = run(ytdlp_cmd() + ["-i",
+                           "--print", "%(id)s %(release_timestamp)s %(timestamp)s %(duration)s",
+                           "--skip-download"] + urls,
+            timeout=timeout)
+    out = {}
+    for line in r.stdout.splitlines():
+        rec = parse_stream_line(line)
+        if rec:
+            out[rec[0]] = (rec[1], rec[2])
+    return out
+
+
 def fetch_streams():
     """Return [(video_id, start_et, end_et)] for the newest 60 streams.
 
     Uses release_timestamp (actual broadcast start) rather than timestamp
     (when the VOD became public, often hours later for this channel).
     Falls back to timestamp if release_timestamp is missing.
+
+    YouTube intermittently bot-walls metadata extraction; videos missed by
+    the bulk pass are retried individually with backoff. Anything still
+    missing after retries is reported on stderr so the run log shows it.
     """
-    cmd = ytdlp_cmd() + ["-i", "--playlist-end", "60",
-                         "--print", "%(id)s %(release_timestamp)s %(timestamp)s %(duration)s",
-                         "--skip-download",
-                         "https://www.youtube.com/@constantinestudies/streams"]
-    r = run(cmd, timeout=1200)
-    streams = []
-    for line in r.stdout.splitlines():
-        parts = line.strip().split()
-        if len(parts) < 4:
-            continue
-        vid, rts, ts, dur = parts[0], parts[1], parts[2], parts[3]
-        start = None
-        for cand in (rts, ts):
-            try:
-                start = datetime.fromtimestamp(int(cand), tz=ET)
+    r = run(ytdlp_cmd() + ["--flat-playlist", "--playlist-end", "60",
+                           "--print", "%(id)s",
+                           "--skip-download",
+                           "https://www.youtube.com/@constantinestudies/streams"],
+            timeout=300)
+    ids = [l.strip() for l in r.stdout.splitlines() if l.strip()]
+
+    got = extract_urls(
+        ["https://www.youtube.com/watch?v=%s" % i for i in ids], 1200)
+
+    missing = [i for i in ids if i not in got]
+    for vid in missing:
+        rec = None
+        for attempt, wait in enumerate((15, 30, 60)):
+            time.sleep(wait)
+            one = extract_urls(
+                ["https://www.youtube.com/watch?v=%s" % vid], 300)
+            if vid in one:
+                rec = one[vid]
                 break
-            except (ValueError, OSError):
-                continue
-        if start is None:
-            continue
-        try:
-            end = start + timedelta(seconds=float(dur))
-        except (ValueError, OSError):
-            continue
-        streams.append((vid, start, end))
-    return streams
+        if rec:
+            got[vid] = rec
+        else:
+            print("fetch_streams: giving up on %s after retries "
+                  "(bot-wall?)" % vid, file=sys.stderr)
+
+    return [(vid, s, e) for vid, (s, e) in got.items()]
 
 
 def streams_on(streams, d):
