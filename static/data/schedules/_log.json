@@ -38,5 +38,34 @@
     "hit": false
    }
   ]
+ },
+ {
+  "date": "2026-10-01",
+  "blocks": [
+   "10:00 AM-12:00 PM",
+   "1:00 PM-3:00 PM",
+   "4:00 PM-6:00 PM"
+  ],
+  "streams": [],
+  "hits": 0,
+  "verdict": "missed",
+  "note": "",
+  "plan_hours": 6.0,
+  "hours": 0,
+  "hours_met": false,
+  "block_results": [
+   {
+    "block": "10:00 AM-12:00 PM",
+    "hit": false
+   },
+   {
+    "block": "1:00 PM-3:00 PM",
+    "hit": false
+   },
+   {
+    "block": "4:00 PM-6:00 PM",
+    "hit": false
+   }
+  ]
  }
 ]

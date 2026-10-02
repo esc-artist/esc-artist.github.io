@@ -2,7 +2,7 @@
 title: "Schedule Adherence"
 ---
 
-One judged day so far, and it's a miss — 0 for 3 on September 30th. Today's plan is filed: three two-hour blocks, currently in progress.
+Two judged days, two misses — 0 for 3 on Wednesday, September 30th, 0 for 3 again on Thursday. Not much else to say. Today's plan is filed: three two-hour blocks starting at 10am.
 
 ## I will be live on [@constantinestudies](https://www.youtube.com/@constantinestudies) at the following times
 
@@ -18,9 +18,10 @@ Plans are timestamped by their git commit and must predate the plan's first bloc
 
 Cumulative and weekly hours, running average, streak, and hour totals against the 6h/day target are tracked on the [Study Log](/study/) page. This page answers one question: did I study when I said I would?
 
-**0 of 1 planned days fully adhered (0%). 0 of 3 blocks hit. 0 of 1 days reached 6h.**
+**0 of 2 planned days fully adhered (0%). 0 of 6 blocks hit. 0 of 2 days reached 6h.**
 
 | Date | Plan | Streams (ET) | Blocks hit | Hours | Verdict | Note |
 |---|---|---|---|---|---|---|
+| 2026-10-01 | 10:00 AM-12:00 PM, 1:00 PM-3:00 PM, 4:00 PM-6:00 PM | — | 0/3 | **0.0h** | missed |  |
 | 2026-09-30 | 4:30 PM-7:30 PM, 9:00 PM-11:00 PM, 12:00 AM-1:00 AM | 09-30 4:58 PM–09-30 5:36 PM, 09-30 8:56 PM–09-30 9:59 PM | 0/3 | **1.7h** | missed |  |
 
