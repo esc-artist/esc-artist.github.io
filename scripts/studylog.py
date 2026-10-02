@@ -3,7 +3,7 @@
 
 Master store: scripts/study_videos.json  {video_id: {date, secs, title}}
   date = stream-title date (Constantine's study-day convention); falls back
-  to upload_date (UTC, may shift late-night streams a day) when untitled.
+  to release_date (actual broadcast date) when untitled.
 
   --fetch : pull newest 60 streams via yt-dlp, merge into master store
   --build : aggregate master store -> content/study.md (inline SVG charts)
@@ -48,7 +48,7 @@ def save_store(vids):
 
 
 def merge_tsv(path, vids):
-    """Merge a yt-dlp --print '%(upload_date)s %(duration)s %(id)s %(title)s' file."""
+    """Merge a yt-dlp --print '%(release_date)s %(duration)s %(id)s %(title)s' file."""
     added = 0
     for line in open(path):
         parts = line.strip().split(None, 3)
@@ -75,7 +75,7 @@ def do_fetch():
     vids = load_store()
     out = subprocess.run(
         ["yt-dlp", "-i", "--playlist-end", "60",
-         "--print", "%(upload_date)s %(duration)s %(id)s %(title)s",
+         "--print", "%(release_date)s %(duration)s %(id)s %(title)s",
          "--skip-download",
          "https://www.youtube.com/@constantinestudies/streams"],
         capture_output=True, text=True, timeout=1200)

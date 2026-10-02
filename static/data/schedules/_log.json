@@ -1,45 +1,5 @@
 [
  {
-  "date": "2026-09-30",
-  "blocks": [
-   "4:30 PM-7:30 PM",
-   "9:00 PM-11:00 PM",
-   "12:00 AM-1:00 AM"
-  ],
-  "streams": [
-   {
-    "id": "7KAAE7sD3Vk",
-    "start": "09-30 4:58 PM",
-    "end": "09-30 5:36 PM"
-   },
-   {
-    "id": "wOmyNzshIck",
-    "start": "09-30 8:56 PM",
-    "end": "09-30 9:59 PM"
-   }
-  ],
-  "hits": 0,
-  "verdict": "missed",
-  "note": "",
-  "plan_hours": 6.0,
-  "hours": 1.7,
-  "hours_met": false,
-  "block_results": [
-   {
-    "block": "4:30 PM-7:30 PM",
-    "hit": false
-   },
-   {
-    "block": "9:00 PM-11:00 PM",
-    "hit": false
-   },
-   {
-    "block": "12:00 AM-1:00 AM",
-    "hit": false
-   }
-  ]
- },
- {
   "date": "2026-10-01",
   "blocks": [
    "10:00 AM-12:00 PM",
@@ -48,14 +8,14 @@
   ],
   "streams": [
    {
-    "id": "wOmyNzshIck",
-    "start": "10-01 11:26 AM",
-    "end": "10-01 12:29 PM"
+    "id": "1ds6JvILzdM",
+    "start": "10-01 3:40 AM",
+    "end": "10-01 4:16 AM"
    },
    {
-    "id": "1ds6JvILzdM",
-    "start": "10-01 4:23 PM",
-    "end": "10-01 4:59 PM"
+    "id": "VeWqZG7f0o8",
+    "start": "10-01 11:27 AM",
+    "end": "10-01 12:29 PM"
    }
   ],
   "hits": 0,
@@ -75,6 +35,51 @@
    },
    {
     "block": "4:00 PM-6:00 PM",
+    "hit": false
+   }
+  ]
+ },
+ {
+  "date": "2026-09-30",
+  "blocks": [
+   "4:30 PM-7:30 PM",
+   "9:00 PM-11:00 PM",
+   "12:00 AM-1:00 AM"
+  ],
+  "streams": [
+   {
+    "id": "TYSpqrPQdzQ",
+    "start": "09-30 4:31 PM",
+    "end": "09-30 4:58 PM"
+   },
+   {
+    "id": "7KAAE7sD3Vk",
+    "start": "09-30 8:12 PM",
+    "end": "09-30 8:50 PM"
+   },
+   {
+    "id": "wOmyNzshIck",
+    "start": "09-30 8:57 PM",
+    "end": "09-30 10:00 PM"
+   }
+  ],
+  "hits": 0,
+  "verdict": "missed",
+  "note": "",
+  "plan_hours": 6.0,
+  "hours": 2.1,
+  "hours_met": false,
+  "block_results": [
+   {
+    "block": "4:30 PM-7:30 PM",
+    "hit": false
+   },
+   {
+    "block": "9:00 PM-11:00 PM",
+    "hit": false
+   },
+   {
+    "block": "12:00 AM-1:00 AM",
     "hit": false
    }
   ]

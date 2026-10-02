@@ -132,20 +132,33 @@ def ytdlp_cmd():
 
 
 def fetch_streams():
-    """Return [(video_id, start_et, end_et)] for the newest 60 streams."""
+    """Return [(video_id, start_et, end_et)] for the newest 60 streams.
+
+    Uses release_timestamp (actual broadcast start) rather than timestamp
+    (when the VOD became public, often hours later for this channel).
+    Falls back to timestamp if release_timestamp is missing.
+    """
     cmd = ytdlp_cmd() + ["-i", "--playlist-end", "60",
-                         "--print", "%(id)s %(timestamp)s %(duration)s",
+                         "--print", "%(id)s %(release_timestamp)s %(timestamp)s %(duration)s",
                          "--skip-download",
                          "https://www.youtube.com/@constantinestudies/streams"]
     r = run(cmd, timeout=1200)
     streams = []
     for line in r.stdout.splitlines():
         parts = line.strip().split()
-        if len(parts) < 3:
+        if len(parts) < 4:
             continue
-        vid, ts, dur = parts[0], parts[1], parts[2]
+        vid, rts, ts, dur = parts[0], parts[1], parts[2], parts[3]
+        start = None
+        for cand in (rts, ts):
+            try:
+                start = datetime.fromtimestamp(int(cand), tz=ET)
+                break
+            except (ValueError, OSError):
+                continue
+        if start is None:
+            continue
         try:
-            start = datetime.fromtimestamp(int(ts), tz=ET)
             end = start + timedelta(seconds=float(dur))
         except (ValueError, OSError):
             continue
