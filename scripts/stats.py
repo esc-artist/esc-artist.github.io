@@ -720,10 +720,13 @@ robotsNoIndex: true
 <div class="badge-grid">{"".join(badges)}</div>
 
 <div class="rewards">
-<h3>Rewards — locked</h3>
-<p>Points are being banked. The store opens when the hardware exists —
-a dispenser, a filter, whatever the privilege mechanism ends up being.
-Exchange rates get set then; the ledger is already honest.</p>
+<h3>Screen time</h3>
+<p>Points buy entertainment. Every point earned today becomes {cfg.get("minutes_per_point", 7.5)} minutes of
+unblocked screen time tomorrow — Instagram, TikTok, Netflix, Hulu, HBO Max,
+Apple TV+, Reddit, all of it. They're blocked by default; the only way through
+is spending yesterday's points.</p>
+<p>To spend: open TV Control above, enter the Pi-hole password, tap Start.
+Blocking drops for exactly your earned minutes, then comes back on its own.</p>
 </div>
 
 <p style="opacity:.5;font-size:.85em"><a href="/stats-rules/">How points, levels, and ranks work</a></p>
@@ -743,6 +746,7 @@ def build_rules_page(cfg):
     badges = "\n".join(
         f"| {b['name']} | {b['desc']} |" for b in cfg["badges"])
     start = cfg.get("start_date", "2026-08-30")
+    mpp = cfg.get("minutes_per_point", 7.5)
     return f"""---
 title: "Stats Rules"
 summary: "how points, levels, and ranks work"
@@ -761,7 +765,8 @@ The rulebook for the [stats](/stats/) page. Everything is computed from public d
 | Fully adhered day (every block hit) | +5 |
 | Each day of a 3+ day run of 6h days | +2 |
 
-Points never expire and are never taken away. They are a ledger, not a currency — there is nothing to spend them on yet.
+Points never expire and are never taken away. Each point also buys {mpp} minutes of
+unblocked screen time, usable the day after it's earned — see Screen time below.
 
 ## Levels
 
@@ -785,9 +790,21 @@ When a rank is earned, the level resets to 1 in the new rank. The peak level fro
 |---|---|
 {badges}
 
-## Rewards
+## Screen time
 
-Locked. Points are being banked; the store opens when the enforcement hardware exists. Exchange rates get set then.
+Points are spent on entertainment. Each point buys {mpp} minutes of unblocked
+screen time, usable the day after it's earned — yesterday's points are today's
+budget. One session per day; unused minutes don't roll over.
+
+Blocked by default, at the DNS level: a Pi-hole on the home network sinkholes
+Instagram, TikTok, Netflix, Hulu, HBO Max, Apple TV+, and Reddit (domains,
+subdomains, and CDN hosts). YouTube is deliberately excluded — it's a study tool.
+
+To spend the budget: open the TV control page (linked from the TV Budget card on
+/stats/ — the URL is stored in your browser, never in the repo), enter the
+Pi-hole admin password, and tap Start. Blocking lifts for exactly the earned
+minutes, then Pi-hole's built-in timer re-enables it automatically. If anything
+crashes, it fails closed — blocking stays on.
 """
 
 

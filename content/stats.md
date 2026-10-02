@@ -185,10 +185,13 @@ robotsNoIndex: true
   <g fill="#0d140e" stroke="#1d3a24"><path d="M12 34 L26 48 L52 18" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></svg><div class="n">No Zero Week</div><div class="d">7 days straight, none zero</div></div></div>
 
 <div class="rewards">
-<h3>Rewards — locked</h3>
-<p>Points are being banked. The store opens when the hardware exists —
-a dispenser, a filter, whatever the privilege mechanism ends up being.
-Exchange rates get set then; the ledger is already honest.</p>
+<h3>Screen time</h3>
+<p>Points buy entertainment. Every point earned today becomes 7.5 minutes of
+unblocked screen time tomorrow — Instagram, TikTok, Netflix, Hulu, HBO Max,
+Apple TV+, Reddit, all of it. They're blocked by default; the only way through
+is spending yesterday's points.</p>
+<p>To spend: open TV Control above, enter the Pi-hole password, tap Start.
+Blocking drops for exactly your earned minutes, then comes back on its own.</p>
 </div>
 
 <p style="opacity:.5;font-size:.85em"><a href="/stats-rules/">How points, levels, and ranks work</a></p>

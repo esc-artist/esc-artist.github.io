@@ -16,7 +16,8 @@ The rulebook for the [stats](/stats/) page. Everything is computed from public d
 | Fully adhered day (every block hit) | +5 |
 | Each day of a 3+ day run of 6h days | +2 |
 
-Points never expire and are never taken away. They are a ledger, not a currency — there is nothing to spend them on yet.
+Points never expire and are never taken away. Each point also buys 7.5 minutes of
+unblocked screen time, usable the day after it's earned — see Screen time below.
 
 ## Levels
 
@@ -79,6 +80,18 @@ When a rank is earned, the level resets to 1 in the new rank. The peak level fro
 | Weekend Warrior | Studied Saturday and Sunday |
 | No Zero Week | 7 days straight, none zero |
 
-## Rewards
+## Screen time
 
-Locked. Points are being banked; the store opens when the enforcement hardware exists. Exchange rates get set then.
+Points are spent on entertainment. Each point buys 7.5 minutes of unblocked
+screen time, usable the day after it's earned — yesterday's points are today's
+budget. One session per day; unused minutes don't roll over.
+
+Blocked by default, at the DNS level: a Pi-hole on the home network sinkholes
+Instagram, TikTok, Netflix, Hulu, HBO Max, Apple TV+, and Reddit (domains,
+subdomains, and CDN hosts). YouTube is deliberately excluded — it's a study tool.
+
+To spend the budget: open the TV control page (linked from the TV Budget card on
+/stats/ — the URL is stored in your browser, never in the repo), enter the
+Pi-hole admin password, and tap Start. Blocking lifts for exactly the earned
+minutes, then Pi-hole's built-in timer re-enables it automatically. If anything
+crashes, it fails closed — blocking stays on.
