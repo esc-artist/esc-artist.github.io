@@ -595,8 +595,8 @@ def build_page(data, cfg):
         (f'{data["total_hours"]:.1f}', "total hours"),
         (str(data["six_days"]), "6h+ days"),
         (f'{data["adherence"]:.0f}%', "blocks hit"),
-        (str(data["cur_streak"]), "day streak"),
-        (str(data["longest_streak"]), "longest streak"),
+        (str(data["cur_streak"]), "6h streak"),
+        (str(data["longest_streak"]), "longest 6h streak"),
     ]
     cards_html = "".join(
         f'<div class="stat-card"><div class="v">{v}</div><div class="k">{k}</div></div>'
