@@ -264,6 +264,7 @@ BADGE_PATHS = {
     "bolt": '<path d="M36 4 L14 36 L28 36 L26 60 L50 26 L36 26 Z"/>',
     "rebirth": '<path d="M52 32 a20 20 0 1 1 -6 -14" fill="none" stroke-width="6"/><path d="M46 6 L48 20 L34 16 Z"/>',
     "gauge": '<path d="M10 44 a22 22 0 0 1 44 0 Z"/><path d="M32 44 L48 26" stroke-width="5" stroke-linecap="round"/>',
+    "hex": '<path d="M32 6 L54 19 L54 45 L32 58 L10 45 L10 19 Z"/>',
 }
 
 
@@ -381,6 +382,13 @@ def build_page(data, cfg):
             f'<div class="n">{b["name"]}</div>'
             f'<div class="d">{b["desc"]}</div>'
             f'{"<div class=d>" + earned + "</div>" if earned else ""}</div>')
+    for h in cfg.get("rank_history", []):
+        badges.append(
+            f'<div class="badge-cell">'
+            f'{badge_svg("hex", h.get("date", ""))}'
+            f'<div class="n">{h["rank"]} Veteran</div>'
+            f'<div class="d">Reached Lv {h["peak_level"]} — {h["peak_name"]}</div>'
+            f'{"<div class=d>" + h["date"] + "</div>" if h.get("date") else ""}</div>')
     cards = [
         (f'{data["total_hours"]:.1f}', "total hours"),
         (str(data["six_days"]), "6h+ days"),
