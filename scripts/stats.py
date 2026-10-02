@@ -28,6 +28,7 @@ SCHED_LOG = f"{HOME}/static/data/schedules/_log.json"
 CONFIG = f"{HOME}/static/data/ranks.json"
 OUT_JSON = f"{HOME}/static/data/stats.json"
 OUT_PAGE = f"{HOME}/content/stats.md"
+OUT_RULES = f"{HOME}/content/stats-rules.md"
 
 
 def load_json(path, default):
@@ -650,10 +651,69 @@ robotsNoIndex: true
 a dispenser, a filter, whatever the privilege mechanism ends up being.
 Exchange rates get set then; the ledger is already honest.</p>
 </div>
+
+<p style="opacity:.5;font-size:.85em"><a href="/stats-rules/">How points, levels, and ranks work</a></p>
 </div>
 
 <style>{CSS}</style>
 <script>{JS}</script>
+"""
+
+
+def build_rules_page(cfg):
+    ppl = cfg["points_per_level"]
+    names = ", ".join(f"{i+1}. {n}" for i, n in enumerate(cfg["level_names"]))
+    spans = "\n".join(
+        f"| {sp['from']} → {sp['to']} | ~{sp['exam_hours_est']}h | {sp['levels']} |"
+        for sp in cfg["rank_spans"])
+    badges = "\n".join(
+        f"| {b['name']} | {b['desc']} |" for b in cfg["badges"])
+    start = cfg.get("start_date", "2026-08-30")
+    return f"""---
+title: "Stats Rules"
+summary: "how points, levels, and ranks work"
+robotsNoIndex: true
+---
+
+The rulebook for the [stats](/stats/) page. Everything is computed from public data — stream durations and the schedule log — starting {start}.
+
+## Points
+
+| Action | Points |
+|---|---|
+| 1 hour studied (streamed) | 1 |
+| 1 schedule block hit | 2 |
+| 6+ hour day | +3 |
+| Fully adhered day (every block hit) | +5 |
+| Each day of a 3+ day run of 6h days | +2 |
+
+Points never expire and are never taken away. They are a ledger, not a currency — there is nothing to spend them on yet.
+
+## Levels
+
+1 level = {ppl} points. Thresholds are absolute: level 5 always means 250 points of work, no matter the rank.
+
+{names}
+
+## Ranks
+
+Ranks are earned only by passing certifications — never by points. The current rank is set by hand when an exam is passed.
+
+| Span | Est. hours | Levels |
+|---|---|---|
+{spans}
+
+When a rank is earned, the level resets to 1 in the new rank. The peak level from the old rank is kept as a Veteran badge — retired, not lost.
+
+## Badges
+
+| Badge | How |
+|---|---|
+{badges}
+
+## Rewards
+
+Locked. Points are being banked; the store opens when the enforcement hardware exists. Exchange rates get set then.
 """
 
 
@@ -701,6 +761,8 @@ def main():
         json.dump(data, f, indent=1)
     with open(OUT_PAGE, "w") as f:
         f.write(build_page(data, cfg))
+    with open(OUT_RULES, "w") as f:
+        f.write(build_rules_page(cfg))
     print(f"level {level_n} ({level_name}), {total_points:.1f} points, "
           f"{len([b for b in badges.values() if b])}/{len(badges)} badges")
 

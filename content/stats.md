@@ -163,6 +163,8 @@ robotsNoIndex: true
 a dispenser, a filter, whatever the privilege mechanism ends up being.
 Exchange rates get set then; the ledger is already honest.</p>
 </div>
+
+<p style="opacity:.5;font-size:.85em"><a href="/stats-rules/">How points, levels, and ranks work</a></p>
 </div>
 
 <style>
