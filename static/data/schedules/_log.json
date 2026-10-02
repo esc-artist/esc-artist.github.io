@@ -46,12 +46,23 @@
    "1:00 PM-3:00 PM",
    "4:00 PM-6:00 PM"
   ],
-  "streams": [],
+  "streams": [
+   {
+    "id": "wOmyNzshIck",
+    "start": "10-01 11:26 AM",
+    "end": "10-01 12:29 PM"
+   },
+   {
+    "id": "1ds6JvILzdM",
+    "start": "10-01 4:23 PM",
+    "end": "10-01 4:59 PM"
+   }
+  ],
   "hits": 0,
   "verdict": "missed",
   "note": "",
   "plan_hours": 6.0,
-  "hours": 0,
+  "hours": 1.6,
   "hours_met": false,
   "block_results": [
    {
