@@ -112,6 +112,33 @@ def streak_days(hours_by_day, min_len=3):
     return out
 
 
+def points_by_day(hours_by_day, sched_log):
+    """{date_iso: points} with per-day attribution for the Pi budget app."""
+    log_by_date = {d["date"]: d for d in sched_log if isinstance(d, dict)}
+    in_streak = streak_days(hours_by_day)
+    out = {}
+    for d, h in hours_by_day.items():
+        p = h  # 1 per hour
+        e = log_by_date.get(d, {})
+        p += 2 * sum(1 for r in e.get("block_results", []) if r.get("hit"))
+        if h >= 6 - 1e-9:
+            p += 3
+        if e.get("verdict") == "adhered":
+            p += 5
+        if d in in_streak:
+            p += 2
+        out[d] = round(p, 2)
+    # schedule-log days with no video hours still earn block/adhered points
+    for d, e in log_by_date.items():
+        if d not in out:
+            p = 2 * sum(1 for r in e.get("block_results", []) if r.get("hit"))
+            if e.get("verdict") == "adhered":
+                p += 5
+            if p:
+                out[d] = round(p, 2)
+    return out
+
+
 def compute_points(hours_by_day, sched_log):
     """Return (total, breakdown dict)."""
     b = {"from hours": 0.0, "from blocks": 0, "6h bonuses": 0, "perfect days": 0, "streaks": 0}
@@ -525,6 +552,17 @@ CSS = """
 .rank-cell.next svg{animation:rankpulse 2.2s ease-in-out infinite}
 @keyframes rankpulse{0%,100%{filter:drop-shadow(0 0 2px rgba(51,255,102,.4))}
   50%{filter:drop-shadow(0 0 9px rgba(51,255,102,.85))}}
+.tv-card{background:#050805;border:1px solid #1d3a24;border-radius:12px;padding:1.2rem 1.5rem;
+  margin:1.5rem 0;text-align:center;box-shadow:0 0 30px rgba(51,255,102,.07)}
+.tv-head{color:#8aa392;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase}
+.tv-big{font-size:2.2rem;color:#33ff66;font-family:ui-monospace,Menlo,monospace;
+  text-shadow:0 0 14px rgba(51,255,102,.4);margin:.3rem 0}
+.tv-sub{font-size:.8rem;color:#8aa392;margin-bottom:.8rem}
+.tv-btn{display:inline-block;padding:.5rem 1.2rem;border:1px solid #33ff66;border-radius:8px;
+  color:#33ff66;text-decoration:none;font-family:ui-monospace,monospace;font-size:.9rem;
+  transition:all .2s}
+.tv-btn:hover{background:rgba(51,255,102,.12);box-shadow:0 0 12px rgba(51,255,102,.4)}
+.tv-btn.disabled{opacity:.4;cursor:not-allowed;border-color:#4a5a4e;color:#4a5a4e}
 """
 
 JS = """
@@ -592,6 +630,40 @@ def build_page(data, cfg):
             f'<div class="n">{h["rank"]} Veteran</div>'
             f'<div class="d">Reached Lv {h["peak_level"]} — {h["peak_name"]}</div>'
             f'{"<div class=d>" + h["date"] + "</div>" if h.get("date") else ""}</div>')
+    # TV budget card (Pi-hole contingency)
+    # Pi URL lives in browser localStorage, never in the repo.
+    tvb = data.get("tv_budget", {})
+    tv_h = tvb.get("minutes", 0) // 60
+    tv_m = tvb.get("minutes", 0) % 60
+    tv_time = f"{tv_h}h {tv_m}m" if tv_h else f"{tv_m} min"
+    tv_btn = ('<a href="#" id="tv-open" class="tv-btn" style="display:none">Open TV Control</a>'
+              '<span id="tv-unset"><button class="tv-btn" id="tv-set">Set Pi URL</button></span>')
+    tv_card = f"""<div class="tv-card">
+  <div class="tv-head">TV Budget — today</div>
+  <div class="tv-big">{tv_time}</div>
+  <div class="tv-sub">{tvb.get("yesterday_points", 0):.1f} points yesterday × {cfg.get("minutes_per_point", 7.5)} min</div>
+  {tv_btn}
+</div>
+<script>
+(function(){{
+  var KEY='pi_budget_url';
+  var open=document.getElementById('tv-open'), unset=document.getElementById('tv-unset'),
+      set=document.getElementById('tv-set');
+  function render(){{
+    var u=localStorage.getItem(KEY);
+    if(u){{ open.href=u; open.style.display=''; unset.style.display='none'; }}
+    else {{ open.style.display='none'; unset.style.display=''; }}
+  }}
+  set.onclick=function(){{
+    var u=prompt('Pi TV app URL (e.g. http://100.x.y.z:5000):', localStorage.getItem(KEY)||'');
+    if(u===null) return;
+    u=u.trim();
+    if(u) localStorage.setItem(KEY,u); else localStorage.removeItem(KEY);
+    render();
+  }};
+  render();
+}})();
+</script>"""
     cards = [
         (f'{data["total_hours"]:.1f}', "total hours"),
         (str(data["six_days"]), "6h+ days"),
@@ -633,6 +705,8 @@ robotsNoIndex: true
     <div class="pts-break">{lvl["to_next"]:.0f} points to Lv {lvl["n"]+1}</div>
   </div>
 </div>
+
+{tv_card}
 
 <h3>Rank Path</h3>
 <div class="rank-path">{rank_cells}</div>
@@ -743,6 +817,12 @@ def main():
     adherence = 100 * hits / total_blocks if total_blocks else 0
     six_days = sum(1 for h in hours_by_day.values() if h >= 6 - 1e-9)
 
+    # TV budget: yesterday's points × minutes_per_point
+    pbd = points_by_day(hours_by_day, sched_log)
+    yesterday = (date.today() - timedelta(days=1)).isoformat()
+    yday_points = pbd.get(yesterday, 0)
+    tv_budget_min = round(yday_points * cfg.get("minutes_per_point", 7.5))
+
     data = {
         "points": round(total_points, 1),
         "breakdown": {k: round(v, 1) for k, v in breakdown.items()},
@@ -756,6 +836,9 @@ def main():
         "cur_streak": cur_streak,
         "longest_streak": longest_streak,
         "hours_by_day": {d: round(h, 2) for d, h in hours_by_day.items()},
+        "points_by_day": pbd,
+        "tv_budget": {"yesterday_points": yday_points, "minutes": tv_budget_min,
+                      "date": yesterday},
     }
     with open(OUT_JSON, "w") as f:
         json.dump(data, f, indent=1)

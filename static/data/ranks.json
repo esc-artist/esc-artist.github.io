@@ -293,5 +293,7 @@
  ],
  "rank_start_points": 0,
  "rank_history": [],
- "start_date": "2026-08-30"
+ "start_date": "2026-08-30",
+ "minutes_per_point": 7.5,
+ "pi_budget_url": ""
 }
