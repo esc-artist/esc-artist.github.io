@@ -38,6 +38,45 @@ robotsNoIndex: true
   </div>
 </div>
 
+<h3>Rank Path</h3>
+<div class="rank-path"><div class="rank-cell" title="OSCP">
+  <svg viewBox="0 0 92 114" width="84" height="106">
+    <polygon points="82.3731,25 82.3731,67 46,88 9.62693,67 9.62693,25 46,4" fill="#33ff66" fill-opacity="0.16" stroke="#33ff66" stroke-width="2.5" filter="url(#hexglow)"/>
+    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="#33ff66" opacity="0.92" filter="url(#hexglow)"><path d="M18 50 C14 40 18 32 26 28 L22 18 L30 22 L34 12 L38 22 L48 24 L42 30 L46 34 L38 36 L40 44 L32 52 Z"/><path d="M40 20 L52 10 L48 24 Z"/><path d="M44 26 L58 20 L50 32 Z"/></g></g>
+    <text x="46.0" y="104.0" text-anchor="middle" fill="#33ff66"
+          font-size="11" font-family="ui-monospace,monospace" opacity="1">OSCP</text>
+  </svg></div><div class="rank-cell" title="CPTS">
+  <svg viewBox="0 0 92 114" width="84" height="106">
+    <polygon points="82.3731,25 82.3731,67 46,88 9.62693,67 9.62693,25 46,4" fill="none" stroke="#33ff66" stroke-width="2.5" stroke-dasharray="7,4" opacity="0.9" filter="url(#hexglow)"><animate attributeName="stroke-dashoffset" from="0" to="22" dur="1.6s" repeatCount="indefinite"/></polygon>
+    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="none" stroke="#33ff66" stroke-width="2.5" opacity="0.95" filter="url(#hexglow)"><g transform="rotate(45 32 32)"><rect x="29" y="6" width="6" height="34" rx="2"/><rect x="20" y="38" width="24" height="5" rx="2"/><rect x="29" y="45" width="6" height="12" rx="3"/></g><g transform="rotate(-45 32 32)"><rect x="29" y="6" width="6" height="34" rx="2"/><rect x="20" y="38" width="24" height="5" rx="2"/><rect x="29" y="45" width="6" height="12" rx="3"/></g></g></g>
+    <text x="46.0" y="104.0" text-anchor="middle" fill="#33ff66"
+          font-size="11" font-family="ui-monospace,monospace" opacity="0.95">CPTS</text>
+  </svg></div><div class="rank-cell" title="CAPE">
+  <svg viewBox="0 0 92 114" width="84" height="106">
+    <polygon points="82.3731,25 82.3731,67 46,88 9.62693,67 9.62693,25 46,4" fill="none" stroke="#33ff66" stroke-width="2" opacity="0.3"/>
+    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="none" stroke="#33ff66" stroke-width="2" opacity="0.3"><rect x="12" y="14" width="18" height="16" rx="1"/><rect x="34" y="14" width="18" height="16" rx="1"/><rect x="12" y="34" width="18" height="16" rx="1"/><rect x="34" y="34" width="18" height="16" rx="1"/></g></g>
+    <text x="46.0" y="104.0" text-anchor="middle" fill="#33ff66"
+          font-size="11" font-family="ui-monospace,monospace" opacity="0.4">CAPE</text>
+  </svg></div><div class="rank-cell" title="OSEP">
+  <svg viewBox="0 0 92 114" width="84" height="106">
+    <polygon points="82.3731,25 82.3731,67 46,88 9.62693,67 9.62693,25 46,4" fill="none" stroke="#33ff66" stroke-width="2" opacity="0.3"/>
+    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="none" stroke="#33ff66" stroke-width="2" opacity="0.3"><path d="M8 26 C8 22 12 20 16 20 L48 20 C52 20 56 22 56 26 L56 34 C56 38 52 40 48 40 L16 40 C12 40 8 38 8 34 Z"/><ellipse cx="22" cy="30" rx="6" ry="4" fill="#050805"/><ellipse cx="42" cy="30" rx="6" ry="4" fill="#050805"/></g></g>
+    <text x="46.0" y="104.0" text-anchor="middle" fill="#33ff66"
+          font-size="11" font-family="ui-monospace,monospace" opacity="0.4">OSEP</text>
+  </svg></div><div class="rank-cell" title="OSWE">
+  <svg viewBox="0 0 92 114" width="84" height="106">
+    <polygon points="82.3731,25 82.3731,67 46,88 9.62693,67 9.62693,25 46,4" fill="none" stroke="#33ff66" stroke-width="2" opacity="0.3"/>
+    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="none" stroke="#33ff66" stroke-width="2" opacity="0.3"><ellipse cx="32" cy="36" rx="10" ry="12"/><circle cx="32" cy="22" r="6"/><path d="M24 28 L12 18 L8 24 M24 34 L10 30 L8 38 M24 42 L10 46 L12 54 M26 48 L18 58 M40 28 L52 18 L56 24 M40 34 L54 30 L56 38 M40 42 L54 46 L52 54 M38 48 L46 58" fill="none" stroke-width="3" stroke-linecap="round"/></g></g>
+    <text x="46.0" y="104.0" text-anchor="middle" fill="#33ff66"
+          font-size="11" font-family="ui-monospace,monospace" opacity="0.4">OSWE</text>
+  </svg></div><div class="rank-cell" title="OSED">
+  <svg viewBox="0 0 92 114" width="84" height="106">
+    <polygon points="82.3731,25 82.3731,67 46,88 9.62693,67 9.62693,25 46,4" fill="none" stroke="#33ff66" stroke-width="2" opacity="0.3"/>
+    <g transform="translate(22.0 22.0) scale(0.75)"><g fill="none" stroke="#33ff66" stroke-width="2" opacity="0.3"><g transform="rotate(45 32 38)"><rect x="10" y="35" width="44" height="7" rx="3.5"/><circle cx="12" cy="38" r="5"/><circle cx="52" cy="38" r="5"/></g><g transform="rotate(-45 32 38)"><rect x="10" y="35" width="44" height="7" rx="3.5"/><circle cx="12" cy="38" r="5"/><circle cx="52" cy="38" r="5"/></g><circle cx="32" cy="26" r="13"/><rect x="24" y="32" width="16" height="10" rx="3"/><circle cx="27" cy="25" r="4" fill="#050805"/><circle cx="37" cy="25" r="4" fill="#050805"/></g></g>
+    <text x="46.0" y="104.0" text-anchor="middle" fill="#33ff66"
+          font-size="11" font-family="ui-monospace,monospace" opacity="0.4">OSED</text>
+  </svg></div></div>
+
 <div class="stat-cards"><div class="stat-card"><div class="v">267.4</div><div class="k">total hours</div></div><div class="stat-card"><div class="v">17</div><div class="k">6h+ days</div></div><div class="stat-card"><div class="v">0%</div><div class="k">blocks hit</div></div><div class="stat-card"><div class="v">0</div><div class="k">day streak</div></div><div class="stat-card"><div class="v">2</div><div class="k">longest streak</div></div></div>
 
 <h3>Heatmap</h3>
@@ -45,19 +84,32 @@ robotsNoIndex: true
 
 <h3>Badges</h3>
 <div class="badge-grid"><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
-  <g fill="#33ff66" stroke="#33ff66" filter="url(#hexglow)"><path d="M32 6 C32 6 14 30 14 42 a18 18 0 0 0 36 0 C50 30 32 6 32 6 Z"/></g></svg><div class="n">First Blood</div><div class="d">First 6-hour day</div><div class=d>2026-03-06</div></div><div class="badge-cell locked"><svg viewBox="0 0 64 64" width="64" height="64" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#33ff66" stroke-width="2" filter="url(#hexglow)"/>
+  <g fill="#33ff66" stroke="#33ff66"><path d="M32 6 C32 6 14 30 14 42 a18 18 0 0 0 36 0 C50 30 32 6 32 6 Z"/></g></svg><div class="n">First Blood</div><div class="d">First 6-hour day</div><div class=d>2026-03-06</div></div><div class="badge-cell locked"><svg viewBox="0 0 64 64" width="64" height="64" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#1d3a24" stroke-width="2"/>
   <g fill="#0d140e" stroke="#1d3a24"><path d="M32 8 L39 25 L57 25 L42 36 L47 54 L32 43 L17 54 L22 36 L7 25 L25 25 Z"/></g></svg><div class="n">Perfect Day</div><div class="d">Every block hit</div></div><div class="badge-cell locked"><svg viewBox="0 0 64 64" width="64" height="64" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#1d3a24" stroke-width="2"/>
   <g fill="#0d140e" stroke="#1d3a24"><path d="M10 44 L14 22 L24 34 L32 16 L40 34 L50 22 L54 44 Z M10 48 L54 48 L54 52 L10 52 Z"/></g></svg><div class="n">Perfect Week</div><div class="d">Every block hit, 7 days straight</div></div><div class="badge-cell locked"><svg viewBox="0 0 64 64" width="64" height="64" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#1d3a24" stroke-width="2"/>
   <g fill="#0d140e" stroke="#1d3a24"><path d="M32 4 C28 18 16 24 16 40 a16 16 0 0 0 32 0 C48 30 40 26 38 18 C34 22 32 14 32 4 Z"/></g></svg><div class="n">Week Clear</div><div class="d">7 straight 6-hour days</div></div><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
-  <g fill="#33ff66" stroke="#33ff66" filter="url(#hexglow)"><circle cx="32" cy="26" r="14"/><path d="M24 38 L18 58 L32 50 L46 58 L40 38 Z"/></g></svg><div class="n">Centurion</div><div class="d">100 total hours</div><div class=d>2026-05-30</div></div><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
-  <g fill="#33ff66" stroke="#33ff66" filter="url(#hexglow)"><circle cx="32" cy="26" r="14"/><path d="M24 38 L18 58 L32 50 L46 58 L40 38 Z"/></g></svg><div class="n">Centurion II</div><div class="d">250 total hours</div><div class=d>2026-09-28</div></div><div class="badge-cell locked"><svg viewBox="0 0 64 64" width="64" height="64" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#33ff66" stroke-width="2" filter="url(#hexglow)"/>
+  <g fill="#33ff66" stroke="#33ff66"><circle cx="32" cy="26" r="14"/><path d="M24 38 L18 58 L32 50 L46 58 L40 38 Z"/></g></svg><div class="n">Centurion</div><div class="d">100 total hours</div><div class=d>2026-05-30</div></div><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#33ff66" stroke-width="2" filter="url(#hexglow)"/>
+  <g fill="#33ff66" stroke="#33ff66"><circle cx="32" cy="26" r="14"/><path d="M24 38 L18 58 L32 50 L46 58 L40 38 Z"/></g></svg><div class="n">Centurion II</div><div class="d">250 total hours</div><div class=d>2026-09-28</div></div><div class="badge-cell locked"><svg viewBox="0 0 64 64" width="64" height="64" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#1d3a24" stroke-width="2"/>
   <g fill="#0d140e" stroke="#1d3a24"><circle cx="32" cy="26" r="14"/><path d="M24 38 L18 58 L32 50 L46 58 L40 38 Z"/></g></svg><div class="n">Centurion III</div><div class="d">500 total hours</div></div><div class="badge-cell locked"><svg viewBox="0 0 64 64" width="64" height="64" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#1d3a24" stroke-width="2"/>
   <g fill="#0d140e" stroke="#1d3a24"><circle cx="32" cy="26" r="14"/><path d="M24 38 L18 58 L32 50 L46 58 L40 38 Z"/></g></svg><div class="n">Centurion IV</div><div class="d">1000 total hours</div></div><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
-  <g fill="#33ff66" stroke="#33ff66" filter="url(#hexglow)"><path d="M42 36 A20 20 0 1 1 28 8 A16 16 0 1 0 42 36 Z"/></g></svg><div class="n">Night Owl</div><div class="d">Stream started between midnight and 5 AM</div><div class=d>2026-10-01</div></div><div class="badge-cell locked"><svg viewBox="0 0 64 64" width="64" height="64" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#33ff66" stroke-width="2" filter="url(#hexglow)"/>
+  <g fill="#33ff66" stroke="#33ff66"><path d="M42 36 A20 20 0 1 1 28 8 A16 16 0 1 0 42 36 Z"/></g></svg><div class="n">Night Owl</div><div class="d">Stream started between midnight and 5 AM</div><div class=d>2026-10-01</div></div><div class="badge-cell locked"><svg viewBox="0 0 64 64" width="64" height="64" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#1d3a24" stroke-width="2"/>
   <g fill="#0d140e" stroke="#1d3a24"><path d="M14 44 a18 18 0 0 1 36 0 Z"/><path d="M32 6 L32 14 M12 18 L18 24 M52 18 L46 24 M6 44 L58 44" stroke-width="4" stroke-linecap="round"/></g></svg><div class="n">Early Bird</div><div class="d">Stream started between 5 and 7 AM</div></div><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
-  <g fill="#33ff66" stroke="#33ff66" filter="url(#hexglow)"><path d="M36 4 L14 36 L28 36 L26 60 L50 26 L36 26 Z"/></g></svg><div class="n">Marathon</div><div class="d">10+ hours in a single day</div><div class=d>2026-05-30</div></div><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
-  <g fill="#33ff66" stroke="#33ff66" filter="url(#hexglow)"><path d="M52 32 a20 20 0 1 1 -6 -14" fill="none" stroke-width="6"/><path d="M46 6 L48 20 L34 16 Z"/></g></svg><div class="n">Comeback</div><div class="d">6-hour day right after a zero day</div><div class=d>2026-03-06</div></div><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
-  <g fill="#33ff66" stroke="#33ff66" filter="url(#hexglow)"><path d="M10 44 a22 22 0 0 1 44 0 Z"/><path d="M32 44 L48 26" stroke-width="5" stroke-linecap="round"/></g></svg><div class="n">Halfway There</div><div class="d">50% of current exam's estimated hours</div><div class=d>2026-09-04</div></div></div>
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#33ff66" stroke-width="2" filter="url(#hexglow)"/>
+  <g fill="#33ff66" stroke="#33ff66"><path d="M36 4 L14 36 L28 36 L26 60 L50 26 L36 26 Z"/></g></svg><div class="n">Marathon</div><div class="d">10+ hours in a single day</div><div class=d>2026-05-30</div></div><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#33ff66" stroke-width="2" filter="url(#hexglow)"/>
+  <g fill="#33ff66" stroke="#33ff66"><path d="M52 32 a20 20 0 1 1 -6 -14" fill="none" stroke-width="6"/><path d="M46 6 L48 20 L34 16 Z"/></g></svg><div class="n">Comeback</div><div class="d">6-hour day right after a zero day</div><div class=d>2026-03-06</div></div><div class="badge-cell"><svg viewBox="0 0 64 64" width="64" height="64" class="badge earned">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#33ff66" stroke-width="2" filter="url(#hexglow)"/>
+  <g fill="#33ff66" stroke="#33ff66"><path d="M10 44 a22 22 0 0 1 44 0 Z"/><path d="M32 44 L48 26" stroke-width="5" stroke-linecap="round"/></g></svg><div class="n">Halfway There</div><div class="d">50% of current exam's estimated hours</div><div class=d>2026-09-04</div></div></div>
 
 <div class="rewards">
 <h3>Rewards — locked</h3>
@@ -100,6 +152,11 @@ Exchange rates get set then; the ledger is already honest.</p>
 .rewards{background:#050805;border:1px dashed #1d3a24;border-radius:10px;padding:1.2rem 1.5rem;
   color:#8aa392;margin:1.5rem 0}
 .rewards h3{color:#4a5a4e;letter-spacing:.15em;font-size:.85rem;text-transform:uppercase}
+.rank-path{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin:1rem 0 1.5rem}
+.rank-cell{text-align:center}
+.rank-cell.next svg{animation:rankpulse 2.2s ease-in-out infinite}
+@keyframes rankpulse{0%,100%{filter:drop-shadow(0 0 2px rgba(51,255,102,.4))}
+  50%{filter:drop-shadow(0 0 9px rgba(51,255,102,.85))}}
 </style>
 <script>
 document.querySelectorAll('.pbar>i').forEach(el=>{

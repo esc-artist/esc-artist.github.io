@@ -267,13 +267,89 @@ BADGE_PATHS = {
     "hex": '<path d="M32 6 L54 19 L54 45 L32 58 L10 45 L10 19 Z"/>',
 }
 
+# Rank icons for the cert-path hexagons (viewBox 0 0 64 64), mirroring the calf tattoo
+RANK_ICONS = {
+    # dragon (OSCP): horned head, serpentine neck, wing slashes
+    "OSCP": ('<path d="M18 50 C14 40 18 32 26 28 L22 18 L30 22 L34 12 L38 22 L48 24'
+             ' L42 30 L46 34 L38 36 L40 44 L32 52 Z"/>'
+             '<path d="M40 20 L52 10 L48 24 Z"/><path d="M44 26 L58 20 L50 32 Z"/>'),
+    # crossed swords (CPTS)
+    "CPTS": ('<g transform="rotate(45 32 32)"><rect x="29" y="6" width="6" height="34" rx="2"/>'
+             '<rect x="20" y="38" width="24" height="5" rx="2"/>'
+             '<rect x="29" y="45" width="6" height="12" rx="3"/></g>'
+             '<g transform="rotate(-45 32 32)"><rect x="29" y="6" width="6" height="34" rx="2"/>'
+             '<rect x="20" y="38" width="24" height="5" rx="2"/>'
+             '<rect x="29" y="45" width="6" height="12" rx="3"/></g>'),
+    # windows logo (CAPE): four panes
+    "CAPE": ('<rect x="12" y="14" width="18" height="16" rx="1"/>'
+             '<rect x="34" y="14" width="18" height="16" rx="1"/>'
+             '<rect x="12" y="34" width="18" height="16" rx="1"/>'
+             '<rect x="34" y="34" width="18" height="16" rx="1"/>'),
+    # mask (OSEP): domino mask with eye cutouts
+    "OSEP": ('<path d="M8 26 C8 22 12 20 16 20 L48 20 C52 20 56 22 56 26 L56 34'
+             ' C56 38 52 40 48 40 L16 40 C12 40 8 38 8 34 Z"/>'
+             '<ellipse cx="22" cy="30" rx="6" ry="4" fill="' + BG + '"/>'
+             '<ellipse cx="42" cy="30" rx="6" ry="4" fill="' + BG + '"/>'),
+    # spider (OSWE)
+    "OSWE": ('<ellipse cx="32" cy="36" rx="10" ry="12"/>'
+             '<circle cx="32" cy="22" r="6"/>'
+             '<path d="M24 28 L12 18 L8 24 M24 34 L10 30 L8 38 M24 42 L10 46 L12 54'
+             ' M26 48 L18 58 M40 28 L52 18 L56 24 M40 34 L54 30 L56 38'
+             ' M40 42 L54 46 L52 54 M38 48 L46 58"'
+             ' fill="none" stroke-width="3" stroke-linecap="round"/>'),
+    # skull and crossbones (OSED)
+    "OSED": ('<g transform="rotate(45 32 38)">'
+             '<rect x="10" y="35" width="44" height="7" rx="3.5"/>'
+             '<circle cx="12" cy="38" r="5"/><circle cx="52" cy="38" r="5"/></g>'
+             '<g transform="rotate(-45 32 38)">'
+             '<rect x="10" y="35" width="44" height="7" rx="3.5"/>'
+             '<circle cx="12" cy="38" r="5"/><circle cx="52" cy="38" r="5"/></g>'
+             '<circle cx="32" cy="26" r="13"/>'
+             '<rect x="24" y="32" width="16" height="10" rx="3"/>'
+             '<circle cx="27" cy="25" r="4" fill="' + BG + '"/>'
+             '<circle cx="37" cy="25" r="4" fill="' + BG + '"/>'),
+}
+
+
+def rank_hex(rank, earned, is_next, size=84):
+    """Cert-path hexagon with the rank's icon."""
+    r = size / 2
+    cx = cy = r + 4
+    icon = RANK_ICONS.get(rank, "")
+    if earned:
+        style = f'fill="{GREEN}" opacity="0.92" filter="url(#hexglow)"'
+        poly = (f'<polygon points="{hex_points(cx, cy, r)}" fill="{GREEN}" fill-opacity="0.16"'
+                f' stroke="{GREEN}" stroke-width="2.5" filter="url(#hexglow)"/>')
+        lbl_op = "1"
+    elif is_next:
+        style = f'fill="none" stroke="{GREEN}" stroke-width="2.5" opacity="0.95" filter="url(#hexglow)"'
+        poly = (f'<polygon points="{hex_points(cx, cy, r)}" fill="none"'
+                f' stroke="{GREEN}" stroke-width="2.5" stroke-dasharray="7,4" opacity="0.9"'
+                f' filter="url(#hexglow)"><animate attributeName="stroke-dashoffset"'
+                f' from="0" to="22" dur="1.6s" repeatCount="indefinite"/></polygon>')
+        lbl_op = "0.95"
+    else:
+        style = f'fill="none" stroke="{GREEN}" stroke-width="2" opacity="0.3"'
+        poly = (f'<polygon points="{hex_points(cx, cy, r)}" fill="none"'
+                f' stroke="{GREEN}" stroke-width="2" opacity="0.3"/>')
+        lbl_op = "0.4"
+    return f"""<div class="rank-cell" title="{rank}">
+  <svg viewBox="0 0 {size+8} {size+30}" width="{size}" height="{size+22}">
+    {poly}
+    <g transform="translate({cx-24} {cy-24}) scale(0.75)"><g {style}>{icon}</g></g>
+    <text x="{cx}" y="{cy + r + 16}" text-anchor="middle" fill="{GREEN}"
+          font-size="11" font-family="ui-monospace,monospace" opacity="{lbl_op}">{rank}</text>
+  </svg></div>"""
+
 
 def badge_svg(icon, earned, size=64):
     path = BADGE_PATHS.get(icon, BADGE_PATHS["star"])
     if earned:
         return f"""<svg viewBox="0 0 64 64" width="{size}" height="{size}" class="badge earned">
-  <g fill="{GREEN}" stroke="{GREEN}" filter="url(#hexglow)">{path}</g></svg>"""
+  <circle cx="32" cy="32" r="29" fill="none" stroke="{GREEN}" stroke-width="2" filter="url(#hexglow)"/>
+  <g fill="{GREEN}" stroke="{GREEN}">{path}</g></svg>"""
     return f"""<svg viewBox="0 0 64 64" width="{size}" height="{size}" class="badge locked">
+  <circle cx="32" cy="32" r="29" fill="none" stroke="{DIM}" stroke-width="2"/>
   <g fill="#0d140e" stroke="{DIM}">{path}</g></svg>"""
 
 
@@ -349,6 +425,11 @@ CSS = """
 .rewards{background:#050805;border:1px dashed #1d3a24;border-radius:10px;padding:1.2rem 1.5rem;
   color:#8aa392;margin:1.5rem 0}
 .rewards h3{color:#4a5a4e;letter-spacing:.15em;font-size:.85rem;text-transform:uppercase}
+.rank-path{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin:1rem 0 1.5rem}
+.rank-cell{text-align:center}
+.rank-cell.next svg{animation:rankpulse 2.2s ease-in-out infinite}
+@keyframes rankpulse{0%,100%{filter:drop-shadow(0 0 2px rgba(51,255,102,.4))}
+  50%{filter:drop-shadow(0 0 9px rgba(51,255,102,.85))}}
 """
 
 JS = """
@@ -383,9 +464,13 @@ def build_page(data, cfg):
             f'<div class="d">{b["desc"]}</div>'
             f'{"<div class=d>" + earned + "</div>" if earned else ""}</div>')
     for h in cfg.get("rank_history", []):
+        # Veteran badges reuse the rank's own icon inside the circular badge frame
+        vic = RANK_ICONS.get(h["rank"], BADGE_PATHS["hex"])
+        bid = f'vet_{h["rank"]}'
+        BADGE_PATHS[bid] = vic
         badges.append(
             f'<div class="badge-cell">'
-            f'{badge_svg("hex", h.get("date", ""))}'
+            f'{badge_svg(bid, h.get("date", ""))}'
             f'<div class="n">{h["rank"]} Veteran</div>'
             f'<div class="d">Reached Lv {h["peak_level"]} — {h["peak_name"]}</div>'
             f'{"<div class=d>" + h["date"] + "</div>" if h.get("date") else ""}</div>')
@@ -399,6 +484,16 @@ def build_page(data, cfg):
     cards_html = "".join(
         f'<div class="stat-card"><div class="v">{v}</div><div class="k">{k}</div></div>'
         for v, k in cards)
+    # rank path: ordered hexagons mirroring the calf tattoo
+    ordered = []
+    for sp in cfg["rank_spans"]:
+        if sp["from"] not in ordered:
+            ordered.append(sp["from"])
+        if sp["to"] not in ordered:
+            ordered.append(sp["to"])
+    earned_ranks = {cfg["current_rank"]} | {h["rank"] for h in cfg.get("rank_history", [])}
+    rank_cells = "".join(
+        rank_hex(r, r in earned_ranks, r == span["to"]) for r in ordered)
     return f"""---
 title: "Stats"
 summary: "private training stats"
@@ -420,6 +515,9 @@ robotsNoIndex: true
     <div class="pts-break">{lvl["to_next"]:.0f} points to Lv {lvl["n"]+1}</div>
   </div>
 </div>
+
+<h3>Rank Path</h3>
+<div class="rank-path">{rank_cells}</div>
 
 <div class="stat-cards">{cards_html}</div>
 
