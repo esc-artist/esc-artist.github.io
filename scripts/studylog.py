@@ -10,7 +10,7 @@ Master store: scripts/study_videos.json  {video_id: {date, secs, title}}
 
 Hours only. Never mention money anywhere in the output.
 """
-import sys, json, re, subprocess
+import sys, json, re, shutil, subprocess
 from datetime import date, timedelta
 from collections import defaultdict
 
@@ -71,10 +71,16 @@ def merge_tsv(path, vids):
     return added
 
 
+def ytdlp_cmd():
+    base = [shutil.which("yt-dlp")] if shutil.which("yt-dlp") else [sys.executable, "-m", "yt_dlp"]
+    # Sandbox egress proxy does SSL interception; skip cert verification
+    return base + ["--no-check-certificate"]
+
+
 def do_fetch():
     vids = load_store()
     out = subprocess.run(
-        ["yt-dlp", "-i", "--no-check-certificate", "--playlist-end", "60",
+        ytdlp_cmd() + ["-i", "--playlist-end", "60",
          "--print", "%(release_date)s %(duration)s %(id)s %(title)s",
          "--skip-download",
          "https://www.youtube.com/@constantinestudies/streams"],
@@ -102,6 +108,14 @@ def do_fetch():
     print(f"fetch: {len(vids)} videos in store, {added} new")
     if out.returncode != 0:
         print("yt-dlp stderr tail:", out.stderr[-500:])
+    # Fail loudly if the fetch was blind: yt-dlp errored AND produced no
+    # parseable lines. A silent 0-new-videos result would look like "no new
+    # streams" when the fetch itself actually failed.
+    lines = [l for l in out.stdout.splitlines() if l.strip()]
+    if out.returncode != 0 and not lines:
+        raise RuntimeError(
+            f"studylog fetch failed: yt-dlp exited {out.returncode} with no output. "
+            f"stderr tail: {out.stderr[-500:]}")
 
 
 def svg_bars(labels, values, title, w=680, h=220, color="#33ff66", target=None):
