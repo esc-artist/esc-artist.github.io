@@ -948,5 +948,17 @@
   "date": "2026-10-01",
   "secs": 3720,
   "title": "10/1/2026"
+ },
+ "LYogd0b3tR8": {
+  "date": "2026-10-02",
+  "secs": 3600,
+  "title": "10/2/2026 notes (manual backfill)",
+  "backfilled": true
+ },
+ "nGDYksS6mWg": {
+  "date": "2026-10-02",
+  "secs": 8532,
+  "title": "10/2/2026 Forest (manual backfill)",
+  "backfilled": true
  }
 }
