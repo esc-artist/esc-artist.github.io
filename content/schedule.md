@@ -8,9 +8,10 @@ Two judged days, two misses — 0 for 3 on Wednesday, September 30th, 0 for 3 ag
 
 All times ET.
 
-- Fri 10/2, 10:00 AM – 12:00 PM
-- Fri 10/2, 1:00 PM – 3:00 PM
-- Fri 10/2, 4:00 PM – 6:00 PM
+- Sat 10/3, 11:00 AM – 12:00 PM
+- Sat 10/3, 1:00 PM – 3:00 PM
+- Sat 10/3, 5:00 PM – 7:00 PM
+- Sat 10/3, 8:00 PM – 9:00 PM
 
 I file a study schedule — time blocks only, always totaling at least 6 hours — sometimes the morning of, sometimes the night before or earlier. The plan locks at filing: it can't be changed after, no matter when it was filed. After the day is done the public streams are checked against it: a block counts as hit if a stream started no later than ten minutes after the block began and was still live ten minutes before the block ended — showing up isn't enough, you have to stay. Blocks past midnight count toward the day they were planned on.
 
