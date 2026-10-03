@@ -951,14 +951,14 @@
  },
  "LYogd0b3tR8": {
   "date": "2026-10-02",
-  "secs": 3900,
-  "title": "10/2/2026 notes (manual backfill)",
-  "backfilled": true
+  "secs": 3694,
+  "title": "10/2/2026",
+  "verified": "screenshot"
  },
  "nGDYksS6mWg": {
   "date": "2026-10-02",
-  "secs": 8520,
-  "title": "10/2/2026 Forest (manual backfill)",
-  "backfilled": true
+  "secs": 8753,
+  "title": "10/2/2026",
+  "verified": "screenshot"
  }
 }
