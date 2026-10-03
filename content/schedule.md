@@ -23,7 +23,7 @@ Cumulative and weekly hours, running average, streak, and hour totals against th
 
 | Date | Plan | Streams (ET) | Blocks hit | Hours | Verdict | Note |
 |---|---|---|---|---|---|---|
-| 2026-10-02 | 10:00 AM-12:00 PM, 1:00 PM-3:00 PM, 4:00 PM-6:00 PM | — | 0/3 | **0.0h** | missed |  |
+| 2026-10-02 | 10:00 AM-12:00 PM, 1:00 PM-3:00 PM, 4:00 PM-6:00 PM | ?–?, ?–? | 0/3 | **3.5h** | missed | Streams occurred outside planned blocks. Hours verified from public channel screenshot; yt-dlp fetch was failing. |
 | 2026-10-01 | 10:00 AM-12:00 PM, 1:00 PM-3:00 PM, 4:00 PM-6:00 PM | 10-01 3:40 AM–10-01 4:16 AM, 10-01 11:27 AM–10-01 12:29 PM | 0/3 | **1.6h** | missed |  |
 | 2026-09-30 | 4:30 PM-7:30 PM, 9:00 PM-11:00 PM, 12:00 AM-1:00 AM | 09-30 4:31 PM–09-30 4:58 PM, 09-30 8:12 PM–09-30 8:50 PM, 09-30 8:57 PM–09-30 10:00 PM | 0/3 | **2.1h** | missed |  |
 
