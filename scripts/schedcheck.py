@@ -127,9 +127,9 @@ def load_state():
 
 
 def ytdlp_cmd():
-    if shutil.which("yt-dlp"):
-        return ["yt-dlp"]
-    return [sys.executable, "-m", "yt_dlp"]
+    base = [shutil.which("yt-dlp")] if shutil.which("yt-dlp") else [sys.executable, "-m", "yt_dlp"]
+    # Sandbox egress proxy does SSL interception; skip cert verification
+    return base + ["--no-check-certificate"]
 
 
 def parse_stream_line(line):
@@ -187,6 +187,15 @@ def fetch_streams():
                            "https://www.youtube.com/@constantinestudies/streams"],
             timeout=300)
     ids = [l.strip() for l in r.stdout.splitlines() if l.strip()]
+
+    # Sanity check: a channel with hundreds of past streams should never
+    # return zero IDs. Zero means the fetch itself failed (bot-wall, SSL,
+    # network) — not that no streams exist. Fail loudly instead of
+    # silently recording a bogus "no streams" verdict.
+    if not ids:
+        raise RuntimeError(
+            "fetch_streams: playlist returned 0 video IDs — fetch failed, "
+            f"not 'no streams'. stderr tail: {r.stderr[-500:]}")
 
     got = extract_urls(
         ["https://www.youtube.com/watch?v=%s" % i for i in ids], 1200)

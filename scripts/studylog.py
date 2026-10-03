@@ -74,7 +74,7 @@ def merge_tsv(path, vids):
 def do_fetch():
     vids = load_store()
     out = subprocess.run(
-        ["yt-dlp", "-i", "--playlist-end", "60",
+        ["yt-dlp", "-i", "--no-check-certificate", "--playlist-end", "60",
          "--print", "%(release_date)s %(duration)s %(id)s %(title)s",
          "--skip-download",
          "https://www.youtube.com/@constantinestudies/streams"],
