@@ -93,21 +93,26 @@
     ],
     "streams": [
       {
-        "start": "?",
-        "end": "?",
-        "duration": "2:25:53"
+        "id": "LYogd0b3tR8",
+        "start": "10-02 10:39 PM",
+        "end": "10-03 01:05 AM"
       },
       {
-        "start": "?",
-        "end": "?",
-        "duration": "1:01:34"
+        "id": "nGDYksS6mWg",
+        "start": "10-02 10:30 PM",
+        "end": "10-02 11:32 PM"
+      },
+      {
+        "id": "VeWqZG7f0o8",
+        "start": "10-02 12:36 AM",
+        "end": "10-02 01:38 AM"
       }
     ],
     "hits": 0,
     "verdict": "missed",
-    "note": "Streams occurred outside planned blocks. Hours verified from public channel screenshot; yt-dlp fetch was failing.",
+    "note": "3.5h streamed, all outside planned blocks (late night/early morning).",
     "plan_hours": 6.0,
-    "hours": 3.46,
+    "hours": 3.5,
     "hours_met": false,
     "block_results": [
       {
