@@ -1,7 +1,7 @@
 {
- "points": 155.1,
+ "points": 155.2,
  "breakdown": {
-  "from hours": 125.1,
+  "from hours": 125.2,
   "from blocks": 0,
   "6h bonuses": 30,
   "perfect days": 0,
@@ -10,8 +10,8 @@
  "level": {
   "n": 4,
   "name": "Restless",
-  "progress": 0.102,
-  "to_next": 44.89499999999998
+  "progress": 0.104,
+  "to_next": 44.815
  },
  "span": {
   "exam_hours_est": 320,
@@ -57,7 +57,7 @@
   "weekend_warrior": null,
   "no_zero_week": null
  },
- "total_hours": 125.1,
+ "total_hours": 125.2,
  "six_days": 10,
  "adherence": 0.0,
  "cur_streak": 0,
@@ -86,7 +86,7 @@
   "2026-09-29": 9.9,
   "2026-09-16": 1.63,
   "2026-09-25": 0.74,
-  "2026-10-02": 3.37
+  "2026-10-02": 3.45
  },
  "points_by_day": {
   "2026-09-18": 11.35,
@@ -112,11 +112,11 @@
   "2026-09-29": 12.9,
   "2026-09-16": 1.63,
   "2026-09-25": 0.74,
-  "2026-10-02": 3.37
+  "2026-10-02": 3.45
  },
  "tv_budget": {
-  "yesterday_points": 3.37,
-  "minutes": 25,
+  "yesterday_points": 3.45,
+  "minutes": 26,
   "date": "2026-10-02"
  }
 }
