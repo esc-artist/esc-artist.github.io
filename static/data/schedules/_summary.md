@@ -1,1 +1,1 @@
-Two judged days, two misses — 0 for 3 on Wednesday, September 30th, 0 for 3 again on Thursday. Not much else to say. Today's plan is filed: three two-hour blocks starting at 10am.
+Three judged days, three misses. Friday, October 2nd was 0 for 3 with no streams at all — the 30th and the 1st at least had a couple of hours outside the blocks. Today's plan is filed: 11am-noon, 1-3, 5-7, 8-9.
