@@ -10,7 +10,7 @@ Master store: scripts/study_videos.json  {video_id: {date, secs, title}}
 
 Hours only. Never mention money anywhere in the output.
 """
-import sys, json, re, shutil, subprocess
+import sys, json, re, os, subprocess
 from datetime import date, timedelta
 from collections import defaultdict
 
@@ -71,51 +71,45 @@ def merge_tsv(path, vids):
     return added
 
 
-def ytdlp_cmd():
-    base = [shutil.which("yt-dlp")] if shutil.which("yt-dlp") else [sys.executable, "-m", "yt_dlp"]
-    # Sandbox egress proxy does SSL interception; skip cert verification
-    return base + ["--no-check-certificate"]
+YOUTUBE_CLI = os.path.expanduser(
+    "~/workspace/skills/youtube-data-api/bin/fetch_videos.py")
 
 
 def do_fetch():
+    """Fetch newest 60 streams via YouTube Data API, merge into master store."""
     vids = load_store()
     out = subprocess.run(
-        ytdlp_cmd() + ["-i", "--playlist-end", "60",
-         "--print", "%(release_date)s %(duration)s %(id)s %(title)s",
-         "--skip-download",
-         "https://www.youtube.com/@constantinestudies/streams"],
-        capture_output=True, text=True, timeout=1200)
+        [sys.executable, YOUTUBE_CLI, "--max", "60"],
+        capture_output=True, text=True, timeout=300)
+    if out.returncode != 0:
+        raise RuntimeError(
+            f"studylog fetch failed: YouTube API CLI exited {out.returncode}. "
+            f"stderr: {out.stderr[-500:]}")
+    try:
+        api_videos = json.loads(out.stdout)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"studylog fetch failed: invalid JSON from API CLI: {e}")
+    if not api_videos:
+        raise RuntimeError(
+            "studylog fetch failed: API returned 0 videos — fetch failed, "
+            "not 'no videos'.")
     added = 0
-    for line in out.stdout.splitlines():
-        parts = line.strip().split(None, 3)
-        if len(parts) < 3:
-            continue
-        udstr, dur, vid = parts[0], parts[1], parts[2]
-        title = parts[3] if len(parts) > 3 else ""
-        try:
-            secs = float(dur)
-        except ValueError:
-            continue
+    for v in api_videos:
+        vid = v["id"]
+        title = v.get("title", "")
+        secs = v.get("duration_secs", 0)
         if secs <= 0:
             continue
-        d = pick_date(udstr, title)
+        # published_at is ISO 8601; pick_date expects YYYYMMDD or title date
+        pub = v.get("published_at", "")[:10].replace("-", "")
+        d = pick_date(pub, title)
         if not d:
             continue
         if vid not in vids:
             added += 1
         vids[vid] = {"date": d, "secs": secs, "title": title}
     save_store(vids)
-    print(f"fetch: {len(vids)} videos in store, {added} new")
-    if out.returncode != 0:
-        print("yt-dlp stderr tail:", out.stderr[-500:])
-    # Fail loudly if the fetch was blind: yt-dlp errored AND produced no
-    # parseable lines. A silent 0-new-videos result would look like "no new
-    # streams" when the fetch itself actually failed.
-    lines = [l for l in out.stdout.splitlines() if l.strip()]
-    if out.returncode != 0 and not lines:
-        raise RuntimeError(
-            f"studylog fetch failed: yt-dlp exited {out.returncode} with no output. "
-            f"stderr tail: {out.stderr[-500:]}")
+    print(f"fetch: {len(vids)} videos in store, {added} new (via YouTube API)")
 
 
 def svg_bars(labels, values, title, w=680, h=220, color="#33ff66", target=None):

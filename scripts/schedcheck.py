@@ -2,7 +2,7 @@
 """Daily study-schedule adherence check.
 
 Compares the morning-filed plan (static/data/schedules/YYYY-MM-DD.json)
-against the day's public study streams (start times via yt-dlp), using a
+against the day's public study streams (via YouTube Data API), using a
 10-minute grace window, and regenerates the public schedule page.
 
 Tamper model (mirrors the CPTS countdown guard): the morning snapshot is
@@ -22,10 +22,8 @@ Usage:
 import hashlib
 import json
 import os
-import shutil
 import subprocess
 import sys
-import time
 from datetime import datetime, timedelta, date
 from zoneinfo import ZoneInfo
 
@@ -126,97 +124,56 @@ def load_state():
         return json.load(f)
 
 
-def ytdlp_cmd():
-    base = [shutil.which("yt-dlp")] if shutil.which("yt-dlp") else [sys.executable, "-m", "yt_dlp"]
-    # Sandbox egress proxy does SSL interception; skip cert verification
-    return base + ["--no-check-certificate"]
-
-
-def parse_stream_line(line):
-    """Parse one yt-dlp --print line into (vid, start_et, end_et) or None."""
-    parts = line.strip().split()
-    if len(parts) < 4:
-        return None
-    vid, rts, ts, dur = parts[0], parts[1], parts[2], parts[3]
-    start = None
-    for cand in (rts, ts):
-        try:
-            start = datetime.fromtimestamp(int(cand), tz=ET)
-            break
-        except (ValueError, OSError):
-            continue
-    if start is None:
-        return None
-    try:
-        end = start + timedelta(seconds=float(dur))
-    except (ValueError, OSError):
-        return None
-    return (vid, start, end)
-
-
-def extract_urls(urls, timeout):
-    """Run yt-dlp --print over urls; return {vid: (start, end)}."""
-    if not urls:
-        return {}
-    r = run(ytdlp_cmd() + ["-i",
-                           "--print", "%(id)s %(release_timestamp)s %(timestamp)s %(duration)s",
-                           "--skip-download"] + urls,
-            timeout=timeout)
-    out = {}
-    for line in r.stdout.splitlines():
-        rec = parse_stream_line(line)
-        if rec:
-            out[rec[0]] = (rec[1], rec[2])
-    return out
+YOUTUBE_CLI = os.path.expanduser(
+    "~/workspace/skills/youtube-data-api/bin/fetch_videos.py")
 
 
 def fetch_streams():
     """Return [(video_id, start_et, end_et)] for the newest 60 streams.
 
-    Uses release_timestamp (actual broadcast start) rather than timestamp
-    (when the VOD became public, often hours later for this channel).
-    Falls back to timestamp if release_timestamp is missing.
+    Uses YouTube Data API v3 via the skill CLI. published_at is the
+    broadcast start time. Duration comes from contentDetails.
 
-    YouTube intermittently bot-walls metadata extraction; videos missed by
-    the bulk pass are retried individually with backoff. Anything still
-    missing after retries is reported on stderr so the run log shows it.
+    Fails loudly on any fetch problem — never silently records a bogus
+    "no streams" verdict.
     """
-    r = run(ytdlp_cmd() + ["--flat-playlist", "--playlist-end", "60",
-                           "--print", "%(id)s",
-                           "--skip-download",
-                           "https://www.youtube.com/@constantinestudies/streams"],
-            timeout=300)
-    ids = [l.strip() for l in r.stdout.splitlines() if l.strip()]
+    r = run([sys.executable, YOUTUBE_CLI, "--max", "60"], timeout=300)
+    if r.returncode != 0:
+        raise RuntimeError(
+            f"fetch_streams: YouTube API CLI failed (exit {r.returncode}). "
+            f"stderr: {r.stderr[-500:]}")
+    try:
+        api_videos = json.loads(r.stdout)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"fetch_streams: invalid JSON from API CLI: {e}")
 
     # Sanity check: a channel with hundreds of past streams should never
-    # return zero IDs. Zero means the fetch itself failed (bot-wall, SSL,
-    # network) — not that no streams exist. Fail loudly instead of
-    # silently recording a bogus "no streams" verdict.
-    if not ids:
+    # return zero videos. Zero means the fetch itself failed — not that
+    # no streams exist. Fail loudly instead of silently recording a bogus
+    # "no streams" verdict.
+    if not api_videos:
         raise RuntimeError(
-            "fetch_streams: playlist returned 0 video IDs — fetch failed, "
-            f"not 'no streams'. stderr tail: {r.stderr[-500:]}")
+            "fetch_streams: API returned 0 videos — fetch failed, "
+            "not 'no streams'.")
 
-    got = extract_urls(
-        ["https://www.youtube.com/watch?v=%s" % i for i in ids], 1200)
-
-    missing = [i for i in ids if i not in got]
-    for vid in missing:
-        rec = None
-        for attempt, wait in enumerate((15, 30, 60)):
-            time.sleep(wait)
-            one = extract_urls(
-                ["https://www.youtube.com/watch?v=%s" % vid], 300)
-            if vid in one:
-                rec = one[vid]
-                break
-        if rec:
-            got[vid] = rec
-        else:
-            print("fetch_streams: giving up on %s after retries "
-                  "(bot-wall?)" % vid, file=sys.stderr)
-
-    return [(vid, s, e) for vid, (s, e) in got.items()]
+    result = []
+    for v in api_videos:
+        vid = v["id"]
+        secs = v.get("duration_secs", 0)
+        if secs <= 0:
+            continue
+        try:
+            # published_at is ISO 8601 UTC, e.g. "2026-10-03T02:30:27Z"
+            start_utc = datetime.fromisoformat(
+                v["published_at"].replace("Z", "+00:00"))
+            start = start_utc.astimezone(ET)
+        except (ValueError, KeyError):
+            print(f"fetch_streams: skipping {vid} (bad published_at)",
+                  file=sys.stderr)
+            continue
+        end = start + timedelta(seconds=secs)
+        result.append((vid, start, end))
+    return result
 
 
 def streams_on(streams, d):
