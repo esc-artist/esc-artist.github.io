@@ -1,15 +1,15 @@
 {
- "points": 155.2,
+ "points": 160.9,
  "breakdown": {
-  "from hours": 125.2,
+  "from hours": 130.9,
   "6h bonuses": 30,
   "streaks": 0
  },
  "level": {
-  "n": 8,
-  "name": "Disciplined",
-  "progress": 0.76,
-  "to_next": 4.79027777777776
+  "n": 9,
+  "name": "Academic",
+  "progress": 0.047,
+  "to_next": 19.05805555555557
  },
  "span": {
   "exam_hours_est": 320,
@@ -36,7 +36,7 @@
   "grinder_50": null,
   "hat_trick": null,
   "week_clear": null,
-  "streak_7": null,
+  "streak_7": "2026-10-03",
   "streak_14": null,
   "streak_30": null,
   "halfway": null,
@@ -44,9 +44,9 @@
   "exam_ready": null,
   "comeback": "2026-09-15",
   "weekend_warrior": null,
-  "no_zero_week": null
+  "no_zero_week": "2026-09-27"
  },
- "total_hours": 125.2,
+ "total_hours": 130.9,
  "six_days": 10,
  "cur_streak": 0,
  "longest_streak": 2,
@@ -67,6 +67,7 @@
   "2026-09-11": 8.85,
   "2026-09-09": 8.06,
   "2026-09-22": 3.7,
+  "2026-10-03": 5.73,
   "2026-09-27": 4.16,
   "2026-09-24": 3.84,
   "2026-09-07": 1.9,
@@ -93,6 +94,7 @@
   "2026-09-11": 11.85,
   "2026-09-09": 11.06,
   "2026-09-22": 3.7,
+  "2026-10-03": 5.73,
   "2026-09-27": 4.16,
   "2026-09-24": 3.84,
   "2026-09-07": 1.9,
@@ -103,8 +105,8 @@
   "2026-09-25": 0.74
  },
  "tv_budget": {
-  "yesterday_points": 0,
-  "minutes": 0,
+  "yesterday_points": 5.73,
+  "minutes": 96,
   "date": "2026-10-03"
  }
 }

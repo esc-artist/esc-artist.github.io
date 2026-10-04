@@ -1,1 +1,1 @@
-23.8 hours so far this week against the 42-hour target, up from 21.5 last week. The shape of it is feast or famine: 9.9 hours Tuesday, 2.1 Wednesday. Two days cleared the 6-hour bar.
+Last week closed at 34.0 hours against the 42-hour target — closer than recent weeks, still short. The shape is feast or famine: 9.9 hours Tuesday, 1.6 Thursday. Two days cleared the 6-hour bar. The running daily average sits at 3.6 against the 6-per-day target, though 10 days total have hit it. Seven-day streak going; the new week starts at zero.
