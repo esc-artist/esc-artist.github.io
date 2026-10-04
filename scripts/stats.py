@@ -112,48 +112,28 @@ def streak_days(hours_by_day, min_len=3):
     return out
 
 
-def points_by_day(hours_by_day, sched_log):
+def points_by_day(hours_by_day, sched_log=None):
     """{date_iso: points} with per-day attribution for the Pi budget app."""
-    log_by_date = {d["date"]: d for d in sched_log if isinstance(d, dict)}
     in_streak = streak_days(hours_by_day)
     out = {}
     for d, h in hours_by_day.items():
         p = h  # 1 per hour
-        e = log_by_date.get(d, {})
-        p += 2 * sum(1 for r in e.get("block_results", []) if r.get("hit"))
         if h >= 6 - 1e-9:
             p += 3
-        if e.get("verdict") == "adhered":
-            p += 5
         if d in in_streak:
             p += 2
         out[d] = round(p, 2)
-    # schedule-log days with no video hours still earn block/adhered points
-    for d, e in log_by_date.items():
-        if d not in out:
-            p = 2 * sum(1 for r in e.get("block_results", []) if r.get("hit"))
-            if e.get("verdict") == "adhered":
-                p += 5
-            if p:
-                out[d] = round(p, 2)
     return out
 
 
-def compute_points(hours_by_day, sched_log):
+def compute_points(hours_by_day, sched_log=None):
     """Return (total, breakdown dict)."""
-    b = {"from hours": 0.0, "from blocks": 0, "6h bonuses": 0, "perfect days": 0, "streaks": 0}
+    b = {"from hours": 0.0, "6h bonuses": 0, "streaks": 0}
     b["from hours"] = sum(hours_by_day.values())
-    for d in sched_log:
-        if not isinstance(d, dict):
-            continue
-        hits = sum(1 for r in d.get("block_results", []) if r.get("hit"))
-        b["from blocks"] += 2 * hits
-        if d.get("verdict") == "adhered":
-            b["perfect days"] += 5
     six_days = [d for d, h in hours_by_day.items() if h >= 6 - 1e-9]
     b["6h bonuses"] = 3 * len(six_days)
     b["streaks"] = 2 * len(streak_days(hours_by_day))
-    total = b["from hours"] + b["from blocks"] + b["6h bonuses"] + b["perfect days"] + b["streaks"]
+    total = b["from hours"] + b["6h bonuses"] + b["streaks"]
     return total, b
 
 
@@ -185,22 +165,14 @@ def first_reach(dates, key, threshold):
     return None
 
 
-def compute_badges(hours_by_day, sched_log, cfg):
+def compute_badges(hours_by_day, sched_log=None, cfg=None):
     """Return {badge_id: date_earned_iso_or_None}."""
     earned = {}
     days = sorted(hours_by_day)
-    log_by_date = {d["date"]: d for d in sched_log if isinstance(d, dict)}
-    log_days = sorted(log_by_date)
 
     # firsts
     earned["first_stream"] = days[0] if days else None
     earned["first_blood"] = next((d for d in days if hours_by_day[d] >= 6 - 1e-9), None)
-    fb = None
-    for d in log_days:
-        if any(r.get("hit") for r in log_by_date[d].get("block_results", [])):
-            fb = d
-            break
-    earned["first_block"] = fb
 
     # total-hour milestones
     for bid in ("hours_10", "hours_25", "hours_50", "centurion_100",
@@ -241,42 +213,6 @@ def compute_badges(hours_by_day, sched_log, cfg):
     earned["streak_7"] = streak_first(1e-9, 7)
     earned["streak_14"] = streak_first(1e-9, 14)
     earned["streak_30"] = streak_first(1e-9, 30)
-
-    # schedule badges
-    adhered = [d for d in log_days if log_by_date[d].get("verdict") == "adhered"]
-    earned["perfect_day"] = adhered[0] if adhered else None
-    earned["perfect_5"] = adhered[4] if len(adhered) >= 5 else None
-    pw = None
-    for d in log_days:
-        di = date.fromisoformat(d)
-        if all(log_by_date.get((di + timedelta(days=k)).isoformat(), {}).get("verdict") == "adhered"
-               for k in range(7)):
-            pw = d
-            break
-    earned["perfect_week"] = pw
-    for bid in ("blocks_10", "blocks_25", "blocks_50"):
-        th = next(b["threshold"] for b in cfg["badges"] if b["id"] == bid)
-        cum, when = 0, None
-        for d in log_days:
-            cum += sum(1 for r in log_by_date[d].get("block_results", []) if r.get("hit"))
-            if cum >= th and when is None:
-                when = d
-        earned[bid] = when
-
-    # stream-time badges
-    earned["night_owl"] = earned["early_bird"] = None
-    for d in log_days:
-        for s in log_by_date[d].get("streams", []):
-            st = s.get("start", "")
-            try:
-                hm, ap = st.split()[1], st.split()[2]
-                h = int(hm.split(":")[0]) % 12 + (12 if ap == "PM" else 0)
-            except (IndexError, ValueError):
-                continue
-            if 0 <= h < 5 and earned["night_owl"] is None:
-                earned["night_owl"] = d
-            if 5 <= h < 7 and earned["early_bird"] is None:
-                earned["early_bird"] = d
 
     # exam progress
     span = next(sp for sp in cfg["rank_spans"] if sp["from"] == cfg["current_rank"])
@@ -667,7 +603,6 @@ def build_page(data, cfg):
     cards = [
         (f'{data["total_hours"]:.1f}', "total hours"),
         (str(data["six_days"]), "6h+ days"),
-        (f'{data["adherence"]:.0f}%', "blocks hit"),
         (str(data["cur_streak"]), "6h streak"),
         (str(data["longest_streak"]), "longest 6h streak"),
     ]
@@ -753,16 +688,14 @@ summary: "how points, levels, and ranks work"
 robotsNoIndex: true
 ---
 
-The rulebook for the [stats](/stats/) page. Everything is computed from public data — stream durations and the schedule log — starting {start}.
+The rulebook for the [stats](/stats/) page. Everything is computed from public data — stream durations — starting {start}.
 
 ## Points
 
 | Action | Points |
 |---|---|
 | 1 hour studied (streamed) | 1 |
-| 1 schedule block hit | 2 |
 | 6+ hour day | +3 |
-| Fully adhered day (every block hit) | +5 |
 | Each day of a 3+ day run of 6h days | +2 |
 
 Points never expire and are never taken away. Each point also buys {mpp} minutes of
@@ -814,12 +747,11 @@ def main():
         print("no config", file=sys.stderr)
         sys.exit(1)
     videos = load_json(VIDEOS, {})
-    sched_log = load_json(SCHED_LOG, [])
 
     hours_by_day = daily_hours(videos, cfg.get("start_date"))
-    total_points, breakdown = compute_points(hours_by_day, sched_log)
+    total_points, breakdown = compute_points(hours_by_day)
     cur_streak, longest_streak = streaks(hours_by_day)
-    badges = compute_badges(hours_by_day, sched_log, cfg)
+    badges = compute_badges(hours_by_day, cfg=cfg)
 
     span = next(sp for sp in cfg["rank_spans"] if sp["from"] == cfg["current_rank"])
     span_points = total_points - cfg.get("rank_start_points", 0)
@@ -828,14 +760,10 @@ def main():
     level_name = cfg["level_names"][level_n - 1]
     progress = (span_points % ppl) / ppl if level_n < span["levels"] else 1.0
 
-    total_blocks = sum(len(d.get("block_results", [])) for d in sched_log if isinstance(d, dict))
-    hits = sum(1 for d in sched_log if isinstance(d, dict)
-               for r in d.get("block_results", []) if r.get("hit"))
-    adherence = 100 * hits / total_blocks if total_blocks else 0
     six_days = sum(1 for h in hours_by_day.values() if h >= 6 - 1e-9)
 
     # TV budget: yesterday's points × minutes_per_point
-    pbd = points_by_day(hours_by_day, sched_log)
+    pbd = points_by_day(hours_by_day)
     yesterday = (date.today() - timedelta(days=1)).isoformat()
     yday_points = pbd.get(yesterday, 0)
     tv_budget_min = round(yday_points * cfg.get("minutes_per_point", 7.5))
@@ -849,7 +777,6 @@ def main():
         "badges": badges,
         "total_hours": round(sum(hours_by_day.values()), 1),
         "six_days": six_days,
-        "adherence": round(adherence, 1),
         "cur_streak": cur_streak,
         "longest_streak": longest_streak,
         "hours_by_day": {d: round(h, 2) for d, h in hours_by_day.items()},

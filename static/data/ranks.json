@@ -14,12 +14,6 @@
    "icon": "droplet"
   },
   {
-   "id": "first_block",
-   "name": "First Block",
-   "desc": "First schedule block hit",
-   "icon": "check"
-  },
-  {
    "id": "hours_10",
    "name": "Warming Up",
    "desc": "10 total hours",
@@ -151,58 +145,6 @@
    "desc": "30 days straight studying",
    "icon": "calendar",
    "threshold": 30
-  },
-  {
-   "id": "perfect_day",
-   "name": "Perfect Day",
-   "desc": "Every block hit",
-   "icon": "star"
-  },
-  {
-   "id": "perfect_5",
-   "name": "Perfectionist",
-   "desc": "5 perfect days",
-   "icon": "star",
-   "threshold": 5
-  },
-  {
-   "id": "perfect_week",
-   "name": "Perfect Week",
-   "desc": "Every block hit, 7 days straight",
-   "icon": "crown"
-  },
-  {
-   "id": "blocks_10",
-   "name": "Sharpshooter",
-   "desc": "10 blocks hit",
-   "icon": "target",
-   "threshold": 10
-  },
-  {
-   "id": "blocks_25",
-   "name": "Sharpshooter II",
-   "desc": "25 blocks hit",
-   "icon": "target",
-   "threshold": 25
-  },
-  {
-   "id": "blocks_50",
-   "name": "Sharpshooter III",
-   "desc": "50 blocks hit",
-   "icon": "target",
-   "threshold": 50
-  },
-  {
-   "id": "night_owl",
-   "name": "Night Owl",
-   "desc": "Stream started between midnight and 5 AM",
-   "icon": "moon"
-  },
-  {
-   "id": "early_bird",
-   "name": "Early Bird",
-   "desc": "Stream started between 5 and 7 AM",
-   "icon": "sunrise"
   },
   {
    "id": "halfway",

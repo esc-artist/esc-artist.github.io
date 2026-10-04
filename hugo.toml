@@ -28,11 +28,6 @@ theme = 'PaperMod'
     url = '/study/'
     weight = 40
   [[menu.main]]
-    identifier = 'schedule'
-    name = 'Schedule'
-    url = '/schedule/'
-    weight = 45
-  [[menu.main]]
     identifier = 'cpts'
     name = 'CPTS'
     url = '/cpts/'
