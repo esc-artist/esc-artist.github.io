@@ -200,7 +200,7 @@
   "Elite",
   "Apex"
  ],
- "points_per_level": 50,
+ "points_per_level": 20,
  "rank_spans": [
   {
    "exam_hours_est": 320,
@@ -236,6 +236,6 @@
  "rank_start_points": 0,
  "rank_history": [],
  "start_date": "2026-08-30",
- "minutes_per_point": 7.5,
+ "minutes_per_point": 16.67,
  "pi_budget_url": ""
 }

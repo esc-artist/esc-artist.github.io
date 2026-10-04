@@ -17,15 +17,15 @@ robotsNoIndex: true
   </defs>
   <polygon points="115.962,34 115.962,94 64,124 12.0385,94 12.0385,34 64,4" fill="#050805" stroke="#1d3a24" stroke-width="2"/>
   <g clip-path="url(#hexclip)">
-    <rect class="hexfill" x="4.0" y="101.12800000000001" width="120.0" height="9.671999999999999"
-          fill="#33ff66" opacity="0.5525"/>
+    <rect class="hexfill" x="4.0" y="40.120000000000005" width="120.0" height="70.68"
+          fill="#33ff66" opacity="0.7175"/>
   </g>
   <polygon points="115.962,34 115.962,94 64,124 12.0385,94 12.0385,34 64,4" fill="none" stroke="#33ff66" stroke-width="2"
-           opacity="0.775" filter="url(#hexglow)"/>
+           opacity="0.925" filter="url(#hexglow)"/>
   <text x="64.0" y="72.0" text-anchor="middle" fill="#33ff66" font-size="26"
-        font-family="ui-monospace,monospace" font-weight="bold" filter="url(#hexglow)">4</text>
+        font-family="ui-monospace,monospace" font-weight="bold" filter="url(#hexglow)">8</text>
 </svg>
-    <div class="lvl-name">Lv 4 — Restless</div>
+    <div class="lvl-name">Lv 8 — Disciplined</div>
     <div class="rank-line">Rank: OSCP → CPTS</div>
   </div>
   <div style="flex:1;min-width:220px">
@@ -33,15 +33,15 @@ robotsNoIndex: true
   <rect x="4" y="4" width="12" height="12" transform="rotate(45 10 10)"
         fill="none" stroke="#33ff66" stroke-width="2"/></svg><span data-count="155.2">0</span></div>
     <div class="pts-break">from hours: 125.2<br>6h bonuses: 30.0<br>streaks: 0.0</div>
-    <div class="pbar"><i data-w="10"></i></div>
-    <div class="pts-break">45 points to Lv 5</div>
+    <div class="pbar"><i data-w="76"></i></div>
+    <div class="pts-break">5 points to Lv 9</div>
   </div>
 </div>
 
 <div class="tv-card">
   <div class="tv-head">TV Budget — today</div>
   <div class="tv-big">0 min</div>
-  <div class="tv-sub">0.0 points yesterday × 7.5 min</div>
+  <div class="tv-sub">0.0 points yesterday × 16.67 min</div>
   <a href="#" id="tv-open" class="tv-btn" style="display:none">Open TV Control</a><span id="tv-unset"><button class="tv-btn" id="tv-set">Set Pi URL</button></span>
 </div>
 <script>
@@ -168,7 +168,7 @@ robotsNoIndex: true
 
 <div class="rewards">
 <h3>Screen time</h3>
-<p>Points buy entertainment. Every point earned today becomes 7.5 minutes of
+<p>Points buy entertainment. Every point earned today becomes 16.67 minutes of
 unblocked screen time tomorrow — Instagram, TikTok, Netflix, Hulu, HBO Max,
 Apple TV+, Reddit, all of it. They're blocked by default; the only way through
 is spending yesterday's points.</p>

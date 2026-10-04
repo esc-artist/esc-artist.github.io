@@ -14,12 +14,12 @@ The rulebook for the [stats](/stats/) page. Everything is computed from public d
 | 6+ hour day | +3 |
 | Each day of a 3+ day run of 6h days | +2 |
 
-Points never expire and are never taken away. Each point also buys 7.5 minutes of
+Points never expire and are never taken away. Each point also buys 16.67 minutes of
 unblocked screen time, usable the day after it's earned — see Screen time below.
 
 ## Levels
 
-1 level = 50 points. Thresholds are absolute: level 5 always means 250 points of work, no matter the rank.
+1 level = 20 points. Thresholds are absolute: level 5 always means 250 points of work, no matter the rank.
 
 1. Slacker, 2. Drifter, 3. Dabbler, 4. Restless, 5. Hungry, 6. Driven, 7. Grinder, 8. Disciplined, 9. Academic, 10. Scholar, 11. Relentless, 12. Obsessive, 13. Elite, 14. Apex
 
@@ -71,7 +71,7 @@ When a rank is earned, the level resets to 1 in the new rank. The peak level fro
 
 ## Screen time
 
-Points are spent on entertainment. Each point buys 7.5 minutes of unblocked
+Points are spent on entertainment. Each point buys 16.67 minutes of unblocked
 screen time, usable the day after it's earned — yesterday's points are today's
 budget. One session per day; unused minutes don't roll over.
 
