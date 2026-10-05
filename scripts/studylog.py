@@ -212,7 +212,7 @@ draft: false
 
 {load_summary()}
 
-Public study hours, for accountability. Totals come from the durations of my public study streams.
+Public study hours, for accountability. Totals come from the durations of my public study streams. Updated weekly, Sundays.
 
 <div class="stat-row">
 <div class="stat"><span class="stat-num">{total:.1f}h</span><span class="stat-label">since Aug 30</span></div>
