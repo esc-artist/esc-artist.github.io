@@ -5,12 +5,11 @@ Unlisted: not in nav, noindex. A quiet footer link on /study/ points here.
 
 Economy (points):
   +1 per streamed hour (fractional)
-  +2 per schedule block hit
   +3 per 6h+ day
-  +5 per fully adhered day (all blocks hit)
   +2 per day while on a 3+ day run of 6h days
 
-Levels: 1 level = 50 points (configurable), named per ranks.json.
+Levels: 1 level = 20 points (configurable per ranks.json), 14 level names.
+16.67 TV minutes per point. One cash-in per day, no rollover.
 Ranks are cert-based and updated manually (current_rank in ranks.json).
 
 Usage:
@@ -24,7 +23,6 @@ from datetime import date, timedelta
 
 HOME = "/home/hatch/workspace/esc-artist-blog"
 VIDEOS = f"{HOME}/scripts/study_videos.json"
-SCHED_LOG = f"{HOME}/static/data/schedules/_log.json"
 CONFIG = f"{HOME}/static/data/ranks.json"
 OUT_JSON = f"{HOME}/static/data/stats.json"
 OUT_PAGE = f"{HOME}/content/stats.md"
@@ -112,7 +110,7 @@ def streak_days(hours_by_day, min_len=3):
     return out
 
 
-def points_by_day(hours_by_day, sched_log=None):
+def points_by_day(hours_by_day):
     """{date_iso: points} with per-day attribution for the Pi budget app."""
     in_streak = streak_days(hours_by_day)
     out = {}
@@ -126,7 +124,7 @@ def points_by_day(hours_by_day, sched_log=None):
     return out
 
 
-def compute_points(hours_by_day, sched_log=None):
+def compute_points(hours_by_day):
     """Return (total, breakdown dict)."""
     b = {"from hours": 0.0, "6h bonuses": 0, "streaks": 0}
     b["from hours"] = sum(hours_by_day.values())
@@ -165,7 +163,7 @@ def first_reach(dates, key, threshold):
     return None
 
 
-def compute_badges(hours_by_day, sched_log=None, cfg=None):
+def compute_badges(hours_by_day, cfg=None):
     """Return {badge_id: date_earned_iso_or_None}."""
     earned = {}
     days = sorted(hours_by_day)
