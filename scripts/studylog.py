@@ -2,17 +2,23 @@
 """Study Log page builder for esc-artist.github.io/study/.
 
 Master store: scripts/study_videos.json  {video_id: {date, secs, title}}
-  date = stream-title date (Constantine's study-day convention); falls back
-  to release_date (actual broadcast date) when untitled.
+  date = actual stream date (liveStreamingDetails.actualStartTime, fallback
+  published_at), converted to America/New_York. Never the stream title.
 
-  --fetch : pull newest 60 streams via yt-dlp, merge into master store
+  --fetch : pull newest 60 streams via YouTube Data API, merge into master store
   --build : aggregate master store -> content/study.md (inline SVG charts)
 
 Hours only. Never mention money anywhere in the output.
 """
 import sys, json, re, os, subprocess
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime, timezone
 from collections import defaultdict
+
+try:
+    from zoneinfo import ZoneInfo
+    ET = ZoneInfo("America/New_York")
+except Exception:
+    ET = None
 
 HOME = "/home/hatch/workspace/esc-artist-blog"
 STORE = f"{HOME}/scripts/study_videos.json"
@@ -20,13 +26,23 @@ TITLE_RE = re.compile(r'(\d{1,2})/(\d{1,2})/(\d{4})\s*$')
 START = date(2026, 8, 30)
 
 
-def pick_date(upload_dstr, title):
-    m = TITLE_RE.search(title or "")
-    if m:
-        try:
-            return date(int(m.group(3)), int(m.group(1)), int(m.group(2))).isoformat()
-        except ValueError:
-            pass
+def stream_date(iso_ts):
+    """Date of actual stream start in America/New_York. Never the title."""
+    if not iso_ts:
+        return None
+    try:
+        ts = iso_ts.replace("Z", "+00:00")
+        dt = datetime.fromisoformat(ts)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        if ET is not None:
+            dt = dt.astimezone(ET)
+        return dt.date().isoformat()
+    except ValueError:
+        return None
+
+
+def pick_date(upload_dstr, title=None):
     if upload_dstr and upload_dstr != "NA" and len(upload_dstr) == 8:
         try:
             return date(int(upload_dstr[:4]), int(upload_dstr[4:6]),
@@ -100,9 +116,8 @@ def do_fetch():
         secs = v.get("duration_secs", 0)
         if secs <= 0:
             continue
-        # published_at is ISO 8601; pick_date expects YYYYMMDD or title date
-        pub = v.get("published_at", "")[:10].replace("-", "")
-        d = pick_date(pub, title)
+        # actual stream start date in ET; never the title
+        d = stream_date(v.get("stream_started_at") or v.get("published_at", ""))
         if not d:
             continue
         if vid not in vids:
