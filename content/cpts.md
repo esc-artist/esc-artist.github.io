@@ -15,7 +15,7 @@ draft: false
 <div class="cd-sep">:</div>
 <div class="cd-cell"><div class="cd-num" id="cd-s">&ndash;&ndash;</div><div class="cd-label">seconds</div></div>
 </div>
-<div class="cd-note" id="cd-note">The date does not move.</div>
+<div class="cd-note" id="cd-note">If this date moves, the change is logged below.</div>
 </div>
 
 <div class="cd-about">
@@ -26,7 +26,7 @@ draft: false
 
 ## Date history
 
-Every change to this date is published here. There is nowhere to hide a moved deadline.
+Every change to this date is published here, with the old date, the new date, and when it changed. Nothing is reverted — the history stays public.
 
 <div id="cd-history" class="cd-history"></div>
 
@@ -66,6 +66,6 @@ Every change to this date is published here. There is nowhere to hide a moved de
   fetch("/data/cpts-target.json")
     .then(function (r) { return r.json(); })
     .then(function (d) { start(d.target || FALLBACK_TARGET, d.history); })
-    .catch(function () { start(FALLBACK_TARGET, [{date: "2026-09-30", event: "Target set: December 6, 2026 — exam start. The date does not move."}]); });
+    .catch(function () { start(FALLBACK_TARGET, [{date: "2026-09-30", event: "Target set: December 6, 2026 — exam start."}]); });
 })();
 </script>
