@@ -4,7 +4,7 @@ date: 2026-11-06
 draft: false
 ---
 
-The last seven days closed at 31.7 hours, down from 36.6 the week before — and the shape tells the story. Two huge days to close October, 10.4 hours on the 31st and 10.8 on Nov 1st, then a taper: 3.6, 1.1, 1.1, and zero on Nov 5th. That zero ended a 39-day streak of studying every single day, going back to Sep 27th — the longest run yet. The running total sits at 283.8 hours since Aug 30, averaging 4.1 a day against the 6-hour target, with 20 of 69 days clearing the bar. Three full weeks in a row cleared 36 hours (40.6, 36.2, 40.1) before this one fell off.
+The last seven days closed at 31.7 hours, down from 36.6 the week before — and the shape tells the story. Two huge days to close October, 10.4 hours on the 31st and 10.8 on Nov 1st, then a taper: 3.6, 1.1, 1.1, and zero on Nov 5th. That zero ended a 39-day streak of studying every single day, going back to Sep 27th — the longest run yet. The running total sits at 283.8 hours since Aug 30, averaging 4.1 a day against the 6-hour target, with 20 of 69 days clearing the bar. Three full weeks in a row cleared 36 hours (40.6, 36.2, 40.1) before this one fell off. I'm taking a week of light studying now — stepping back from boxes to recover from burnout, in the hope of coming back more consistent on medium boxes.
 
 Public study hours, for accountability. Totals come from the durations of my public study streams. Updated weekly, Sundays.
 
