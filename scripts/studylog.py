@@ -127,7 +127,7 @@ def do_fetch():
     print(f"fetch: {len(vids)} videos in store, {added} new (via YouTube API)")
 
 
-def svg_bars(labels, values, title, w=680, h=220, color="#33ff66", target=None):
+def svg_bars(labels, values, title, w=680, h=220, color="#33ff66", target=None, full_labels=None):
     import math
     pad_l, pad_r, pad_t, pad_b = 44, 12, 26, 30
     iw, ih = w - pad_l - pad_r, h - pad_t - pad_b
@@ -142,15 +142,21 @@ def svg_bars(labels, values, title, w=680, h=220, color="#33ff66", target=None):
         y = pad_t + ih - (gv / vmax) * ih
         p.append(f'<line x1="{pad_l}" y1="{y:.1f}" x2="{w-pad_r}" y2="{y:.1f}" stroke="#1d3a24" stroke-width="1"/>')
         p.append(f'<text x="{pad_l-6}" y="{y+4:.1f}" font-size="10" text-anchor="end">{gv:g}h</text>')
-    step = 1 if len(values) <= 16 else 2
+    # Axis labels are short (month once, then day numbers) so they fit;
+    # the full date is in each bar's <title>, shown on hover.
+    # Show a label only when bars are wide enough for it (~11px per char).
+    step = max(1, int((len(str(max(labels, key=len))) * 7 + 4) // bw)) if labels else 1
     for i, (lab, v) in enumerate(zip(labels, values)):
         bh = (v / vmax) * ih
         x = pad_l + i * bw + bw * 0.18
         bw2 = bw * 0.64
         y = pad_t + ih - bh
         fill = color if v > 0 else "#16241a"
-        p.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bw2:.1f}" height="{max(bh,2):.1f}" rx="3" fill="{fill}" opacity="0.92"><title>{lab}: {v:.1f}h</title></rect>')
-        if i % step == 0:
+        hover = full_labels[i] if full_labels else lab
+        p.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bw2:.1f}" height="{max(bh,2):.1f}" rx="3" fill="{fill}" opacity="0.92"><title>{hover}: {v:.1f}h</title></rect>')
+        # Always show month-boundary labels ("Sep 23", "Oct 1", "Nov 1")
+        # even when they fall off the regular step.
+        if i % step == 0 or " " in lab:
             p.append(f'<text x="{x+bw2/2:.1f}" y="{h-10}" font-size="10" text-anchor="middle">{lab}</text>')
         if v > 0 and len(values) <= 24:
             p.append(f'<text x="{x+bw2/2:.1f}" y="{y-5:.1f}" font-size="10" text-anchor="middle" fill="#c9f5d6">{v:.1f}</text>')
@@ -204,8 +210,17 @@ def do_build():
     if len(days) > 45:
         ddays, dhours = days[-45:], hours[-45:]
         dtitle = "Hours per day — last 45 days"
-    day_labels = [d.strftime("%-m/%-d") for d in ddays]
-    daily_svg = svg_bars(day_labels, dhours, dtitle, target=6)
+    # Axis: month name once at each month boundary, then just the day
+    # number ("Sep 23", "24", "25", ...). Full date shows on hover.
+    day_labels = []
+    for j, d in enumerate(ddays):
+        if j == 0 or d.month != ddays[j - 1].month:
+            day_labels.append(d.strftime("%b %-d"))
+        else:
+            day_labels.append(d.strftime("%-d"))
+    day_full = [d.strftime("%b %-d, %Y") for d in ddays]
+    daily_svg = svg_bars(day_labels, dhours, dtitle, target=6,
+                         full_labels=day_full)
 
     weeks = defaultdict(float)
     for d, h in zip(days, hours):
@@ -227,7 +242,7 @@ draft: false
 
 {load_summary()}
 
-Public study hours, for accountability. Totals come from the durations of my public study streams. Updated weekly, Sundays.
+Public study hours, for accountability. Totals come from the durations of my public study streams. Updated daily.
 
 <div class="stat-row">
 <div class="stat"><span class="stat-num">{total:.1f}h</span><span class="stat-label">since Aug 30</span></div>
