@@ -6,8 +6,6 @@ draft: false
 
 I'm esc_artist. I study penetration testing — OSCP in hand, working through Hack The Box's CPTS path. Find me on Hack The Box as [escartist](https://profile.hackthebox.com/profile/019c2efa-a28c-717a-9083-f3a679fb7fb6).
 
-<img src="/images/htb-100-machines-badge.png" alt="Hack The Box Labs Badge: Look at the Time — Owned 100 machines" style="max-width: 420px; width: 100%;">
-
 This blog is my notes: retired HTB machines, and whatever I'm building. Currently that's a Raspberry Pi Pico status display for my home lab, which has taken far more hours than it had any right to.
 
 <div class="gallery">
@@ -26,5 +24,8 @@ This blog is my notes: retired HTB machines, and whatever I'm building. Currentl
 <figure>
 <img src="/images/hands-keyboard.jpg" alt="BLACK HAT knuckle tattoos on a keyboard">
 <figcaption>At work.</figcaption>
+</figure>
+<figure>
+<img src="/images/htb-100-machines-badge.png" alt="Hack The Box Labs Badge: Look at the Time — Owned 100 machines">
 </figure>
 </div>
