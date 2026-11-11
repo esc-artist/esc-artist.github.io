@@ -1,7 +1,7 @@
 {
- "points": 351.5,
+ "points": 351.8,
  "breakdown": {
-  "from hours": 285.5,
+  "from hours": 285.8,
   "6h bonuses": 60,
   "streaks": 6
  },
@@ -46,7 +46,7 @@
   "weekend_warrior": "2026-10-03",
   "no_zero_week": "2026-09-27"
  },
- "total_hours": 285.5,
+ "total_hours": 285.8,
  "six_days": 20,
  "cur_streak": 0,
  "longest_streak": 3,
@@ -109,6 +109,7 @@
   "2026-10-28": 5.24,
   "2026-11-04": 1.09,
   "2026-10-25": 7.82,
+  "2026-11-10": 0.28,
   "2026-09-25": 0.74
  },
  "points_by_day": {
@@ -170,11 +171,12 @@
   "2026-10-28": 5.24,
   "2026-11-04": 1.09,
   "2026-10-25": 10.82,
+  "2026-11-10": 0.28,
   "2026-09-25": 0.74
  },
  "tv_budget": {
-  "yesterday_points": 0,
-  "minutes": 0,
-  "date": "2026-11-09"
+  "yesterday_points": 0.28,
+  "minutes": 5,
+  "date": "2026-11-10"
  }
 }
