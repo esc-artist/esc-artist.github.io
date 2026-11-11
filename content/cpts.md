@@ -5,7 +5,7 @@ draft: false
 ---
 
 <div class="countdown-wrap">
-<div class="cd-target">December 6, 2026 &mdash; exam day.</div>
+<div class="cd-target">February 20, 2027 &mdash; exam day.</div>
 <div class="countdown-digits">
 <div class="cd-cell"><div class="cd-num" id="cd-d">&ndash;&ndash;</div><div class="cd-label">days</div></div>
 <div class="cd-sep">:</div>
@@ -32,7 +32,7 @@ Every change to this date is published here, with the old date, the new date, an
 
 <script>
 (function () {
-  var FALLBACK_TARGET = "2026-12-06T00:00:00";
+  var FALLBACK_TARGET = "2027-02-20T00:00:00";
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function renderHistory(items) {
     var el = document.getElementById("cd-history");
@@ -66,6 +66,6 @@ Every change to this date is published here, with the old date, the new date, an
   fetch("/data/cpts-target.json")
     .then(function (r) { return r.json(); })
     .then(function (d) { start(d.target || FALLBACK_TARGET, d.history); })
-    .catch(function () { start(FALLBACK_TARGET, [{date: "2026-09-30", event: "Target set: December 6, 2026 — exam start."}]); });
+    .catch(function () { start(FALLBACK_TARGET, [{date: "2026-09-30", event: "Target set: December 6, 2026 — exam start."}, {date: "2026-11-10", event: "Target moved: December 6, 2026 → February 20, 2027 — exam start."}]); });
 })();
 </script>
