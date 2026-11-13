@@ -139,4 +139,3 @@ Public study hours, for accountability. Totals come from the durations of my pub
 
 Sessions are screen-recorded study streams on [YouTube @constantinestudies](https://www.youtube.com/@constantinestudies) — boring to watch, useful to log. Hours are summed from public stream durations.
 
-<span style="opacity:.35;font-size:.8em">[stats](/stats/)</span>
