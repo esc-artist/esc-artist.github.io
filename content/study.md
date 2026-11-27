@@ -1,10 +1,10 @@
 ---
 title: "Study Log"
-date: 2026-11-26
+date: 2026-11-27
 draft: false
 ---
 
-Nov 25th came to 44 minutes across one stream, starting a new streak after Nov 24th's zero day ended the 14-day run. The last seven days (Nov 19–25) total 32.3 hours across six study days, up from 26.0 hours in the prior seven days (Nov 12–18). The running total is 350.7 hours since Aug 30, averaging 3.9 a day against the 6-hour target, with 24 days clearing the bar.
+Nov 26th had no streams — a zero day, breaking the one-day streak from Nov 25th. The last seven days (Nov 20–26) total 23.8 hours across five study days, down from 29.7 hours in the prior seven days (Nov 13–19). The running total is 350.7 hours since Aug 30, averaging 3.9 a day against the 6-hour target, with 24 days clearing the bar.
 
 Public study hours, for accountability. Totals come from the durations of my public study streams. Updated daily.
 
@@ -13,7 +13,7 @@ Public study hours, for accountability. Totals come from the durations of my pub
 <div class="stat"><span class="stat-num">3.9h</span><span class="stat-label">avg / day (target 6h)</span></div>
 <div class="stat"><span class="stat-num">11.7h</span><span class="stat-label">best day (Mon 11/23)</span></div>
 <div class="stat"><span class="stat-num">1</span><span class="stat-label">day streak</span></div>
-<div class="stat"><span class="stat-num">24/89</span><span class="stat-label">days ≥ 6h</span></div>
+<div class="stat"><span class="stat-num">24/90</span><span class="stat-label">days ≥ 6h</span></div>
 </div>
 
 <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hours per day — last 45 days">
@@ -25,67 +25,66 @@ Public study hours, for accountability. Totals come from the durations of my pub
 <text x="38" y="112.0" font-size="10" text-anchor="end">6h</text>
 <line x1="44" y1="26.0" x2="668" y2="26.0" stroke="#1d3a24" stroke-width="1"/>
 <text x="38" y="30.0" font-size="10" text-anchor="end">12h</text>
-<rect x="46.5" y="61.1" width="8.9" height="128.9" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 13, 2026: 9.4h</title></rect>
-<text x="50.9" y="210" font-size="10" text-anchor="middle">Oct 13</text>
-<rect x="60.4" y="30.9" width="8.9" height="159.1" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 14, 2026: 11.6h</title></rect>
-<rect x="74.2" y="121.4" width="8.9" height="68.6" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 15, 2026: 5.0h</title></rect>
-<rect x="88.1" y="144.8" width="8.9" height="45.2" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 16, 2026: 3.3h</title></rect>
-<text x="92.5" y="210" font-size="10" text-anchor="middle">16</text>
-<rect x="102.0" y="121.3" width="8.9" height="68.7" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 17, 2026: 5.0h</title></rect>
-<rect x="115.8" y="112.9" width="8.9" height="77.1" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 18, 2026: 5.6h</title></rect>
-<rect x="129.7" y="67.3" width="8.9" height="122.7" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 19, 2026: 9.0h</title></rect>
-<text x="134.1" y="210" font-size="10" text-anchor="middle">19</text>
-<rect x="143.6" y="184.3" width="8.9" height="5.7" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 20, 2026: 0.4h</title></rect>
-<rect x="157.4" y="79.3" width="8.9" height="110.7" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 21, 2026: 8.1h</title></rect>
-<rect x="171.3" y="175.4" width="8.9" height="14.6" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 22, 2026: 1.1h</title></rect>
-<text x="175.7" y="210" font-size="10" text-anchor="middle">22</text>
-<rect x="185.2" y="105.1" width="8.9" height="84.9" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 23, 2026: 6.2h</title></rect>
-<rect x="199.0" y="131.8" width="8.9" height="58.2" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 24, 2026: 4.3h</title></rect>
-<rect x="212.9" y="61.0" width="8.9" height="129.0" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 25, 2026: 9.4h</title></rect>
-<text x="217.3" y="210" font-size="10" text-anchor="middle">25</text>
-<rect x="226.8" y="124.9" width="8.9" height="65.1" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 26, 2026: 4.8h</title></rect>
-<rect x="240.6" y="140.5" width="8.9" height="49.5" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 27, 2026: 3.6h</title></rect>
-<rect x="254.5" y="129.2" width="8.9" height="60.8" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 28, 2026: 4.5h</title></rect>
-<text x="258.9" y="210" font-size="10" text-anchor="middle">28</text>
-<rect x="268.4" y="145.0" width="8.9" height="45.0" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 29, 2026: 3.3h</title></rect>
-<rect x="282.2" y="130.4" width="8.9" height="59.6" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 30, 2026: 4.4h</title></rect>
-<rect x="296.1" y="33.9" width="8.9" height="156.1" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 31, 2026: 11.4h</title></rect>
-<text x="300.5" y="210" font-size="10" text-anchor="middle">31</text>
-<rect x="310.0" y="58.3" width="8.9" height="131.7" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 1, 2026: 9.6h</title></rect>
-<text x="314.4" y="210" font-size="10" text-anchor="middle">Nov 1</text>
-<rect x="323.8" y="135.5" width="8.9" height="54.5" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 2, 2026: 4.0h</title></rect>
-<rect x="337.7" y="165.4" width="8.9" height="24.6" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 3, 2026: 1.8h</title></rect>
-<text x="342.1" y="210" font-size="10" text-anchor="middle">3</text>
-<rect x="351.6" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 4, 2026: 0.0h</title></rect>
-<rect x="365.4" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 5, 2026: 0.0h</title></rect>
-<rect x="379.3" y="181.1" width="8.9" height="8.9" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 6, 2026: 0.7h</title></rect>
-<text x="383.7" y="210" font-size="10" text-anchor="middle">6</text>
-<rect x="393.2" y="175.2" width="8.9" height="14.8" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 7, 2026: 1.1h</title></rect>
-<rect x="407.0" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 8, 2026: 0.0h</title></rect>
-<rect x="420.9" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 9, 2026: 0.0h</title></rect>
-<text x="425.3" y="210" font-size="10" text-anchor="middle">9</text>
-<rect x="434.8" y="186.2" width="8.9" height="3.8" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 10, 2026: 0.3h</title></rect>
-<rect x="448.6" y="71.0" width="8.9" height="119.0" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 11, 2026: 8.7h</title></rect>
-<rect x="462.5" y="124.0" width="8.9" height="66.0" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 12, 2026: 4.8h</title></rect>
-<text x="466.9" y="210" font-size="10" text-anchor="middle">12</text>
-<rect x="476.4" y="162.4" width="8.9" height="27.6" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 13, 2026: 2.0h</title></rect>
-<rect x="490.2" y="137.4" width="8.9" height="52.6" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 14, 2026: 3.9h</title></rect>
-<rect x="504.1" y="123.6" width="8.9" height="66.4" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 15, 2026: 4.9h</title></rect>
-<text x="508.5" y="210" font-size="10" text-anchor="middle">15</text>
-<rect x="518.0" y="129.0" width="8.9" height="61.0" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 16, 2026: 4.5h</title></rect>
-<rect x="531.8" y="136.2" width="8.9" height="53.8" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 17, 2026: 3.9h</title></rect>
-<rect x="545.7" y="162.1" width="8.9" height="27.9" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 18, 2026: 2.0h</title></rect>
-<text x="550.1" y="210" font-size="10" text-anchor="middle">18</text>
-<rect x="559.6" y="73.7" width="8.9" height="116.3" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 19, 2026: 8.5h</title></rect>
-<rect x="573.4" y="150.8" width="8.9" height="39.2" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 20, 2026: 2.9h</title></rect>
-<rect x="587.3" y="74.9" width="8.9" height="115.1" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 21, 2026: 8.4h</title></rect>
-<text x="591.7" y="210" font-size="10" text-anchor="middle">21</text>
-<rect x="601.2" y="188.9" width="8.9" height="2.0" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 22, 2026: 0.1h</title></rect>
-<rect x="615.0" y="30.6" width="8.9" height="159.4" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 23, 2026: 11.7h</title></rect>
-<rect x="628.9" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 24, 2026: 0.0h</title></rect>
-<text x="633.3" y="210" font-size="10" text-anchor="middle">24</text>
-<rect x="642.8" y="179.8" width="8.9" height="10.2" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 25, 2026: 0.8h</title></rect>
-<rect x="656.6" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 26, 2026: 0.0h</title></rect>
+<rect x="46.5" y="30.9" width="8.9" height="159.1" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 14, 2026: 11.6h</title></rect>
+<text x="50.9" y="210" font-size="10" text-anchor="middle">Oct 14</text>
+<rect x="60.4" y="121.4" width="8.9" height="68.6" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 15, 2026: 5.0h</title></rect>
+<rect x="74.2" y="144.8" width="8.9" height="45.2" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 16, 2026: 3.3h</title></rect>
+<rect x="88.1" y="121.3" width="8.9" height="68.7" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 17, 2026: 5.0h</title></rect>
+<text x="92.5" y="210" font-size="10" text-anchor="middle">17</text>
+<rect x="102.0" y="112.9" width="8.9" height="77.1" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 18, 2026: 5.6h</title></rect>
+<rect x="115.8" y="67.3" width="8.9" height="122.7" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 19, 2026: 9.0h</title></rect>
+<rect x="129.7" y="184.3" width="8.9" height="5.7" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 20, 2026: 0.4h</title></rect>
+<text x="134.1" y="210" font-size="10" text-anchor="middle">20</text>
+<rect x="143.6" y="79.3" width="8.9" height="110.7" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 21, 2026: 8.1h</title></rect>
+<rect x="157.4" y="175.4" width="8.9" height="14.6" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 22, 2026: 1.1h</title></rect>
+<rect x="171.3" y="105.1" width="8.9" height="84.9" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 23, 2026: 6.2h</title></rect>
+<text x="175.7" y="210" font-size="10" text-anchor="middle">23</text>
+<rect x="185.2" y="131.8" width="8.9" height="58.2" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 24, 2026: 4.3h</title></rect>
+<rect x="199.0" y="61.0" width="8.9" height="129.0" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 25, 2026: 9.4h</title></rect>
+<rect x="212.9" y="124.9" width="8.9" height="65.1" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 26, 2026: 4.8h</title></rect>
+<text x="217.3" y="210" font-size="10" text-anchor="middle">26</text>
+<rect x="226.8" y="140.5" width="8.9" height="49.5" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 27, 2026: 3.6h</title></rect>
+<rect x="240.6" y="129.2" width="8.9" height="60.8" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 28, 2026: 4.5h</title></rect>
+<rect x="254.5" y="145.0" width="8.9" height="45.0" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 29, 2026: 3.3h</title></rect>
+<text x="258.9" y="210" font-size="10" text-anchor="middle">29</text>
+<rect x="268.4" y="130.4" width="8.9" height="59.6" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 30, 2026: 4.4h</title></rect>
+<rect x="282.2" y="33.9" width="8.9" height="156.1" rx="3" fill="#33ff66" opacity="0.92"><title>Oct 31, 2026: 11.4h</title></rect>
+<rect x="296.1" y="58.3" width="8.9" height="131.7" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 1, 2026: 9.6h</title></rect>
+<text x="300.5" y="210" font-size="10" text-anchor="middle">Nov 1</text>
+<rect x="310.0" y="135.5" width="8.9" height="54.5" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 2, 2026: 4.0h</title></rect>
+<rect x="323.8" y="165.4" width="8.9" height="24.6" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 3, 2026: 1.8h</title></rect>
+<rect x="337.7" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 4, 2026: 0.0h</title></rect>
+<text x="342.1" y="210" font-size="10" text-anchor="middle">4</text>
+<rect x="351.6" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 5, 2026: 0.0h</title></rect>
+<rect x="365.4" y="181.1" width="8.9" height="8.9" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 6, 2026: 0.7h</title></rect>
+<rect x="379.3" y="175.2" width="8.9" height="14.8" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 7, 2026: 1.1h</title></rect>
+<text x="383.7" y="210" font-size="10" text-anchor="middle">7</text>
+<rect x="393.2" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 8, 2026: 0.0h</title></rect>
+<rect x="407.0" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 9, 2026: 0.0h</title></rect>
+<rect x="420.9" y="186.2" width="8.9" height="3.8" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 10, 2026: 0.3h</title></rect>
+<text x="425.3" y="210" font-size="10" text-anchor="middle">10</text>
+<rect x="434.8" y="71.0" width="8.9" height="119.0" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 11, 2026: 8.7h</title></rect>
+<rect x="448.6" y="124.0" width="8.9" height="66.0" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 12, 2026: 4.8h</title></rect>
+<rect x="462.5" y="162.4" width="8.9" height="27.6" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 13, 2026: 2.0h</title></rect>
+<text x="466.9" y="210" font-size="10" text-anchor="middle">13</text>
+<rect x="476.4" y="137.4" width="8.9" height="52.6" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 14, 2026: 3.9h</title></rect>
+<rect x="490.2" y="123.6" width="8.9" height="66.4" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 15, 2026: 4.9h</title></rect>
+<rect x="504.1" y="129.0" width="8.9" height="61.0" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 16, 2026: 4.5h</title></rect>
+<text x="508.5" y="210" font-size="10" text-anchor="middle">16</text>
+<rect x="518.0" y="136.2" width="8.9" height="53.8" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 17, 2026: 3.9h</title></rect>
+<rect x="531.8" y="162.1" width="8.9" height="27.9" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 18, 2026: 2.0h</title></rect>
+<rect x="545.7" y="73.7" width="8.9" height="116.3" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 19, 2026: 8.5h</title></rect>
+<text x="550.1" y="210" font-size="10" text-anchor="middle">19</text>
+<rect x="559.6" y="150.8" width="8.9" height="39.2" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 20, 2026: 2.9h</title></rect>
+<rect x="573.4" y="74.9" width="8.9" height="115.1" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 21, 2026: 8.4h</title></rect>
+<rect x="587.3" y="188.9" width="8.9" height="2.0" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 22, 2026: 0.1h</title></rect>
+<text x="591.7" y="210" font-size="10" text-anchor="middle">22</text>
+<rect x="601.2" y="30.6" width="8.9" height="159.4" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 23, 2026: 11.7h</title></rect>
+<rect x="615.0" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 24, 2026: 0.0h</title></rect>
+<rect x="628.9" y="179.8" width="8.9" height="10.2" rx="3" fill="#33ff66" opacity="0.92"><title>Nov 25, 2026: 0.8h</title></rect>
+<text x="633.3" y="210" font-size="10" text-anchor="middle">25</text>
+<rect x="642.8" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 26, 2026: 0.0h</title></rect>
+<rect x="656.6" y="190.0" width="8.9" height="2.0" rx="3" fill="#16241a" opacity="0.92"><title>Nov 27, 2026: 0.0h</title></rect>
 <line x1="44" y1="108.0" x2="668" y2="108.0" stroke="#e5484d" stroke-width="1.5" stroke-dasharray="6,4"/>
 <text x="668" y="102.0" font-size="10" text-anchor="end" fill="#e5484d">6h target</text>
 </svg>
